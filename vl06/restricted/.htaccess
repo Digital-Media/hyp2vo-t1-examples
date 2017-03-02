@@ -1,0 +1,4 @@
+AuthType Basic
+AuthUserFile C:\xampp\apache\users.file
+AuthName "HM2 Secret Area"
+Require valid-user

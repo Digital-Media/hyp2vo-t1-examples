@@ -1,0 +1,2 @@
+user1|$2y$10$W3O5.dEZs5G.7mD8tiuyIeHPo/kCAlnDjACLLVRdp6WG9aNaH.02q
+user2|$2y$10$g9VvcnFxRzNf35lGpcjoG.5Or9hotnGCyCtIRsglSQCY73z1i/13m

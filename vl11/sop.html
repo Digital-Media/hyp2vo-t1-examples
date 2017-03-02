@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>jQuery SOP-Beispiel</title>
+    <meta charset="utf-8">
+    <script src="jquery-2.2.4.js"></script>
+    <script>
+        $(document).ready(function () {
+            $.get("http://www.orf.at/", {index: 1},
+                    function (data) {
+                        $("#content").html(data);
+                    }).error(function () {
+                        $("#content").text("Oje SOP! :(");
+                    });
+        });
+    </script>
+</head>
+<body>
+<h1>SOP-Test</h1>
+
+<div id="content"></div>
+</body>
+</html>

@@ -1,0 +1,81 @@
+@import url(https://fonts.googleapis.com/css?family=Gochi+Hand);
+@import url(https://fonts.googleapis.com/css?family=Permanent+Marker);
+
+body {
+    font-family: "Gochi Hand", Arial, Verdana, sans-serif;
+    font-size: 2.5em;
+}
+
+main {
+    text-align: center;
+    width: 800px;
+    height: 800px;
+    margin: auto;
+}
+
+h1 {
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+#content {
+    background: url("images/chalkboard.jpg") no-repeat;
+    font-family: "Permanent Marker", Arial, Verdana, sans-serif;
+    width: 800px;
+    height: 619px;
+    position: relative;
+}
+
+ul {
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+    display: inline;
+}
+
+#characters {
+    letter-spacing: 0.3em;
+    width: 600px;
+    margin-left: 100px;
+    margin-right: 100px;
+    word-wrap: break-word;
+    word-break: break-all;
+}
+
+a:link, a:visited {
+    color: black;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #808080;
+}
+
+#content a:link {
+    color: white;
+}
+
+#content a:hover {
+    color: yellow;
+}
+
+#hangman {
+    padding-top: 75px;
+    height: 200px;
+    text-align: center;
+}
+
+#answer {
+    letter-spacing: 0.25em;
+    color: white;
+}
+
+#message {
+    color: yellow;
+    transform:rotate(315deg);
+    position: absolute;
+    top: 150px;
+    left: 100px;
+}

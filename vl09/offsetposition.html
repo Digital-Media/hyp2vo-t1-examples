@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>After</title>
+    <meta charset="utf-8">
+    <script src="jquery-2.2.3.js"></script>
+    <script>
+        $(function () {
+            // Alle Absätze abfragen und in Variable speichern - effizient, da diese Abfrage 2x benötigt wird
+            var paragraph = $("p");
+            var offset = paragraph.offset();
+            alert("Offset - Left: " + offset.left + ", Top: " + offset.top);
+            var position = paragraph.position();
+            alert("Position - Left: " + position.left + ", Top: " + position.top);
+        });
+    </script>
+</head>
+<body>
+<div>
+    <p>Hallo Welt</p>
+</div>
+</body>
+</html>

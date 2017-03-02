@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>JSON Example</title>
+    <meta charset="utf-8">
+    <script>
+        var jsonObject = {
+            "firstName": "John",
+            "lastName": "Doe",
+            "age": 25,
+            "address": {
+                "street": "21 Doe St.",
+                "city": "Doeville",
+                "zip": "12345",
+                "state": "NY",
+                "country": "USA"
+            },
+            "phoneNumbers": [
+                {
+                    "type": "home",
+                    "number": "800 123 456-789"
+                },
+                {
+                    "type": "work",
+                    "number": "800 999 666-333"
+                }
+            ]
+        };
+    </script>
+</head>
+<body>
+<script>
+    var last = jsonObject.lastName;
+    var street = jsonObject.address.street;
+    var workPhone = jsonObject.phoneNumbers[1].number;
+
+    var par = document.createElement("p");
+    par.textContent = last + " | " + street + " | " + workPhone;
+    document.getElementsByTagName("body")[0].appendChild(par);
+</script>
+</body>
+</html>

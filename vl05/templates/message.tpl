@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Message</title>
+    <meta charset="utf-8">
+</head>
+<body>
+<p>Name: {$name}</p>
+<p>Message: {$message}</p>
+</body>
+</html>

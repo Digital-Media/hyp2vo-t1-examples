@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>:first-child vs. :first</title>
+    <meta charset="utf-8">
+    <script src="jquery-2.2.3.js"></script>
+    <script>
+        $(function () {
+            $("ul li:first-child").each(function () {
+                alert(":first-child: " + $(this).text());
+            });
+
+            $("ul li:first").each(function () {
+                alert(":first: " + $(this).text());
+            });
+        });
+    </script>
+</head>
+<body>
+<ul>
+    <li>L1, E1</li>
+    <li>L1, E2</li>
+    <li>L1, E3</li>
+</ul>
+<ul>
+    <li>L2, E1</li>
+    <li>L2, E2</li>
+    <li>L2, E3</li>
+</ul>
+</body>
+</html>

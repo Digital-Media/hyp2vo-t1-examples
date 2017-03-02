@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <title>Hover</title>
+    <meta charset="utf-8">
+    <script src="jquery-2.2.3.js"></script>
+    <script>
+        $(function () {
+            $("img").hover(function () {
+                $(this).attr("src", "html4logo.png");
+            }, function () {
+                $(this).attr("src", "html5logo.png");
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="src">
+    <img src="html5logo.png" alt="HTML5-Logo">
+</div>
+<div id="photos"></div>
+</body>
+</html>
