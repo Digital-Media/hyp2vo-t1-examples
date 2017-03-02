@@ -1,3 +1,6 @@
+# PhpStorm IDE project directory
+.idea
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
