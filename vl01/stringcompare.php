@@ -5,7 +5,7 @@ $name1 = "Fred";
 $name2 = "Wilma";
 
 # strcmp
-echo strcmp($value1, $value1)."<br>"; // 0
+echo strcmp($value1, $value1) . "<br>"; // 0
 # Vergleich auf Wert (==)
 if ($value1 == $value2) {
     echo "Wert gleich" . "<br>"; // wird ausgegeben

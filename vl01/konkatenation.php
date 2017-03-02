@@ -1,8 +1,8 @@
 <?php
-$str = "Hallo " . "Welt\n";
+$str = "Hallo " . "Welt";
 echo $str . "<br>";
 
-$wrong = "Hallo " + "Welt\n";
+$wrong = "Hallo " + "Welt";
 echo $wrong . "<br>";
 
 $first = 100;
