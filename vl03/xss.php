@@ -15,7 +15,7 @@
     <button type="submit">Abschicken</button>
 </form>
 
-<!-- Eingabe von <script type="text/javascript">alert("XSS Alarm!")</script> triggert XSS -->
+<!-- Eingabe von <script>alert("XSS Alarm!")</script> triggert XSS -->
 
 <?php
 if (isset($_POST["daten"])) {

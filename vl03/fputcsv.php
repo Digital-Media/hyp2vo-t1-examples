@@ -1,5 +1,5 @@
 <?php
-$array = array("HM2", "Hagenberg", "MTD15");
+$array = ["HM2", "Hagenberg", "MTD16"];
 $fp = fopen("studium.csv", "w");
 $bytes = fputcsv($fp, $array, ";");
 if ($bytes > 0) {

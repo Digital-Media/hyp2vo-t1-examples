@@ -7,8 +7,7 @@ if ($lock) { // Wenn Lock erhalten
         $contents .= fgets($fp);
     }
     flock($fp, LOCK_UN); // Lock freigeben
-}
-else { // Wenn Lock nicht erhalten
+} else { // Wenn Lock nicht erhalten
     echo "<p>Kann Datei nicht öffnen!</p>";
 }
 fclose($fp);

@@ -1,2 +1,2 @@
 <?php
-return "Da schau her!";
+return "<p>Da schau her!</p>";
