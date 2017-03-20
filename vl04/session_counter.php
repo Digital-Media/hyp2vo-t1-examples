@@ -11,8 +11,7 @@ session_start();
 <?php
 if (!isset($_SESSION["counter"])) {
     $_SESSION["counter"] = 0;
-}
-else {
+} else {
     $_SESSION["counter"]++;
 }
 

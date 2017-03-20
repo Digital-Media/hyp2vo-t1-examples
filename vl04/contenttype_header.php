@@ -4,7 +4,7 @@ header("Content-type: text/plain");
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Header-Angaben</title>
+    <title>Header-Angaben: Content-Type</title>
     <meta charset="utf-8">
 </head>
 <body>

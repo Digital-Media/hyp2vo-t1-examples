@@ -17,8 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     if ($_FILES["userfile"]["error"] === UPLOAD_ERR_OK) {
         move_uploaded_file($_FILES["userfile"]["tmp_name"], $_FILES["userfile"]["name"]);
         echo "<p>Upload von " . $_FILES["userfile"]["name"] . " erfolgreich!</p>";
-    }
-    else {
+    } else {
         echo "<p>Ein Fehler ist aufgetreten: " . $_FILES["userfile"]["error"] . "</p>";
         // Fehlercode analysieren und entsprechende Fehlermeldungen ausgeben
     }
