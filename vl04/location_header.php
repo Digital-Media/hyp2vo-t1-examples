@@ -1,5 +1,6 @@
 <?php
 header("Location: https://www.fh-ooe.at/");
+exit();
 ?>
 <!DOCTYPE html>
 <html lang="de">
