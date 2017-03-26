@@ -1,10 +1,13 @@
 <?php
+
 require("Rectangle.php");
 
-class Box extends Rectangle {
+class Box extends Rectangle
+{
     public $depth;
 
-    function draw() {
+    public function draw()
+    {
         // Vorderseite zeichnen (Rechteck)
         parent::draw();
         // Andere Seiten zeichen

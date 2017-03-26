@@ -1,14 +1,17 @@
 <?php
 
-class Person {
+class Person
+{
     // ...
 }
 
-class Employee extends Person {
+class Employee extends Person
+{
     // ...
 }
 
-class Animal {
+class Animal
+{
     // ...
 }
 

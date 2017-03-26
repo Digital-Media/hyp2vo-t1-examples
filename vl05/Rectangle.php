@@ -1,8 +1,9 @@
 <?php
 
-require("GeometricComponent.php");
+require("GeometricComponentInterface.php");
 
-class Rectangle implements GeometricComponent {
+class Rectangle implements GeometricComponentInterface
+{
     public $x1;
     public $y1;
     public $x2;
@@ -11,7 +12,8 @@ class Rectangle implements GeometricComponent {
     public static $version = "1.0";
     const TYPE = "Rectangle";
 
-    public function __construct($x1 = 0, $y1 = 0, $x2 = 0, $y2 = 0, $color = 0) {
+    public function __construct($x1 = 0, $y1 = 0, $x2 = 0, $y2 = 0, $color = 0)
+    {
         $this->x1 = $x1;
         $this->y1 = $y1;
         $this->x2 = $x2;
@@ -19,31 +21,37 @@ class Rectangle implements GeometricComponent {
         $this->color = $color;
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         echo "Destructor called!";
     }
 
-    public function move($dx, $dy) {
+    public function move($dx, $dy)
+    {
         $this->x1 += $dx;
         $this->y1 += $dy;
         $this->x2 += $dx;
         $this->y2 += $dy;
     }
 
-    public function getX1() {
+    public function getX1()
+    {
         return $this->x1;
     }
 
-    public function getVersion() {
+    public function getVersion()
+    {
         return self::$version;
     }
 
-    public function getType() {
+    public function getType()
+    {
         return self::TYPE;
     }
 
-    public function draw() {
-        //...
+    public function draw()
+    {
+        // ...
     }
 }
 
