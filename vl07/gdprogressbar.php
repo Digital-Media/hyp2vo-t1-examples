@@ -1,6 +1,6 @@
 <?php
 /**
- * Code adapted from http://www.akchauhan.com/dynamic-progress-bar-or-status-bar-using-gd-library/
+ * Code originally adapted from http://www.akchauhan.com/dynamic-progress-bar-or-status-bar-using-gd-library/
  */
 
 // Set width and height of progress bar in px

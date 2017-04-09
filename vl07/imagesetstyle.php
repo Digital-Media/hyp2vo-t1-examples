@@ -14,7 +14,7 @@ imagesetthickness($image, 5);
 imagerectangle($image, 10, 10, 110, 110, $yellow);
 
 // Set style
-$style = array($yellow, $yellow, $yellow, $blue, $blue, $blue);
+$style = [$yellow, $yellow, $yellow, $blue, $blue, $blue];
 imagesetstyle($image, $style);
 
 // Line

@@ -1,6 +1,6 @@
 <?php
 /**
- * Code adapted from http://www.codewalkers.com/c/a/Miscellaneous/An-Intro-to-Using-the-GD-Image-Library-with-PHP/
+ * Code adapted from https://www.codewalkers.com/c/a/Miscellaneous/An-Intro-to-Using-the-GD-Image-Library-with-PHP/
  */
 
 // Get the current time
@@ -16,8 +16,7 @@ if ($hour != 0) {
     if ($hourdegree < 0) {
         $hourdegree = 360 + $hourdegree;
     }
-}
-else {
+} else {
     $hourdegree = 270;
 }
 
@@ -26,8 +25,7 @@ if ($minute != 0) {
     if ($minutedegree < 0) {
         $minutedegree = 360 + $minutedegree;
     }
-}
-else {
+} else {
     $minutedegree = 270;
 }
 
@@ -36,8 +34,7 @@ if ($second != 0) {
     if ($seconddegree < 0) {
         $seconddegree = 360 + $seconddegree;
     }
-}
-else {
+} else {
     $seconddegree = 270;
 }
 
