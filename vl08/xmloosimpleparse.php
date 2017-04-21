@@ -1,7 +1,9 @@
 <?php
 
-class XMLOoSimpleParse {
-    public function parse($file) {
+class XMLOoSimpleParse
+{
+    public function parse($file)
+    {
         $xml = simplexml_load_file($file);
 
         //var_dump($xml);
@@ -29,14 +31,13 @@ class XMLOoSimpleParse {
         /*$xml = simplexml_load_file($file, "SimpleXMLIterator");
         $iterator = new RecursiveIteratorIterator($xml, RecursiveIteratorIterator::SELF_FIRST);
 
-        foreach($iterator as $name => $element) {
+        foreach ($iterator as $name => $element) {
             for ($i = 0; $i < $iterator->getDepth(); $i++) {
                 echo "&nbsp;&nbsp;";
             }
             if ($element !== "") {
                 echo $name . ": " . $element . "<br>";
-            }
-            else {
+            } else {
                 echo $name . "<br>";
             }
         }*/
@@ -56,8 +57,8 @@ class XMLOoSimpleParse {
 
 <p>
     <?php
-    $xmlparse = new XMLOoSimpleParse();
-    $xmlparse->parse("rezept.xml");
+    $xmlParse = new XMLOoSimpleParse();
+    $xmlParse->parse("rezept.xml");
     ?>
 </p>
 </body>

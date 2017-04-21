@@ -1,22 +1,29 @@
 <?php
 
-class XMLManualWrite {
+class XMLManualWrite
+{
     private $shows;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->shows = [
-            ["name" => "Die Simpsons",
+            [
+                "name" => "Die Simpsons",
                 "kanal" => "FOX",
                 "beginn" => "20:00",
-                "dauer" => "20"],
-            ["name" => "Game of Thrones",
+                "dauer" => "20"
+            ],
+            [
+                "name" => "Game of Thrones",
                 "kanal" => "HBO",
                 "beginn" => "21:00",
-                "dauer" => "60"]
+                "dauer" => "60"
+            ]
         ];
     }
 
-    public function generateXML() {
+    public function generateXML()
+    {
         header("Content-Type: text/xml");
         echo '<?xml version="1.0" ?>' . PHP_EOL;
         echo "<shows>" . PHP_EOL;
@@ -32,5 +39,5 @@ class XMLManualWrite {
     }
 }
 
-$xmlwrite = new XMLManualWrite();
-$xmlwrite->generateXML();
+$xmlWrite = new XMLManualWrite();
+$xmlWrite->generateXML();

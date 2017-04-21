@@ -1,13 +1,16 @@
 <?php
 
-class XMLOoDomParse {
+class XMLOoDomParse
+{
     private $dom;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->dom = new DOMDocument();
     }
 
-    public function parse($file) {
+    public function parse($file)
+    {
         $this->dom->load($file);
 
         //$this->processNode($this->dom->documentElement);
@@ -19,11 +22,11 @@ class XMLOoDomParse {
         echo $zutaten->nodeName . "<br>";
 
         $zutat = $this->dom->getElementsByTagName("zutat");
-        foreach($zutat as $item) {
+        foreach ($zutat as $item) {
             echo $item->nodeName . "<br>";
             $children = $item->childNodes;
-            foreach($children as $child) {
-                if (strcmp($child->nodeType, XML_ELEMENT_NODE) === 0) {
+            foreach ($children as $child) {
+                if ($child->nodeType === XML_ELEMENT_NODE) {
                     echo $child->nodeName . ": " . $child->firstChild->nodeValue . "<br>";
                 }
             }
@@ -33,12 +36,13 @@ class XMLOoDomParse {
         echo $zubereitung->nodeName . "<br>";
 
         $schritt = $this->dom->getElementsByTagName("schritt");
-        foreach($schritt as $item) {
+        foreach ($schritt as $item) {
             echo $item->nodeName . ": " . $item->firstChild->nodeValue . "<br>";
         }
     }
 
-    /*private function processNode($node) {
+    /*private function processNode($node)
+    {
         if ($node->nodeType === XML_ELEMENT_NODE) {
             echo $node->getLineNo() . ": " . $node->nodeName;
             switch ($node->nodeName) {
@@ -77,8 +81,8 @@ class XMLOoDomParse {
 
 <p>
     <?php
-    $xmlparse = new XMLOoDomParse();
-    $xmlparse->parse("rezept.xml");
+    $xmlParse = new XMLOoDomParse();
+    $xmlParse->parse("rezept.xml");
     ?>
 </p>
 </body>

@@ -1,6 +1,7 @@
 <?php
 
-class XMLEventParse {
+class XMLEventParse
+{
     private $parser;
     private $isParsing;
     private $depth;
@@ -10,7 +11,8 @@ class XMLEventParse {
     private $zutat;
     private $schritt;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->parser = xml_parser_create();
         xml_set_object($this->parser, $this);
         xml_parser_set_option($this->parser, XML_OPTION_CASE_FOLDING, false);
@@ -27,14 +29,16 @@ class XMLEventParse {
         $this->schritt = null;
     }
 
-    public function __destruct() {
+    public function __destruct()
+    {
         if ($this->isParsing) {
             xml_parse($this->parser, null, true);
         }
         xml_parser_free($this->parser);
     }
 
-    public function parse($file) {
+    public function parse($file)
+    {
         $this->isParsing = true;
         $fp = null;
 
@@ -51,7 +55,8 @@ class XMLEventParse {
         $this->isParsing = false;
     }
 
-    public function startElement($parser, $tag, $attributes) {
+    public function startElement($parser, $tag, $attributes)
+    {
         $this->currentElement = $tag;
         $line = xml_get_current_line_number($this->parser);
 
@@ -62,57 +67,59 @@ class XMLEventParse {
 
         $this->depth++;
 
-        if (strcmp($this->currentElement, "rezept") === 0) {
-            $quelle = $attributes["quelle"];
-            echo ": $quelle" . "<br>";
-        }
-        else {
-            if (strcmp($this->currentElement, "zutat") === 0) {
+        switch ($this->currentElement) {
+            case "rezept":
+                $quelle = $attributes["quelle"];
+                echo ": $quelle" . "<br>";
+                break;
+            case "zutat":
                 $this->zutat["ingredienz"] = "";
                 $this->zutat["menge"] = "";
                 $this->zutat["einheit"] = "";
                 echo "<br>";
-            }
-            else {
-                if (strcmp($this->currentElement, "zutaten") === 0 || strcmp($this->currentElement, "zubereitung") === 0) {
-                    echo "<br>";
-                }
-            }
+                break;
+            case "zutaten":
+            case "zubereitung":
+                echo "<br>";
+                break;
         }
     }
 
-    public function endElement($parser, $tag) {
-        if (strcmp($this->currentElement, "gericht") === 0) {
-            echo ": " . $this->gericht . "<br>";
-        }
-        else {
-            if (strcmp($this->currentElement, "ingredienz") === 0 || strcmp($this->currentElement, "menge") === 0 || strcmp($this->currentElement, "einheit") === 0) {
+    public function endElement($parser, $tag)
+    {
+        switch ($this->currentElement) {
+            case "gericht":
+                echo ": " . $this->gericht . "<br>";
+                break;
+            case "ingredienz":
+            case "menge":
+            case "einheit":
                 echo ": " . $this->zutat[$this->currentElement] . "<br>";
-            }
-            else {
-                if (strcmp($this->currentElement, "schritt") === 0) {
-                    echo ": " . $this->schritt . "<br>";
-                }
-            }
+                break;
+            case "schritt":
+                echo ": " . $this->schritt . "<br>";
+                break;
         }
+
         $this->schritt = null;
         $this->depth--;
         $this->currentElement = null;
     }
 
-    public function characterData($parser, $data) {
-        if (strcmp($this->currentElement, "gericht") === 0) {
-            $this->gericht .= trim($data);
-        }
-        else {
-            if (strcmp($this->currentElement, "ingredienz") === 0 || strcmp($this->currentElement, "menge") === 0 || strcmp($this->currentElement, "einheit") === 0) {
+    public function characterData($parser, $data)
+    {
+        switch ($this->currentElement) {
+            case "gericht":
+                $this->gericht .= trim($data);
+                break;
+            case "ingredienz":
+            case "menge":
+            case "einheit":
                 $this->zutat[$this->currentElement] .= trim($data);
-            }
-            else {
-                if (strcmp($this->currentElement, "schritt") === 0) {
-                    $this->schritt .= $data;
-                }
-            }
+                break;
+            case "schritt":
+                $this->schritt .= $data;
+                break;
         }
     }
 }
@@ -130,8 +137,8 @@ class XMLEventParse {
 
 <p>
     <?php
-    $xmlparse = new XMLEventParse();
-    $xmlparse->parse("rezept.xml");
+    $xmlParse = new XMLEventParse();
+    $xmlParse->parse("rezept.xml");
     ?>
 </p>
 </body>

@@ -1,24 +1,31 @@
 <?php
 
-class XMLDomWrite {
+class XMLDomWrite
+{
     private $dom;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->dom = new DOMDocument("1.0", "UTF-8");
         $this->dom->formatOutput = true;
         $this->shows = [
-            ["name" => "Die Simpsons",
+            [
+                "name" => "Die Simpsons",
                 "kanal" => "FOX",
                 "beginn" => "20:00",
-                "dauer" => "20"],
-            ["name" => "Game of Thrones",
+                "dauer" => "20"
+            ],
+            [
+                "name" => "Game of Thrones",
                 "kanal" => "HBO",
                 "beginn" => "21:00",
-                "dauer" => "60"]
+                "dauer" => "60"
+            ]
         ];
     }
 
-    public function generateXML($file) {
+    public function generateXML($file)
+    {
         $shows = $this->dom->appendChild($this->dom->createElement("shows"));
 
         foreach ($this->shows as $show) {
@@ -32,5 +39,5 @@ class XMLDomWrite {
     }
 }
 
-$xmlwrite = new XMLDomWrite();
-$xmlwrite->generateXML("dom_shows.xml");
+$xmlWrite = new XMLDomWrite();
+$xmlWrite->generateXML("dom_shows.xml");
