@@ -3,17 +3,17 @@
  */
 
 // Das zu erratende Wort (String)
-var word;
-// Eine Liste auf bereits ricthig geratenen Buchstaben (String)
-var answerLetters;
+let word;
+// Eine Liste aus bereits richtig geratenen Buchstaben (String)
+let answerLetters;
 // Die Anzahl der Fehlversuche (int)
-var guesses;
-// Das Hangman Bild (jQuery-Objekt)
-var image;
+let guesses;
+// Das Hangman-Bild (jQuery-Objekt)
+let image;
 // Das <div>-Element mit der Antwort (jQuery-Objekt)
-var answer;
+let answer;
 // Das <div>-Element mit den Buchstaben (jQuery-Objekt)
-var characters;
+let characters;
 
 
 /**
@@ -22,7 +22,7 @@ var characters;
 function init() {
     // Neustart Link bekommt einen Event-Handler zugewiesen, bei dem das Spiel zurückgesetzt wird
     // Performance-Tipp: $("#newgame").find("a") ist schneller als $("#newgame a")
-    $("#newgame").find("a").click(function(event) {
+    $("#newgame").find("a").click(function (event) {
         resetGame();
         event.preventDefault();
     });
@@ -49,17 +49,18 @@ function setupGame(wordlist) {
     // Die Anzahl der Fehlversuche beträgt zu Beginn 0
     guesses = 0;
 
-    // wordlist ist ein durch \n getrennter String (in jeder Zeile steht ein Wort)
+    // wordlist ist ein durch \r\n oder \n oder \r getrennter String (in jeder Zeile steht ein Wort)
     // Durch split() werden die Zeilen/Wörter in einem Array (words) gespeichert
-    // Parameter /\n/: Regular-Expression Literal!
-    var words = wordlist.split(/\n/);
+    // Parameter /\r\n|\n|\r/: Regular-Expression Literal!
+    let words = wordlist.split(/\r\n|\n|\r/);
 
     // Math.random() liefert eine Zufallszahl zwischen [0,1) (inkl. 0, exkl. 1)
     // words.length enthält die Anzahl der Elemente im Array words
     // bei 4 Elementen liegt das Ergebnis zwischen [0,4) (inkl. 0, exkl. 4), z.B. 2.1345
     // Math.floor() rundet ab, z.B. 2.1345 -> 2, daher ensteht eine Zufallszahl zwischen 0 und 3,
     // ideal für den Array-Zugriff. word ist daher ein zufällig ausgewähltes Wort aus dem Array
-    word = words[Math.floor(Math.random() * words.length)].toUpperCase();
+    // trim() wird sicherheitshalber eingesetzt, um allfällige Whitespace-Zeichen zu entfernen
+    word = words[Math.floor(Math.random() * words.length)].toUpperCase().trim();
 
     // Antwortbereich wird initialisiert. Für jeden Buchstaben im Lösungswort wird "_" eingesetzt
     // z.B. "Test" wird zu "____"
@@ -73,15 +74,15 @@ function setupGame(wordlist) {
     characters = $("#characters").empty();
 
     // Dann werden die verfügbaren Buchstaben als Array angelegt
-    var charList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Ä", "Ö", "Ü"];
+    let charList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z", "Ä", "Ö", "Ü"];
 
     // Nun wird über die Buchstaben mit dem jQuery Iterator $.each() iteriert
     // Für jeden Buchstaben wird ein <li>-Element mit enthaltenem Link angelegt
     // Performance-Tipp: <li>-Elemente zunächst in einen einzigen String hängen und dann 1x mit append/appendTo anfügen
     // statt 29x einzeln append/appendTo aufrufen
     // Performance-Tipp: for-Schleife wäre nochmals schneller als $.each (aber nicht so komfortabel).
-    var characterListItems = "";
-    $.each(charList, function(index, value) {
+    let characterListItems = "";
+    $.each(charList, function (index, value) {
         characterListItems += '<li id="' + value + '"><a href="' + value + '">' + value + '</a></li>';
     });
 
@@ -90,7 +91,7 @@ function setupGame(wordlist) {
     // Schließlich bekommt die Liste einen Klick-Handler mit "on". Dieser fängt Klicks auf die <a>-Elemente innerhalb ab
     // Performance-Tipp: 1 Klick-Handler mit "on" auf das übergeordnete Element, der "Event-Bubbling" unterstützt, ist
     // effizienter, als 29 einzelne Klick-Handler auf die jeweiligen <a>-Elemente
-    $("<ul></ul>").append(characterListItems).appendTo(characters).on("click", "a", function(event) {
+    $("<ul></ul>").append(characterListItems).appendTo(characters).on("click", "a", function (event) {
         guess($(this).attr("href"));
         event.preventDefault();
     });
@@ -137,9 +138,9 @@ function guess(character) {
  */
 function refreshCharList() {
     // Anzeige zunächst leer initialisieren
-    var updatedAnswer = "";
+    let updatedAnswer = "";
     // Gesuchtes Wort buchstabenweise durchlaufen
-    for (var i = 0; i < word.length; i++) {
+    for (let i = 0; i < word.length; i++) {
         // Falls der aktuelle Buchstabe des gesuchten Wortes in der richtig geratenen Wortmenge vorkommt...
         if (answerLetters.indexOf(word.charAt(i)) !== -1) {
             // Füge den Buchstaben dem Antwortbereich hinzu
@@ -157,10 +158,10 @@ function refreshCharList() {
 }
 
 /**
- * Zeigt das nächste Bild an. Der aktuelle Bildname entspricht der Anzahl der Fehlversuche (0.png, 1.png, etc.)
+ * Zeigt das nächste Bild an. Der aktuelle Bildname entspricht der Anzahl der Fehlversuche (0.png, 1.png etc.)
  */
 function incrementHangman() {
-    // Bildquelle austauschen (src Attribut)
+    // Bildquelle austauschen (src-Attribut)
     image.attr("src", "images/" + guesses + ".png");
 }
 
