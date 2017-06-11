@@ -3,15 +3,15 @@
 <head>
     <title>jQuery SOP-Beispiel</title>
     <meta charset="utf-8">
-    <script src="jquery-2.2.4.js"></script>
+    <script src="jquery-3.2.1.js"></script>
     <script>
         $(document).ready(function () {
             $.get("http://www.orf.at/", {index: 1},
-                    function (data) {
-                        $("#content").html(data);
-                    }).error(function () {
-                        $("#content").text("Oje SOP! :(");
-                    });
+                function (data) {
+                    $("#content").html(data);
+                }).fail(function () {
+                $("#content").text("Oje SOP! :(");
+            });
         });
     </script>
 </head>

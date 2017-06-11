@@ -4,7 +4,7 @@
     <title>JSON Example</title>
     <meta charset="utf-8">
     <script>
-        var jsonObject = {
+        let jsonObject = {
             "firstName": "John",
             "lastName": "Doe",
             "age": 25,
@@ -30,11 +30,11 @@
 </head>
 <body>
 <script>
-    var last = jsonObject.lastName;
-    var street = jsonObject.address.street;
-    var workPhone = jsonObject.phoneNumbers[1].number;
+    let last = jsonObject.lastName;
+    let street = jsonObject.address.street;
+    let workPhone = jsonObject.phoneNumbers[1].number;
 
-    var par = document.createElement("p");
+    let par = document.createElement("p");
     par.textContent = last + " | " + street + " | " + workPhone;
     document.getElementsByTagName("body")[0].appendChild(par);
 </script>
