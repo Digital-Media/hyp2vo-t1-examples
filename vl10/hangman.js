@@ -210,7 +210,7 @@ function showResult(outcome) {
 }
 
 /**
- * Document-Ready Handler: Ruft die Initilisierungsmethode auf und startet ein neues Spiel
+ * Document-Ready Handler: Ruft die Initialisierungsmethode auf und startet ein neues Spiel
  */
 $(document).ready(function () {
     init();
