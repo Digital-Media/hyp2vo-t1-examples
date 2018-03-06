@@ -4,7 +4,7 @@ $value2 = "3";
 $name1 = "Fred";
 $name2 = "Wilma";
 
-# strcmp
+# Vergleich zweier Integer mit strcmp
 echo strcmp($value1, $value1) . "<br>"; // 0
 # Vergleich auf Wert (==)
 if ($value1 == $value2) {
@@ -18,9 +18,9 @@ if ($value1 === $value2) {
 if ($name1 < $name2) {
     echo "Fred kommt vor Wilma" . "<br>"; // wird ausgegeben
 }
-# Vergleich auf Wert (==)
+# Lexikografischer Vergleich von String mit Integer
 if ($name1 < $value1) {
     echo "Fred < 3" . "<br>"; // ausgegeben (aber falsch!)
 }
-# Vergleich mit strcmp
+# Vergleich mit strcmp von String mit Integer
 echo strcmp($name1, $value1); // 1 (Fred > 3)
