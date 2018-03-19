@@ -10,7 +10,7 @@ class Rectangle implements GeometricComponentInterface
     public $y2;
     public $color;
     public static $version = "1.0";
-    const TYPE = "Rectangle";
+    public const TYPE = "Rectangle";
 
     public function __construct($x1 = 0, $y1 = 0, $x2 = 0, $y2 = 0, $color = 0)
     {
@@ -44,6 +44,11 @@ class Rectangle implements GeometricComponentInterface
         return self::$version;
     }
 
+    public static function printVersion()
+    {
+        echo self::$version;
+    }
+
     public function getType()
     {
         return self::TYPE;
@@ -64,6 +69,9 @@ $rect1->move(10, 10);
 echo Rectangle::$version; // 1.0
 echo $rect1->getVersion(); // 1.0
 //echo $rect1->version; // FEHLER!
+
+Rectangle::printVersion(); // 1.0
+$rect1->printVersion(); // Funktioniert, aber nicht nötig/empfehlenswert
 
 echo Rectangle::TYPE; // Rectangle
 echo $rect1->getType(); // Rectangle
