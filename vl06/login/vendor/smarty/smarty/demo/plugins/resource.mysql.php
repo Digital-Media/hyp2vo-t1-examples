@@ -29,7 +29,7 @@ class Smarty_Resource_Mysql extends Smarty_Resource_Custom
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:dbname=test;host=127.0.0.1", "smarty");
+            $this->db = new PDO("mysql:dbname=test;host=127.0.0.1", "Smarty");
         }
         catch (PDOException $e) {
             throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());

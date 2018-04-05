@@ -486,7 +486,7 @@ abstract class Smarty_Internal_TemplateCompilerBase
         ) {
             $this->tag_nocache = true;
         }
-        // compile the smarty tag (required compile classes to compile the tag are autoloaded)
+        // compile the Smarty tag (required compile classes to compile the tag are autoloaded)
         if (($_output = $this->callTagCompiler($tag, $args, $parameter)) === false) {
             if (isset($this->parent_compiler->templateProperties['tpl_function'][$tag])) {
                 // template defined by {template} tag

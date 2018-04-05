@@ -52,7 +52,7 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
                                 $output = "{$function}({$params})";
                             } else {
                                 if (is_object($function[0])) {
-                                    $output = '$_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][\'' . $modifier . '\'][0][0]->' . $function[1] . '(' . $params . ')';
+                                    $output = '$_smarty_tpl->Smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][\'' . $modifier . '\'][0][0]->' . $function[1] . '(' . $params . ')';
                                 } else {
                                     $output = $function[0] . '::' . $function[1] . '(' . $params . ')';
                                 }
@@ -113,7 +113,7 @@ class Smarty_Internal_Compile_Private_Modifier extends Smarty_Internal_CompileBa
                                     $output = "{$function}({$params})";
                                 } else {
                                     if (is_object($function[0])) {
-                                        $output = '$_smarty_tpl->smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][\'' . $modifier . '\'][0][0]->' . $function[1] . '(' . $params . ')';
+                                        $output = '$_smarty_tpl->Smarty->registered_plugins[Smarty::PLUGIN_MODIFIER][\'' . $modifier . '\'][0][0]->' . $function[1] . '(' . $params . ')';
                                     } else {
                                         $output = $function[0] . '::' . $function[1] . '(' . $params . ')';
                                     }

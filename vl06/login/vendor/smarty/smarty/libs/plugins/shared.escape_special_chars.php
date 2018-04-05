@@ -10,7 +10,7 @@ if (version_compare(PHP_VERSION, '5.2.3', '>=')) {
     /**
      * escape_special_chars common function
      * Function: smarty_function_escape_special_chars<br>
-     * Purpose:  used by other smarty functions to escape
+     * Purpose:  used by other Smarty functions to escape
      *           special chars except for already escaped ones
      *
      * @author   Monte Ohrt <monte at ohrt dot com>
@@ -31,7 +31,7 @@ if (version_compare(PHP_VERSION, '5.2.3', '>=')) {
     /**
      * escape_special_chars common function
      * Function: smarty_function_escape_special_chars<br>
-     * Purpose:  used by other smarty functions to escape
+     * Purpose:  used by other Smarty functions to escape
      *           special chars except for already escaped ones
      *
      * @author   Monte Ohrt <monte at ohrt dot com>

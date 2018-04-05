@@ -21,7 +21,7 @@
 class Smarty_Internal_Template extends Smarty_Internal_TemplateBase
 {
     /**
-     * Global smarty instance
+     * Global Smarty instance
      *
      * @var Smarty
      */
@@ -197,7 +197,7 @@ class Smarty_Internal_Template extends Smarty_Internal_TemplateBase
             $this->tpl_vars = $tpl_vars;
             $this->config_vars = $config_vars;
         }
-        // dummy local smarty variable
+        // dummy local Smarty variable
         if (!isset($this->tpl_vars['smarty'])) {
             $this->tpl_vars['smarty'] = new Smarty_Variable;
         }

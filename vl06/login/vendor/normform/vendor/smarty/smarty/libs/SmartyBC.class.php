@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * For questions, help, comments, discussion, etc., please join the
  * Smarty mailing list. Send a blank e-mail to
- * smarty-discussion-subscribe@googlegroups.com
+ * Smarty-discussion-subscribe@googlegroups.com
  *
  * @link      http://www.smarty.net/
  * @copyright 2008 New Digital Group, Inc.
@@ -116,7 +116,7 @@ class SmartyBC extends Smarty
      * @param string  $object        name of template object
      * @param object  $object_impl   the referenced PHP object to register
      * @param array   $allowed       list of allowed methods (empty = all)
-     * @param boolean $smarty_args   smarty argument format, else traditional
+     * @param boolean $smarty_args   Smarty argument format, else traditional
      * @param array   $block_methods list of methods that are block format
      *
      * @throws SmartyException

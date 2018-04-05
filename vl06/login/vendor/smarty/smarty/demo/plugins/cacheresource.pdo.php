@@ -21,9 +21,9 @@
  * ) ENGINE=InnoDB
  * Example usage :
  *      $cnx    =   new PDO("mysql:host=localhost;dbname=mydb", "username", "password");
- *      $smarty->setCachingType('pdo');
- *      $smarty->loadPlugin('Smarty_CacheResource_Pdo');
- *      $smarty->registerCacheResource('pdo', new Smarty_CacheResource_Pdo($cnx, 'smarty_cache'));
+ *      $Smarty->setCachingType('pdo');
+ *      $Smarty->loadPlugin('Smarty_CacheResource_Pdo');
+ *      $Smarty->registerCacheResource('pdo', new Smarty_CacheResource_Pdo($cnx, 'smarty_cache'));
  *
  * @author Beno!t POLASZEK - 2014
  */

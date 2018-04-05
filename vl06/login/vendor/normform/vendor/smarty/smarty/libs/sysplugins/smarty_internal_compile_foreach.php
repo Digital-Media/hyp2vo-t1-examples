@@ -71,7 +71,7 @@ class Smarty_Internal_Compile_Foreach extends Smarty_Internal_CompileBase
         if (isset($_attr['name'])) {
             $name = trim($_attr['name'], '\'"');
             $has_name = true;
-            $SmartyVarName = "\$smarty.foreach.{$name}.";
+            $SmartyVarName = "\$Smarty.foreach.{$name}.";
         } else {
             $has_name = false;
         }

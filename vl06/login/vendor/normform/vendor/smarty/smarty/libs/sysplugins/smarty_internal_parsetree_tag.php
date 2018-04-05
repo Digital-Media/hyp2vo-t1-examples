@@ -10,7 +10,7 @@
  */
 
 /**
- * A complete smarty tag.
+ * A complete Smarty tag.
  *
  * @package    Smarty
  * @subpackage Compiler

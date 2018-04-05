@@ -65,12 +65,12 @@ class Smarty_Internal_Compile_Private_Php extends Smarty_Internal_CompileBase
                 return '';
             } elseif ($compiler->php_handling == Smarty::PHP_ALLOW) {
                 if (!($compiler->smarty instanceof SmartyBC)) {
-                    $compiler->trigger_template_error('$smarty->php_handling PHP_ALLOW not allowed. Use SmartyBC to enable it', $compiler->lex->taglineno);
+                    $compiler->trigger_template_error('$Smarty->php_handling PHP_ALLOW not allowed. Use SmartyBC to enable it', $compiler->lex->taglineno);
                 }
                 $compiler->has_code = true;
                 return $_attr['code'];
             } else {
-                $compiler->trigger_template_error('Illegal $smarty->php_handling value', $compiler->lex->taglineno);
+                $compiler->trigger_template_error('Illegal $Smarty->php_handling value', $compiler->lex->taglineno);
             }
         } else {
             $compiler->has_code = true;

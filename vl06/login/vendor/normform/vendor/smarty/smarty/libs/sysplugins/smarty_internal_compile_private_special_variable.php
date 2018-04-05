@@ -1,7 +1,7 @@
 <?php
 /**
  * Smarty Internal Plugin Compile Special Smarty Variable
- * Compiles the special $smarty variables
+ * Compiles the special $Smarty variables
  *
  * @package    Smarty
  * @subpackage Compiler
@@ -17,7 +17,7 @@
 class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_CompileBase
 {
     /**
-     * Compiles code for the special $smarty variables
+     * Compiles code for the special $Smarty variables
      *
      * @param  array  $args     array with attributes from parser
      * @param  object $compiler compiler object
@@ -37,7 +37,7 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
                     $foreachVar = "'__foreach_{$name}'";
                     return "(isset(\$_smarty_tpl->tpl_vars[$foreachVar]->value[{$_index[2]}]) ? \$_smarty_tpl->tpl_vars[$foreachVar]->value[{$_index[2]}] : null)";
                 case 'section':
-                    return "\$_smarty_tpl->getVariable('smarty')->value$parameter";
+                    return "\$_smarty_tpl->getVariable('Smarty')->value$parameter";
                 case 'capture':
                     return "Smarty::\$_smarty_vars$parameter";
                 case 'now':
@@ -105,7 +105,7 @@ class Smarty_Internal_Compile_Private_Special_Variable extends Smarty_Internal_C
                     return "'$_rdelim'";
 
                 default:
-                    $compiler->trigger_template_error('$smarty.' . trim($_index[0], "'") . ' is invalid');
+                    $compiler->trigger_template_error('$Smarty.' . trim($_index[0], "'") . ' is invalid');
                     break;
             }
             if (isset($_index[1])) {

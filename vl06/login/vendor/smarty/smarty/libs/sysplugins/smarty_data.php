@@ -41,7 +41,7 @@ class Smarty_Data extends Smarty_Internal_Data
      * create Smarty data object
      *
      * @param Smarty|array                    $_parent parent template
-     * @param Smarty|Smarty_Internal_Template $smarty  global smarty instance
+     * @param Smarty|Smarty_Internal_Template $smarty  global Smarty instance
      * @param string                          $name    optional data block name
      *
      * @throws SmartyException

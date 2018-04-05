@@ -144,7 +144,7 @@ abstract class Smarty_Resource
     /**
      * Load Resource Handler
      *
-     * @param  Smarty $smarty smarty object
+     * @param  Smarty $smarty Smarty object
      * @param  string $type   name of the resource
      *
      * @throws SmartyException
@@ -152,7 +152,7 @@ abstract class Smarty_Resource
      */
     public static function load(Smarty $smarty, $type)
     {
-        // try smarty's cache
+        // try Smarty's cache
         if (isset($smarty->_resource_handlers[$type])) {
             return $smarty->_resource_handlers[$type];
         }
@@ -215,7 +215,7 @@ abstract class Smarty_Resource
      * @note "C:/foo.tpl" was forced to file resource up till Smarty 3.1.3 (including).
      *
      * @param  string $resource_name    template_resource or config_resource to parse
-     * @param  string $default_resource the default resource_type defined in $smarty
+     * @param  string $default_resource the default resource_type defined in $Smarty
      *
      * @return array with parsed resource name and type
      */
@@ -268,10 +268,10 @@ abstract class Smarty_Resource
     /**
      * initialize Source Object for given resource
      * wrapper for backward compatibility to versions < 3.1.22
-     * Either [$_template] or [$smarty, $template_resource] must be specified
+     * Either [$_template] or [$Smarty, $template_resource] must be specified
      *
      * @param  Smarty_Internal_Template $_template         template object
-     * @param  Smarty                   $smarty            smarty object
+     * @param  Smarty                   $smarty            Smarty object
      * @param  string                   $template_resource resource identifier
      *
      * @return Smarty_Template_Source   Source Object

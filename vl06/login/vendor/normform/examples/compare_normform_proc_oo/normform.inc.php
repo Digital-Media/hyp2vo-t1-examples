@@ -83,7 +83,7 @@ function show_form() {
     prepare_formfields();
     print_result();
     // Eine Übergabe von Variablen an Smarty ist noch nicht notwendig, weil wir Smarty-Templates erst später einführen
-    // display wird später durch die gleichnamige Smarty-Methode $smarty->dislplay(irgendeinTemplate.tpl) ersetzt
+    // display wird später durch die gleichnamige Smarty-Methode $Smarty->dislplay(irgendeinTemplate.tpl) ersetzt
     display();
 }
 

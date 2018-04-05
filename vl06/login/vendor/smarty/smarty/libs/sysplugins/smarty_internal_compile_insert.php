@@ -65,7 +65,7 @@ class Smarty_Internal_Compile_Insert extends Smarty_Internal_CompileBase
         // save possible attributes
         eval('$_name = ' . $_attr['name'] . ';');
         if (isset($_attr['assign'])) {
-            // output will be stored in a smarty variable instead of being displayed
+            // output will be stored in a Smarty variable instead of being displayed
             $_assign = $_attr['assign'];
             // create variable to make sure that the compiler knows about its nocache status
             $var = trim($_attr['assign'], "'");

@@ -61,14 +61,14 @@ class Smarty_Internal_Compile_Private_Object_Function extends Smarty_Internal_Co
                     }
                 }
                 $_params = 'array(' . implode(",", $_paramsArray) . ')';
-                $return = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}({$_params},\$_smarty_tpl)";
+                $return = "\$_smarty_tpl->Smarty->registered_objects['{$tag}'][0]->{$method}({$_params},\$_smarty_tpl)";
             } else {
                 $_params = implode(",", $_attr);
-                $return = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}({$_params})";
+                $return = "\$_smarty_tpl->Smarty->registered_objects['{$tag}'][0]->{$method}({$_params})";
             }
         } else {
             // object property
-            $return = "\$_smarty_tpl->smarty->registered_objects['{$tag}'][0]->{$method}";
+            $return = "\$_smarty_tpl->Smarty->registered_objects['{$tag}'][0]->{$method}";
         }
 
         if (empty($_assign)) {

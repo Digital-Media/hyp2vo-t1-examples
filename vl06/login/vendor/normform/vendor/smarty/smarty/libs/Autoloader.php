@@ -13,7 +13,7 @@
  *             Usage:
  *             require_once '...path/Autoloader.php';
  *             Smarty_Autoloader::register();
- *             $smarty = new Smarty();
+ *             $Smarty = new Smarty();
  *             Note:       This autoloader is not needed if you use Composer.
  *             Composer will automatically add the classes of the Smarty package to it common autoloader.
  */

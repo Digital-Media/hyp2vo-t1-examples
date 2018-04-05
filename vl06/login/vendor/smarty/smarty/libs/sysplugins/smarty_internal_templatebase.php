@@ -238,7 +238,7 @@ abstract class Smarty_Internal_TemplateBase extends Smarty_Internal_Data
      * @param          $object_name
      * @param  object  $object_impl   the referenced PHP object to register
      * @param  array   $allowed       list of allowed methods (empty = all)
-     * @param  boolean $smarty_args   smarty argument format, else traditional
+     * @param  boolean $smarty_args   Smarty argument format, else traditional
      * @param  array   $block_methods list of block-methods
      *
      * @throws SmartyException

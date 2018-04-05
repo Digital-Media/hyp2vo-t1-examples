@@ -140,7 +140,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase
             $compiler->has_code = false;
             return;
         }
-        // if called by {$smarty.block.child} we must search the name of enclosing {block}
+        // if called by {$Smarty.block.child} we must search the name of enclosing {block}
         if ($_name == null) {
             $stack_count = count($compiler->_tag_stack);
             while (-- $stack_count >= 0) {
@@ -151,14 +151,14 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase
             }
         }
         if ($_name == null) {
-            $compiler->trigger_template_error(' tag {$smarty.block.child} used outside {block} tags ', $compiler->lex->taglineno);
+            $compiler->trigger_template_error(' tag {$Smarty.block.child} used outside {block} tags ', $compiler->lex->taglineno);
         }
         // undefined child?
         if (!isset($compiler->template->block_data[$_name]['source'])) {
             $compiler->popTrace();
             return '';
         }
-        // flag that child is already compile by {$smarty.block.child} inclusion
+        // flag that child is already compile by {$Smarty.block.child} inclusion
         $compiler->template->block_data[$_name]['compiled'] = true;
         $_tpl = new Smarty_Internal_template('string:' . $compiler->template->block_data[$_name]['source'], $compiler->smarty, $compiler->template, $compiler->template->cache_id,
                                              $compiler->template->compile_id, $compiler->template->caching, $compiler->template->cache_lifetime);
@@ -207,7 +207,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase
     }
 
     /**
-     * Compile $smarty.block.parent
+     * Compile $Smarty.block.parent
      *
      * @param object $compiler compiler object
      * @param string $_name    optional name of child block
@@ -216,7 +216,7 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase
      */
     static function compileParentBlock($compiler, $_name = null)
     {
-        // if called by {$smarty.block.parent} we must search the name of enclosing {block}
+        // if called by {$Smarty.block.parent} we must search the name of enclosing {block}
         if ($_name == null) {
             $stack_count = count($compiler->_tag_stack);
             while (-- $stack_count >= 0) {
@@ -227,10 +227,10 @@ class Smarty_Internal_Compile_Block extends Smarty_Internal_CompileBase
             }
         }
         if ($_name == null) {
-            $compiler->trigger_template_error(' tag {$smarty.block.parent} used outside {block} tags ', $compiler->lex->taglineno);
+            $compiler->trigger_template_error(' tag {$Smarty.block.parent} used outside {block} tags ', $compiler->lex->taglineno);
         }
         if (empty(Smarty_Internal_Compile_Block::$nested_block_names)) {
-            $compiler->trigger_template_error(' illegal {$smarty.block.parent} in parent template ', $compiler->lex->taglineno);
+            $compiler->trigger_template_error(' illegal {$Smarty.block.parent} in parent template ', $compiler->lex->taglineno);
         }
         Smarty_Internal_Compile_Block::$block_data[Smarty_Internal_Compile_Block::$nested_block_names[0]]['source'] .= Smarty_Internal_Compile_Block::parent;
         $compiler->lex->yypushstate(Smarty_Internal_Templatelexer::CHILDBLOCK);

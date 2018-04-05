@@ -52,7 +52,7 @@ class Smarty_Internal_Compile_Call extends Smarty_Internal_CompileBase
         $_attr = $this->getAttributes($compiler, $args);
         // save possible attributes
         if (isset($_attr['assign'])) {
-            // output will be stored in a smarty variable instead of being displayed
+            // output will be stored in a Smarty variable instead of being displayed
             $_assign = $_attr['assign'];
         }
         //$_name = trim($_attr['name'], "'\"");

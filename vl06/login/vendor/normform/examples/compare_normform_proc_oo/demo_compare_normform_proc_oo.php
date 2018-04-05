@@ -40,7 +40,7 @@ function prepare_formfields() {
     global $nachricht_value;
     // Diese Anweisung verschwindet später im Smarty-Template
     $script_name = $_SERVER["SCRIPT_NAME"];
-    // Die folgenden Werte werden später mit $smarty->assign() an das Template weitergegeben.
+    // Die folgenden Werte werden später mit $Smarty->assign() an das Template weitergegeben.
     $vorname_key = VORNAME;
     $nachname_key = NACHNAME;
     $nachricht_key = NACHRICHT;

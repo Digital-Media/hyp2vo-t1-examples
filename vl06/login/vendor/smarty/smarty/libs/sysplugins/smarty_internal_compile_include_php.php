@@ -88,7 +88,7 @@ class Smarty_Internal_Compile_Include_Php extends Smarty_Internal_CompileBase
         }
 
         if (isset($_attr['assign'])) {
-            // output will be stored in a smarty variable instead of being displayed
+            // output will be stored in a Smarty variable instead of being displayed
             $_assign = $_attr['assign'];
         }
         $_once = '_once';

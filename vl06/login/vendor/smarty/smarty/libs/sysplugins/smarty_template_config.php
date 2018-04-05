@@ -83,10 +83,10 @@ class Smarty_Template_Config extends Smarty_Template_Source
 
     /**
      * initialize Source Object for given resource
-     * Either [$_template] or [$smarty, $template_resource] must be specified
+     * Either [$_template] or [$Smarty, $template_resource] must be specified
      *
      * @param  Smarty_Internal_Template $_template         template object
-     * @param  Smarty                   $smarty            smarty object
+     * @param  Smarty                   $smarty            Smarty object
      * @param  string                   $template_resource resource identifier
      *
      * @return Smarty_Template_Source Source Object
@@ -102,7 +102,7 @@ class Smarty_Template_Config extends Smarty_Template_Source
         }
         // parse resource_name, load resource handler
         list($name, $type) = Smarty_Resource::parseResourceName($template_resource, $smarty->default_config_type);
-        // make sure configs are not loaded via anything smarty can't handle
+        // make sure configs are not loaded via anything Smarty can't handle
         if (isset($_incompatible_resources[$type])) {
             throw new SmartyException ("Unable to use resource '{$type}' for config");
         }

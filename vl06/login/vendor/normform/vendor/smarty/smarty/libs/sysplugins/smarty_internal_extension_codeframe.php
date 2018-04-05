@@ -63,7 +63,7 @@ class Smarty_Internal_Extension_CodeFrame
             }
             if (!empty($_template->required_plugins['nocache'])) {
                 $_template->has_nocache_code = true;
-                $output .= "echo '/*%%SmartyNocache:{$_template->properties['nocache_hash']}%%*/<?php \$_smarty = \$_smarty_tpl->smarty; ";
+                $output .= "echo '/*%%SmartyNocache:{$_template->properties['nocache_hash']}%%*/<?php \$_smarty = \$_smarty_tpl->Smarty; ";
                 foreach ($_template->required_plugins['nocache'] as $tmp) {
                     foreach ($tmp as $data) {
                         $file = addslashes($data['file']);

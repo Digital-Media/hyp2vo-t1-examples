@@ -68,7 +68,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase
         $include_file = $_attr['file'];
 
         if (isset($_attr['assign'])) {
-            // output will be stored in a smarty variable instead of being displayed
+            // output will be stored in a Smarty variable instead of being displayed
             $_assign = $_attr['assign'];
         }
 
@@ -231,7 +231,7 @@ class Smarty_Internal_Compile_Include extends Smarty_Internal_CompileBase
         }
         // delete {include} standard attributes
         unset($_attr['file'], $_attr['assign'], $_attr['cache_id'], $_attr['compile_id'], $_attr['cache_lifetime'], $_attr['nocache'], $_attr['caching'], $_attr['scope'], $_attr['inline']);
-        // remaining attributes must be assigned as smarty variable
+        // remaining attributes must be assigned as Smarty variable
         $_vars_nc = '';
         if (!empty($_attr)) {
             if ($_parent_scope == Smarty::SCOPE_LOCAL) {
