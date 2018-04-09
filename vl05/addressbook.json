@@ -1,0 +1,22 @@
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "age": 25,
+  "address": {
+    "street": "21 Doe St.",
+    "city": "Doeville",
+    "zip": "12345",
+    "state": "NY",
+    "country": "USA"
+  },
+  "phoneNumbers": [
+    {
+      "type": "home",
+      "number": "800 123 456-789"
+    },
+    {
+      "type": "work",
+      "number": "800 999 666-333"
+    }
+  ]
+}
