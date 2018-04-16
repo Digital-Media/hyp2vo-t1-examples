@@ -16,7 +16,7 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  * For questions, help, comments, discussion, etc., please join the
  * Smarty mailing list. Send a blank e-mail to
- * Smarty-discussion-subscribe@googlegroups.com
+ * smarty-discussion-subscribe@googlegroups.com
  *
  * @link      http://www.smarty.net/
  * @copyright 2008 New Digital Group, Inc.
@@ -31,7 +31,7 @@
 require_once(dirname(__FILE__) . '/Smarty.class.php');
 
 /**
- * Smarty Backward Compatability Wrapper Class
+ * Smarty Backward Compatibility Wrapper Class
  *
  * @package Smarty
  */
@@ -45,13 +45,19 @@ class SmartyBC extends Smarty
     public $_version = self::SMARTY_VERSION;
 
     /**
+     * This is an array of directories where trusted php scripts reside.
+     *
+     * @var array
+     */
+    public $trusted_dir = array();
+
+    /**
      * Initialize new SmartyBC object
      *
-     * @param array $options options to set during initialization, e.g. array( 'forceCompile' => false )
      */
-    public function __construct(array $options = array())
+    public function __construct()
     {
-        parent::__construct($options);
+        parent::__construct();
     }
 
     /**
@@ -101,7 +107,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-     * Unregisters custom function
+     * Unregister custom function
      *
      * @param string $function name of template function
      */
@@ -116,13 +122,14 @@ class SmartyBC extends Smarty
      * @param string  $object        name of template object
      * @param object  $object_impl   the referenced PHP object to register
      * @param array   $allowed       list of allowed methods (empty = all)
-     * @param boolean $smarty_args   Smarty argument format, else traditional
+     * @param boolean $smarty_args   smarty argument format, else traditional
      * @param array   $block_methods list of methods that are block format
      *
      * @throws SmartyException
      * @internal param array $block_functs list of methods that are block format
      */
-    public function register_object($object, $object_impl, $allowed = array(), $smarty_args = true, $block_methods = array())
+    public function register_object($object, $object_impl, $allowed = array(), $smarty_args = true,
+                                    $block_methods = array())
     {
         settype($allowed, 'array');
         settype($smarty_args, 'boolean');
@@ -130,7 +137,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-     * Unregisters object
+     * Unregister object
      *
      * @param string $object name of template object
      */
@@ -153,7 +160,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-     * Unregisters block function
+     * Unregister block function
      *
      * @param string $block name of template function
      */
@@ -175,7 +182,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-     * Unregisters compiler function
+     * Unregister compiler function
      *
      * @param string $function name of template function
      */
@@ -196,7 +203,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-     * Unregisters modifier
+     * Unregister modifier
      *
      * @param string $modifier name of template modifier
      */
@@ -217,7 +224,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-     * Unregisters a resource
+     * Unregister a resource
      *
      * @param string $type name of resource
      */
@@ -238,7 +245,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-     * Unregisters a prefilter function
+     * Unregister a prefilter function
      *
      * @param callable $function
      */
@@ -259,7 +266,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-     * Unregisters a postfilter function
+     * Unregister a postfilter function
      *
      * @param callable $function
      */
@@ -280,7 +287,7 @@ class SmartyBC extends Smarty
     }
 
     /**
-     * Unregisters an outputfilter function
+     * Unregister an outputfilter function
      *
      * @param callable $function
      */

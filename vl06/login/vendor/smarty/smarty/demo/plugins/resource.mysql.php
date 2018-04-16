@@ -21,15 +21,17 @@ class Smarty_Resource_Mysql extends Smarty_Resource_Custom
 {
     // PDO instance
     protected $db;
+
     // prepared fetch() statement
     protected $fetch;
+
     // prepared fetchTimestamp() statement
     protected $mtime;
 
     public function __construct()
     {
         try {
-            $this->db = new PDO("mysql:dbname=test;host=127.0.0.1", "Smarty");
+            $this->db = new PDO("mysql:dbname=test;host=127.0.0.1", "smarty");
         }
         catch (PDOException $e) {
             throw new SmartyException('Mysql Resource failed: ' . $e->getMessage());
@@ -53,8 +55,8 @@ class Smarty_Resource_Mysql extends Smarty_Resource_Custom
         $row = $this->fetch->fetch();
         $this->fetch->closeCursor();
         if ($row) {
-            $source = $row['source'];
-            $mtime = strtotime($row['modified']);
+            $source = $row[ 'source' ];
+            $mtime = strtotime($row[ 'modified' ]);
         } else {
             $source = null;
             $mtime = null;

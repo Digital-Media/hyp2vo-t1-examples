@@ -16,9 +16,8 @@ if (!isset($_SESSION["counter"])) {
 }
 
 echo "<p>Anzahl Reloads: " . $_SESSION["counter"] . "</p>";
-echo "<p>Inhalt Konstante SID: " . SID . "</p>";
-echo '<p><a href="session_counter.php?' . SID . '">Seite neu laden</a></p>';
-echo '<p><a href="session_destroy.php?' . SID . '">Session löschen</a></p>';
+echo '<p><a href="session_counter.php?">Seite neu laden</a></p>';
+echo '<p><a href="session_destroy.php?">Session löschen</a></p>';
 ?>
 </body>
 </html>

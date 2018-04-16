@@ -4,9 +4,9 @@
  * PDO Cache Handler with GZIP support
  * Example usage :
  *      $cnx    =   new PDO("mysql:host=localhost;dbname=mydb", "username", "password");
- *      $Smarty->setCachingType('pdo_gzip');
- *      $Smarty->loadPlugin('Smarty_CacheResource_Pdo_Gzip');
- *      $Smarty->registerCacheResource('pdo_gzip', new Smarty_CacheResource_Pdo_Gzip($cnx, 'smarty_cache'));
+ *      $smarty->setCachingType('pdo_gzip');
+ *      $smarty->loadPlugin('Smarty_CacheResource_Pdo_Gzip');
+ *      $smarty->registerCacheResource('pdo_gzip', new Smarty_CacheResource_Pdo_Gzip($cnx, 'smarty_cache'));
  *
  * @require Smarty_CacheResource_Pdo class
  * @author  Beno!t POLASZEK - 2014

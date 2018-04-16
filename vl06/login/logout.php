@@ -7,14 +7,13 @@
  *
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2017
+ * @version 2018
  */
 
 session_start();
 
-require_once("includes/defines.inc.php");
-
-require_once LOGIN_SYSTEM;
+require_once("src/defines.inc.php");
+require_once TNORMFORM;
 
 $_SESSION = [];
 if (isset($_COOKIE[session_name()])) {
@@ -22,4 +21,4 @@ if (isset($_COOKIE[session_name()])) {
 }
 session_destroy();
 
-LoginSystem::redirectTo(LOGIN);
+View::redirectTo("login.php");
