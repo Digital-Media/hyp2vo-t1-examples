@@ -1,7 +1,0 @@
-Österreich
-Hagenberg
-Linz
-MTD
-Hallo
-Hypermedia
-jQuery
