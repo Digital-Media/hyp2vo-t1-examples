@@ -1,6 +1,9 @@
 # PhpStorm IDE project directory
 .idea
 
+# Composer vendor directories
+vendor
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
