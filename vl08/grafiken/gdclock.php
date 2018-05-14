@@ -1,68 +1,86 @@
 <?php
 /**
- * Code adapted from https://www.codewalkers.com/c/a/Miscellaneous/An-Intro-to-Using-the-GD-Image-Library-with-PHP/
+ * Code adapted from http://www.codelibary.com/snippet/655/gd-clock
  */
 
-// Get the current time
-$time = strftime("%I:%M:%S", time());
-$timearray = explode(':', $time);
+// Define measurements
+$max_length = 150;
+$marker = 5;
+$origin_x = $origin_y = $max_length / 2;
+$radius = $max_length / 2 - 2;
+$hour_segment = $radius * 0.50;
+$minute_segment = $radius * 0.80;
 
-$hour = (((int)$timearray[0]) * 60) + (int)$timearray[1];
-$minute = (int)$timearray[1];
-$second = (int)$timearray[2];
+// Create image
+$image = imagecreatetruecolor($max_length, $max_length);
 
-if ($hour != 0) {
-    $hourdegree = ((360 / (720 / $hour)) - 90) % 360;
-    if ($hourdegree < 0) {
-        $hourdegree = 360 + $hourdegree;
-    }
-} else {
-    $hourdegree = 270;
-}
-
-if ($minute != 0) {
-    $minutedegree = ((360 / (60 / $minute)) - 90) % 360;
-    if ($minutedegree < 0) {
-        $minutedegree = 360 + $minutedegree;
-    }
-} else {
-    $minutedegree = 270;
-}
-
-if ($second != 0) {
-    $seconddegree = ((360 / (60 / $second)) - 90) % 360;
-    if ($seconddegree < 0) {
-        $seconddegree = 360 + $seconddegree;
-    }
-} else {
-    $seconddegree = 270;
-}
-
-// Draw clock and watch hands
-$image = imagecreate(100, 100);
-$maroon = imagecolorallocate($image, 123, 9, 60);
-$white = imagecolorallocate($image, 255, 255, 255);
+// Allocate colors
 $black = imagecolorallocate($image, 0, 0, 0);
+$red = imagecolorallocate($image, 255, 0, 0);
+$blue = imagecolorallocate($image, 0, 0, 255);
+$white = imagecolorallocate($image, 254, 255, 255);
 
-imagefilledrectangle($image, 0, 0, 99, 99, $white);
-imagefilledellipse($image, 49, 49, 100, 100, $black);
-imagefilledellipse($image, 49, 49, 95, 95, $maroon);
-imagefilledellipse($image, 49, 49, 75, 75, $white);
-imagefilledellipse($image, 49, 49, 5, 5, $maroon);
-imagefilledarc($image, 49, 49, 50, 50, $hourdegree - 4, $hourdegree + 4, $maroon, IMG_ARC_PIE);
-imagefilledarc($image, 49, 49, 65, 65, $minutedegree - 3, $minutedegree + 3, $maroon, IMG_ARC_PIE);
-imagefilledarc($image, 49, 49, 70, 70, $seconddegree - 2, $seconddegree + 2, $black, IMG_ARC_PIE);
+// Get current time
+date_default_timezone_set("Europe/Vienna");
+$lt = localtime();
 
-imagecolortransparent($image, $white);
+// Calculate hand angles
+$hour_angle = deg2rad(($lt[2] + ($lt[1] / 60) - 3) * 30);
+$minute_angle = deg2rad(($lt[1] + ($lt[0] / 60) - 15) * 6);
 
-// Add the text
-imagettftext($image, 8, 0, 44, 11, $white, "arial.ttf", "12");
-imagettftext($image, 8, 0, 89, 53, $white, "arial.ttf", "3");
-imagettftext($image, 8, 0, 47, 96, $white, "arial.ttf", "6");
-imagettftext($image, 8, 0, 5, 53, $white, "arial.ttf", "9");
+// White background
+imagefilledrectangle($image, 0, 0, $max_length, $max_length, $white);
 
-// Output the image
+// Outer clock circle
+imagearc(
+    $image,
+    $origin_x,
+    $origin_y,
+    $max_length - 2,
+    $max_length - 2,
+    0,
+    360,
+    $blue
+);
+
+// Hour markers
+for ($i = 0; $i < 360; $i = $i + 30) {
+    $degrees = deg2rad($i);
+    imageline(
+        $image,
+        $origin_x + (($radius - $marker) * cos($degrees)),
+        $origin_y + (($radius - $marker) * sin($degrees)),
+        $origin_x + ($radius * cos($degrees)),
+        $origin_y + ($radius * sin($degrees)),
+        $red
+    );
+}
+
+// Hour hand
+imageline(
+    $image,
+    $origin_x,
+    $origin_y,
+    $origin_x + ($hour_segment * cos($hour_angle)),
+    $origin_y + ($hour_segment * sin($hour_angle)),
+    $black
+);
+
+// Minute hand
+imageline(
+    $image,
+    $origin_x,
+    $origin_y,
+    $origin_x + ($minute_segment * cos($minute_angle)),
+    $origin_y + ($minute_segment * sin($minute_angle)),
+    $black
+);
+
+// Center dot
+imagearc($image, $origin_x, $origin_y, 6, 6, 0, 360, $red);
+imagefill($image, $origin_x + 1, $origin_y + 1, $red);
+
+// Draw image
 header("Content-type: image/png");
 imagepng($image);
-//imagePNG($image, "clock.png");
 imagedestroy($image);

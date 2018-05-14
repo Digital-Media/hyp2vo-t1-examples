@@ -36,13 +36,13 @@ imagerectangle($image, 0, 0, $width, $height, $black);
 if ($p) {
     $text = floor($pos / $width * 100) . "%";
     $font = "arial.ttf";
-    $fontsize = $height * 0.3;
+    $font_size = $height * 0.3;
     $black = imagecolorallocate($image, 0, 0, 0);
-    $textsize = imagettfbbox($fontsize, 0, $font, $text);
-    $textlength = $textsize[2] - $textsize[0];
-    $textX = $width / 2 - $textlength / 2;
-    $textY = $height / 2 + $fontsize / 2;
-    imagettftext($image, $fontsize, 0, $textX, $textY, $black, $font, $text);
+    $text_size = imagettfbbox($font_size, 0, $font, $text);
+    $text_length = $text_size[2] - $text_size[0];
+    $textX = $width / 2 - $text_length / 2;
+    $textY = $height / 2 + $font_size / 2;
+    imagettftext($image, $font_size, 0, $textX, $textY, $black, $font, $text);
 }
 
 // Output the image

@@ -1,0 +1,12 @@
+<?php
+$d = new DateTime("2018-05-15T08:50:00+02:00");
+$dOrig = new DateTime("2018-05-15T08:50:00+02:00");
+
+$twoWeeks = new DateInterval("P2W");
+$oneDay5Hours3Mins10Secs = new DateInterval("P1DT5H3M10S");
+$seventeenHours = new DateInterval("PT17H");
+
+echo "<p>Original Date: " . $d->format("r") . "</p>";
+echo "<p>Plus 2 weeks: " . $d->add($twoWeeks)->format("r") . "</p>";
+echo "<p>Plus 1 day 5 hours 3 minutes and 5 seconds: " . $d->add($oneDay5Hours3Mins10Secs)->format("r") . "</p>";
+echo "<p>Minus 17 hours: " . $d->sub($seventeenHours)->format("r") . "</p>";
