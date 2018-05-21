@@ -1,89 +1,43 @@
 <?php
+require "Hypermedia2/Vl09/XMLOoDomParser.php";
 
-class XMLOoDomParse
-{
-    private $dom;
+use Hypermedia2\Vl09\XMLOoDomParser;
 
-    public function __construct()
-    {
-        $this->dom = new DOMDocument();
-    }
-
-    public function parse($file)
-    {
-        $this->dom->load($file);
-
-        //$this->processNode($this->dom->documentElement);
-
-        $rezept = $this->dom->documentElement;
-        echo $rezept->nodeName . ": " . $rezept->getAttribute("quelle") . "<br>";
-
-        $zutaten = $this->dom->getElementsByTagName("zutaten")->item(0);
-        echo $zutaten->nodeName . "<br>";
-
-        $zutat = $this->dom->getElementsByTagName("zutat");
-        foreach ($zutat as $item) {
-            echo $item->nodeName . "<br>";
-            $children = $item->childNodes;
-            foreach ($children as $child) {
-                if ($child->nodeType === XML_ELEMENT_NODE) {
-                    echo $child->nodeName . ": " . $child->firstChild->nodeValue . "<br>";
-                }
-            }
-        }
-
-        $zubereitung = $this->dom->getElementsByTagName("zubereitung")->item(0);
-        echo $zubereitung->nodeName . "<br>";
-
-        $schritt = $this->dom->getElementsByTagName("schritt");
-        foreach ($schritt as $item) {
-            echo $item->nodeName . ": " . $item->firstChild->nodeValue . "<br>";
-        }
-    }
-
-    /*private function processNode($node)
-    {
-        if ($node->nodeType === XML_ELEMENT_NODE) {
-            echo $node->getLineNo() . ": " . $node->nodeName;
-            switch ($node->nodeName) {
-                case "rezept":
-                    echo ": " . $node->getAttribute("quelle") . "<br>";
-                    break;
-                case "zutaten":
-                case "zutat":
-                case "zubereitung":
-                    echo "<br>";
-            }
-        }
-        if ($node->nodeType === XML_TEXT_NODE) {
-            $content = trim($node->nodeValue);
-            if (!empty($content)) {
-                echo ": " . $content . "<br>";
-            }
-        }
-        if ($node->hasChildNodes()) {
-            foreach ($node->childNodes as $n) {
-                $this->processNode($n);
-            }
-        }
-    }*/
-}
-
+$xmlParser = new XMLOoDomParser();
+$xmlParser->parse("rezept.xml");
 ?>
+
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>DOM Parser</title>
+    <title>SimpleXML-Parser</title>
     <meta charset="utf-8">
 </head>
 <body>
-<h1>Output:</h1>
+<h1><?= $xmlParser->getDish() ?></h1>
 
-<p>
+<p>Quelle: <a href="<?= $xmlParser->getSource() ?>"><?= $xmlParser->getSource() ?></a></p>
+
+<h2>Zutaten</h2>
+
+<ul>
     <?php
-    $xmlParse = new XMLOoDomParse();
-    $xmlParse->parse("rezept.xml");
+    $ingredients = $xmlParser->getIngredients();
+    foreach ($ingredients as $ingredient) {
+        echo "<li>". $ingredient["menge"] . " " . $ingredient["einheit"] . " " . $ingredient["ingredienz"] . "</li>";
+    }
     ?>
-</p>
+</ul>
+
+<h2>Zubereitung</h2>
+
+<ol>
+    <?php
+    $steps = $xmlParser->getSteps();
+    foreach ($steps as $step) {
+        echo "<li>$step</li>";
+    }
+    ?>
+</ol>
 </body>
 </html>

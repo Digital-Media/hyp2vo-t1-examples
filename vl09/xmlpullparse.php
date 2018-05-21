@@ -1,70 +1,43 @@
 <?php
+require "Hypermedia2/Vl09/XMLPullParser.php";
 
-class XMLPullParse
-{
-    private $parser;
-    private $depth;
+use Hypermedia2\Vl09\XMLPullParser;
 
-    public function __construct()
-    {
-        $this->parser = new XMLReader();
-    }
-
-    public function __destruct()
-    {
-        $this->parser->close();
-    }
-
-    public function parse($file)
-    {
-        $this->parser->open($file);
-
-        while ($this->parser->read()) {
-            if ($this->parser->nodeType === XMLReader::ELEMENT) {
-                $line = $this->parser->expand()->getLineNo();
-                for ($i = 0; $i < $this->parser->depth; $i++) {
-                    echo "&nbsp;&nbsp;";
-                }
-                echo "$line: " . $this->parser->name;
-
-                switch ($this->parser->name) {
-                    case "rezept":
-                        echo ": " . $this->parser->getAttribute("quelle") . "<br>";
-                        break;
-                    case "gericht":
-                    case "ingredienz":
-                    case "menge":
-                    case "einheit":
-                    case "schritt":
-                        echo ": " . trim($this->parser->readString()) . "<br>";
-                        break;
-                    case "zutaten":
-                    case "zutat":
-                    case "zubereitung":
-                        echo "<br>";
-                        break;
-                }
-            }
-        }
-    }
-}
-
+$xmlParser = new XMLPullParser();
+$xmlParser->parse("rezept.xml");
 ?>
 
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>XML Pull-Parser</title>
+    <title>XML-Pull-Parser</title>
     <meta charset="utf-8">
 </head>
 <body>
-<h1>Output:</h1>
+<h1><?= $xmlParser->getDish() ?></h1>
 
-<p>
+<p>Quelle: <a href="<?= $xmlParser->getSource() ?>"><?= $xmlParser->getSource() ?></a></p>
+
+<h2>Zutaten</h2>
+
+<ul>
     <?php
-    $xmlParse = new XMLPullParse();
-    $xmlParse->parse("rezept.xml");
+    $ingredients = $xmlParser->getIngredients();
+    foreach ($ingredients as $ingredient) {
+        echo "<li>". $ingredient["menge"] . " " . $ingredient["einheit"] . " " . $ingredient["ingredienz"] . "</li>";
+    }
     ?>
-</p>
+</ul>
+
+<h2>Zubereitung</h2>
+
+<ol>
+    <?php
+    $steps = $xmlParser->getSteps();
+    foreach ($steps as $step) {
+        echo "<li>$step</li>";
+    }
+    ?>
+</ol>
 </body>
 </html>
