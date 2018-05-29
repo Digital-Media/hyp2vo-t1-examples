@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Tell Me Your Name</title>
+</head>
+<body>
+<h1>Tell Me Your Name</h1>
+<form action="{{ path_for('result') }}" method="post">
+    <label for="name">Name:</label>
+    <input type="text" id="name" name="name" value="{{ placeholder }}">
+    <button type="submit">Send</button>
+</form>
+</body>
+</html>
