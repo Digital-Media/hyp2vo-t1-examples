@@ -4,6 +4,9 @@
 # Composer vendor directories
 vendor
 
+# Twig template cache directories
+templates_c
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
