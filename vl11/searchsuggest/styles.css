@@ -1,0 +1,29 @@
+body {
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+.suggestlink {
+    color: rgb(0, 0, 0);
+    background-color: rgb(255, 255, 255);
+    padding: 2px 6px 2px 6px;
+    border-bottom: 1px solid black;
+    border-left: 1px solid black;
+    border-right: 1px solid black;
+}
+
+.suggestlink:first-child {
+    border-top: 1px solid black;
+}
+
+.suggestlinkover {
+    color: rgb(255, 255, 255);
+    background-color: rgb(51, 102, 204);
+    cursor: pointer;
+}
+
+#suggestions {
+    position: absolute;
+    left: 68px;
+    background-color: rgb(255, 255, 255);
+    text-align: left;
+}
