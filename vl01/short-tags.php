@@ -5,7 +5,7 @@
     <title>PHP-Short-Tags</title>
 </head>
 <body>
-<!-- Short Tags (deaktiviert in der Vagrant Box) -->
+<!-- Short Tags (deaktiviert in den meisten PHP-Umgebungen) -->
 <? echo "Short Tag Einbindung"; ?>
 
 <!-- Short Echo Tags -->

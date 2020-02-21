@@ -19,7 +19,15 @@ echo ($test ? "Hallo" : "Kein Hallo") . "<br>"; // Hallo
 $name = $vorname ?? "Nobody";
 echo $name . "<br>";
 
-// Spaceship Operator (PHP 7)
+
+// Null Coalescing Assignment Operator
+// $hero = "Batman";  // Diese Zeile ein- bzw. auskommentieren um die Funktionsweise zu testen
+$hero ??= "Superman";
+echo "<p>$hero</p>";
+// Entpricht = $hero = $hero ?? "Batman";
+
+
+// Spaceship Operator
 echo 1 <=> 1; // 0
 echo 1.5 <=> 2.5; // -1
 echo "b" <=> "a"; // 1

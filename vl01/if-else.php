@@ -7,18 +7,6 @@ if ($name !== "") {
     $username = "John Doe";
 }
 
-$n = 3;
-// if-else-Kaskade
-if ($n === 1) {
-    // Code 1
-} else {
-    if ($n === 2) {
-        // Code 2
-    } else {
-        // Restlicher Code
-    }
-}
-
 // if-elseif-else-Kaskade
 if ($n === 1) {
     // Code 1
