@@ -13,6 +13,6 @@ $parts = ["name", "alter", "geschlecht"];
 $string = implode(",", $parts);
 echo "<p>$string</p>";
 
-$date = "13/03/2018";
+$date = "10/03/2020";
 $values = preg_split("#[/.-]#", $date);
 print_r($values);
