@@ -1,15 +1,24 @@
 <?php
 
+/**
+ * A person.
+ */
 class Person
 {
     // ...
 }
 
+/**
+ * An employee based on Person.
+ */
 class Employee extends Person
 {
     // ...
 }
 
+/**
+ * An animal.
+ */
 class Animal
 {
     // ...

@@ -2,11 +2,17 @@
 
 require("Rectangle.php");
 
+/**
+ * Implementation of a 3D box based on a 2D rectangle.
+ */
 class Box extends Rectangle
 {
-    public $depth;
+    public int $depth;
 
-    public function draw()
+    /**
+     * Draws this box.
+     */
+    public function draw(): void
     {
         // Vorderseite zeichnen (Rechteck)
         parent::draw();
