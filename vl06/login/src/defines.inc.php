@@ -32,7 +32,7 @@ define("SMARTY", "vendor/smarty/smarty/libs/Smarty.class.php");
 /**
  * @var string NORM_DIR The Path to the NormForm library.
  */
-define("NORM_DIR", "vendor/normform/");
+define("NORM_DIR", "vendor/normform_old/");
 
 /**
  * @var string UTILITIES Path to the Utilities class.

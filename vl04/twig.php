@@ -1,37 +1,37 @@
 <?php
-// Autoloader für Twig-Klassen von https://gist.github.com/sarciszewski/b6cd3776fbd20acaf26b
+
+use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
+use Twig\Loader\FilesystemLoader;
+
+// Einfacher PSR-4 Autoloader von https://gist.github.com/Shelob9/acf3109c006f2957c12ea6b317f549f2
 spl_autoload_register(function ($class) {
-    // project-specific namespace prefix
-    $prefix = 'Twig';
-    // base directory for the namespace prefix
-    $base_dir = __DIR__ . '/Twig/lib/Twig/';
-    // does the class use the namespace prefix?
+    //change this to your root namespace
+    $prefix = "Twig";
+    //make sure this is the directory with your classes
+    $base_dir = __DIR__ . "/Twig/src/";
     $len = strlen($prefix);
     if (strncmp($prefix, $class, $len) !== 0) {
-        // no, move to the next registered autoloader
         return;
     }
-    // get the relative class name
     $relative_class = substr($class, $len);
-    // replace the namespace prefix with the base directory, replace namespace
-    // separators with directory separators in the relative class name, append
-    // with .php
-    $file = $base_dir . str_replace('_', '/', $relative_class) . '.php';
-    // if the file exists, require it
+    $file = $base_dir . str_replace("\\", DIRECTORY_SEPARATOR, $relative_class) . ".php";
     if (file_exists($file)) {
         require $file;
     }
 });
 
-$loader = new Twig_Loader_Filesystem("templates");
-$twig = new Twig_Environment($loader, ["cache" => "templates_c", "auto_reload" => true]);
+$loader = new FilesystemLoader("templates");
+$twig = new Environment($loader, ["cache" => "templates_c", "auto_reload" => true]);
 
 try {
     $twig->display("message.html.twig", ["name" => "John Doe", "message" => "I'm back baby!"]);
-} catch (Twig_Error_Loader $e) {
+} catch (LoaderError $e) {
     // Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
-} catch (Twig_Error_Runtime $e) {
+} catch (RuntimeError $e) {
     // Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
-} catch (Twig_Error_Syntax $e) {
+} catch (SyntaxError $e) {
     // Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
 }

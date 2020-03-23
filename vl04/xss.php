@@ -1,6 +1,3 @@
-<!-- Chrome benötigt die Angabe dieser Header-Daten, um die XSS-Protection auszuschalten -->
-<?php header("X-XSS-Protection: 0"); ?>
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
