@@ -6,13 +6,14 @@
  *
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2018
+ * @version 2020
  */
 
 /**
  * Activate Debugging-Messages here for easier testing
  */
-define ('DEBUG',true);
+define("DEBUG", true);
+
 if (DEBUG) {
     echo "<br>WARNING: Debugging is enabled. Set DEBUG to false for production use in " . __FILE__;
     echo "<br>Connect via SSH and send tail -f /var/log/apache2/error.log";
@@ -22,37 +23,13 @@ if (DEBUG) {
     ini_set('display_errors', '1');
     ini_set('display_startup_errors', '1');
 }
+
 // Path and file definitions
-
-/**
- * @var string NORM_DIR The Path to the NormForm library.
- */
-define("SMARTY", "vendor/smarty/smarty/libs/Smarty.class.php");
-
-/**
- * @var string NORM_DIR The Path to the NormForm library.
- */
-define("NORM_DIR", "vendor/normform_old/");
-
-/**
- * @var string UTILITIES Path to the Utilities class.
- */
-define("UTILITIES", "src/Utilities.php");
-
-/**
- * @var string NORM_FORM Path to the NormForm class.
- */
-define("TNORMFORM", NORM_DIR . "AbstractNormForm.php");
-
-/**
- * @var string FILE_ACCESS Path to the FileAccess class.
- */
-define("FILE_ACCESS", "src/FileAccess.php");
 
 /**
  * @var string DATA_DIRECTORY Sets the directory where the meta data (JSON files) for users is stored.
  */
-define("DATA_DIRECTORY", "data/");
+define("DATA_DIRECTORY", "../data/");
 
 // Login Handling
 

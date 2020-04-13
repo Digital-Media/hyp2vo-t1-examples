@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PHP-based Login Mechanism &ndash; Login Page</title>
+</head>
+<body>
+<header>
+    <h1>Login Page</h1>
+</header>
+<main>
+    <h2>Enter Your User Name and Password</h2>
+    {% if errorMessages is defined and errorMessages|length > 0 %}
+        <ul>
+            {% for error in errorMessages %}
+                <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+    <form action="{{ _server.SCRIPT_NAME }}" method="post">
+        <div>
+            <label for="{{ username.getName() }}">User Name*:</label><br>
+            <input type="text" id="{{ username.getName() }}" name="{{ username.getName() }}"
+                   value="{{ username.getValue() }}">
+        </div>
+        <div>
+            <label for="{{ passwordName }}">Password*:</label><br>
+            <input type="password" id="{{ passwordName }}" name="{{ passwordName }}">
+        </div>
+        <div>
+            <button type="submit">Log In</button>
+        </div>
+    </form>
+</main>
+</body>
+</html>
