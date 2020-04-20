@@ -17,6 +17,7 @@
 </html>
 
 <?php
+
 require "vendor/autoload.php";
 
 if (isset($_POST["firstName"]) && isset($_POST["lastName"])) {
@@ -29,21 +30,17 @@ if (isset($_POST["firstName"]) && isset($_POST["lastName"])) {
 
     $client = new GuzzleHttp\Client();
 
-    try {
-        $response = $client->request(
-            "GET",
-            "http://api.icndb.com/jokes/random",
-            [
-                "query" => [
-                    "firstName" => $firstName,
-                    "lastName"  => $lastName
-                ]
+    $response = $client->request(
+        "GET",
+        "http://api.icndb.com/jokes/random",
+        [
+            "query" => [
+                "firstName" => $firstName,
+                "lastName" => $lastName
             ]
-        );
-        $body = $response->getBody();
-        $data = json_decode($body);
-        echo "<p>" . $data->value->joke . "</p>";
-    } catch (\GuzzleHttp\Exception\GuzzleException $e) {
-        echo "<p>You are not ready for Chuck Norris!</p>";
-    }
+        ]
+    );
+    $body = $response->getBody();
+    $data = json_decode($body);
+    echo "<p>" . $data->value->joke . "</p>";
 }
