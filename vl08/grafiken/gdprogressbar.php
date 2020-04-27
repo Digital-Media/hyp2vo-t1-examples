@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Code originally adapted from http://www.akchauhan.com/dynamic-progress-bar-or-status-bar-using-gd-library/
  */
@@ -34,8 +35,8 @@ imagerectangle($image, 0, 0, $width, $height, $black);
 
 // Display text text centered if enabled
 if ($p) {
-    $text = floor($pos / $width * 100) . "%";
-    $font = "arial.ttf";
+    $text = floor($pos / $width * 100) . " %";
+    $font = __DIR__ . "/arial.ttf";
     $font_size = $height * 0.3;
     $black = imagecolorallocate($image, 0, 0, 0);
     $text_size = imagettfbbox($font_size, 0, $font, $text);

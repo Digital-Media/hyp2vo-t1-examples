@@ -1,4 +1,5 @@
 <?php
+
 // Create image
 $width = $height = 300;
 $image1 = imagecreatetruecolor($width, $height);

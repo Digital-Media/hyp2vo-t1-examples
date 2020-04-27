@@ -1,6 +1,7 @@
 <?php
+
 /**
- * Code adapted from http://www.codelibary.com/snippet/655/gd-clock
+ * Code adapted from https://www.codelibary.com/snippet/655/gd-clock
  */
 
 // Define measurements

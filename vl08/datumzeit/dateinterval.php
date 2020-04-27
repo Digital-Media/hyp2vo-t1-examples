@@ -1,6 +1,6 @@
 <?php
-$d = new DateTime("2018-05-15T08:50:00+02:00");
-$dOrig = new DateTime("2018-05-15T08:50:00+02:00");
+
+$d = new DateTime("2020-04-28T08:50:00+02:00");
 
 $twoWeeks = new DateInterval("P2W");
 $oneDay5Hours3Mins10Secs = new DateInterval("P1DT5H3M10S");
