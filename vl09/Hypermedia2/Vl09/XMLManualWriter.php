@@ -1,4 +1,5 @@
 <?php
+
 namespace Hypermedia2\Vl09;
 
 /**
@@ -23,18 +24,18 @@ class XMLManualWriter
     public function __construct()
     {
         $this->shows = [
-                [
-                        "name"   => "Die Simpsons",
-                        "kanal"  => "FOX",
-                        "beginn" => "20:00",
-                        "dauer"  => "20"
-                ],
-                [
-                        "name"   => "Game of Thrones",
-                        "kanal"  => "HBO",
-                        "beginn" => "21:00",
-                        "dauer"  => "60"
-                ]
+            [
+                "name" => "Die Simpsons",
+                "kanal" => "FOX",
+                "beginn" => "20:00",
+                "dauer" => "20"
+            ],
+            [
+                "name" => "Game of Thrones",
+                "kanal" => "HBO",
+                "beginn" => "21:00",
+                "dauer" => "60"
+            ]
         ];
     }
 

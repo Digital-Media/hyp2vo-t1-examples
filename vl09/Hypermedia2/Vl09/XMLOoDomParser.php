@@ -1,4 +1,5 @@
 <?php
+
 namespace Hypermedia2\Vl09;
 
 use DOMDocument;
@@ -17,7 +18,7 @@ class XMLOoDomParser
      *
      * @var DOMDocument
      */
-    private $dom;
+    private DOMDocument $dom;
 
     // Document related properties
 
@@ -26,28 +27,28 @@ class XMLOoDomParser
      *
      * @var string
      */
-    private $source;
+    private string $source;
 
     /**
      * The name of the current dish.
      *
      * @var string
      */
-    private $dish;
+    private string $dish;
 
     /**
      * The list of ingredients.
      *
      * @var array
      */
-    private $ingredients;
+    private array $ingredients;
 
     /**
      * The list of preparation steps.
      *
      * @var array
      */
-    private $steps;
+    private array $steps;
 
     /**
      * Creates a new DOM instances and initializes properties for data storage.

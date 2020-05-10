@@ -1,4 +1,5 @@
 <?php
+
 require "Hypermedia2/Vl09/XMLDomWriter.php";
 
 use Hypermedia2\Vl09\XMLDomWriter;

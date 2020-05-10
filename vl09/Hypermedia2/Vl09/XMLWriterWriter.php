@@ -1,4 +1,5 @@
 <?php
+
 namespace Hypermedia2\Vl09;
 
 use XMLWriter;
@@ -17,7 +18,7 @@ class XMLWriterWriter
      *
      * @var XMLWriter
      */
-    private $writer;
+    private XMLWriter $writer;
 
     // Document data properties
 
@@ -26,7 +27,7 @@ class XMLWriterWriter
      *
      * @var array
      */
-    private $shows;
+    private array $shows;
 
     /**
      * Initializes the writer and the data used for XML creation.
@@ -36,18 +37,18 @@ class XMLWriterWriter
         $this->writer = new XMLWriter();
 
         $this->shows = [
-                [
-                        "name"   => "Die Simpsons",
-                        "kanal"  => "FOX",
-                        "beginn" => "20:00",
-                        "dauer"  => "20"
-                ],
-                [
-                        "name"   => "Game of Thrones",
-                        "kanal"  => "HBO",
-                        "beginn" => "21:00",
-                        "dauer"  => "60"
-                ]
+            [
+                "name" => "Die Simpsons",
+                "kanal" => "FOX",
+                "beginn" => "20:00",
+                "dauer" => "20"
+            ],
+            [
+                "name" => "Game of Thrones",
+                "kanal" => "HBO",
+                "beginn" => "21:00",
+                "dauer" => "60"
+            ]
         ];
     }
 

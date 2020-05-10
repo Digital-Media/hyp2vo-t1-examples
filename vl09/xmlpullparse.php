@@ -1,4 +1,5 @@
 <?php
+
 require "Hypermedia2/Vl09/XMLPullParser.php";
 
 use Hypermedia2\Vl09\XMLPullParser;
@@ -24,7 +25,7 @@ $xmlParser->parse("rezept.xml");
     <?php
     $ingredients = $xmlParser->getIngredients();
     foreach ($ingredients as $ingredient) {
-        echo "<li>". $ingredient["menge"] . " " . $ingredient["einheit"] . " " . $ingredient["ingredienz"] . "</li>";
+        echo "<li>" . $ingredient["menge"] . " " . $ingredient["einheit"] . " " . $ingredient["ingredienz"] . "</li>";
     }
     ?>
 </ul>

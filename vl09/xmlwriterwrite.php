@@ -1,4 +1,5 @@
 <?php
+
 require "Hypermedia2/Vl09/XMLWriterWriter.php";
 
 use Hypermedia2\Vl09\XMLWriterWriter;

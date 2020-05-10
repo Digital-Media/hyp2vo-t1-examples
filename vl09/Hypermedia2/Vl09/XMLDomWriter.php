@@ -1,4 +1,5 @@
 <?php
+
 namespace Hypermedia2\Vl09;
 
 use DOMDocument;
@@ -17,7 +18,7 @@ class XMLDomWriter
      *
      * @var DOMDocument
      */
-    private $dom;
+    private DOMDocument $dom;
 
     // Document data properties
 
@@ -26,7 +27,7 @@ class XMLDomWriter
      *
      * @var array
      */
-    private $shows;
+    private array $shows;
 
     /**
      * Initializes the DOM document and the data used for XML creation.
@@ -36,18 +37,18 @@ class XMLDomWriter
         $this->dom = new DOMDocument("1.0", "UTF-8");
         $this->dom->formatOutput = true;
         $this->shows = [
-                [
-                        "name"   => "Die Simpsons",
-                        "kanal"  => "FOX",
-                        "beginn" => "20:00",
-                        "dauer"  => "20"
-                ],
-                [
-                        "name"   => "Game of Thrones",
-                        "kanal"  => "HBO",
-                        "beginn" => "21:00",
-                        "dauer"  => "60"
-                ]
+            [
+                "name" => "Die Simpsons",
+                "kanal" => "FOX",
+                "beginn" => "20:00",
+                "dauer" => "20"
+            ],
+            [
+                "name" => "Game of Thrones",
+                "kanal" => "HBO",
+                "beginn" => "21:00",
+                "dauer" => "60"
+            ]
         ];
     }
 

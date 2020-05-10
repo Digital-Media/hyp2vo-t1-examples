@@ -1,4 +1,5 @@
 <?php
+
 namespace Hypermedia2\Vl09;
 
 /**
@@ -22,44 +23,44 @@ class XMLEventParser
      *
      * @var bool
      */
-    private $isParsing;
+    private bool $isParsing;
 
     /**
      * Keeps track of the currently "opened" element in order to by able to correctly assign the character data.
      *
-     * @var string
+     * @var string|null
      */
-    private $currentElement;
+    private ?string $currentElement;
 
     // Document related properties
 
     /**
-     * The URL source of the receipe.
+     * The URL source of the recipe.
      *
      * @var string
      */
-    private $source;
+    private string $source;
 
     /**
      * The name of the current dish.
      *
      * @var string
      */
-    private $dish;
+    private string $dish;
 
     /**
      * The list of ingredients.
      *
      * @var array
      */
-    private $ingredients;
+    private array $ingredients;
 
     /**
      * The list of preparation steps.
      *
      * @var array
      */
-    private $steps;
+    private array $steps;
 
     /**
      * Creates a new parser instance, assigns the handler callbacks and initializes properties.
@@ -120,9 +121,9 @@ class XMLEventParser
     /**
      * The callback for opening XML tags.
      *
-     * @param resource $parser     The parser instance.
-     * @param string   $tag        The name of the opening element.
-     * @param array    $attributes The list of attributes present.
+     * @param resource $parser The parser instance.
+     * @param string $tag The name of the opening element.
+     * @param array $attributes The list of attributes present.
      */
     public function startElement($parser, string $tag, array $attributes): void
     {
@@ -145,7 +146,7 @@ class XMLEventParser
      * The callback for closing XML tags.
      *
      * @param resource $parser The parser instance.
-     * @param string   $tag    The name of the closing element.
+     * @param string $tag The name of the closing element.
      */
     public function endElement($parser, string $tag): void
     {
@@ -156,7 +157,7 @@ class XMLEventParser
      * The callback for character data.
      *
      * @param resource $parser The parser instance.
-     * @param string   $data   The character data.
+     * @param string $data The character data.
      */
     public function characterData($parser, string $data): void
     {

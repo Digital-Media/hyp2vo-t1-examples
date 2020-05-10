@@ -1,4 +1,5 @@
 <?php
+
 require "Hypermedia2/Vl09/XMLEventParser.php";
 
 use Hypermedia2\Vl09\XMLEventParser;
@@ -21,23 +22,23 @@ $xmlParser->parse("rezept.xml");
 <h2>Zutaten</h2>
 
 <ul>
-<?php
-$ingredients = $xmlParser->getIngredients();
-foreach ($ingredients as $ingredient) {
-    echo "<li>". $ingredient["menge"] . " " . $ingredient["einheit"] . " " . $ingredient["ingredienz"] . "</li>";
-}
-?>
+    <?php
+    $ingredients = $xmlParser->getIngredients();
+    foreach ($ingredients as $ingredient) {
+        echo "<li>" . $ingredient["menge"] . " " . $ingredient["einheit"] . " " . $ingredient["ingredienz"] . "</li>";
+    }
+    ?>
 </ul>
 
 <h2>Zubereitung</h2>
 
 <ol>
-<?php
-$steps = $xmlParser->getSteps();
-foreach ($steps as $step) {
-    echo "<li>$step</li>";
-}
-?>
+    <?php
+    $steps = $xmlParser->getSteps();
+    foreach ($steps as $step) {
+        echo "<li>$step</li>";
+    }
+    ?>
 </ol>
 </body>
 </html>
