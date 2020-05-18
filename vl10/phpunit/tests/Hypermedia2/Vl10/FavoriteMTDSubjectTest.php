@@ -1,4 +1,5 @@
 <?php
+
 namespace Hypermedia2\Vl10;
 
 require dirname(__DIR__) . "../../../src/Hypermedia2/Vl10/FavoriteMTDSubject.php";
@@ -6,15 +7,21 @@ require dirname(__DIR__) . "../../../src/Hypermedia2/Vl10/FavoriteMTDSubject.php
 use Exception;
 use PHPUnit\Framework\TestCase;
 
-class FavoriteSubjectTest extends TestCase
+/**
+ * Test class for FavoriteMTDSubject
+ * @package Hypermedia2\Vl10
+ */
+class FavoriteMTDSubjectTest extends TestCase
 {
     /**
-     * Tests if the constructor assigns the correct value to the property.
+     * Tests if the constructor assigns the correct value to the property and
+     * getFavoriteSubject() returns it correctly.
      */
-    public function testSetsFAvoriteMTDSubjectWithConstructor()
+    public function testGetFavoriteSubject()
     {
-        $subject = new FavoriteMTDSubject("Hypermedia 2");
-        $this->assertAttributeEquals("Hypermedia 2", "favoriteSubject", $subject);
+        $name = "Hypermedia 2";
+        $subject = new FavoriteMTDSubject($name);
+        $this->assertEquals($name, $subject->getFavoriteSubject());
     }
 
     /**
@@ -40,12 +47,14 @@ class FavoriteSubjectTest extends TestCase
 
     /**
      * Tests if the respondTo method throws an exception if the subject doesn't match.
-     * @expectedException Exception
+     * @throws Exception
      */
     public function testRespondToInDisagreement()
     {
         $subject = new FavoriteMTDSubject("Hypermedia 2");
         $opinion = "I love Digitale Medientechnik 2!";
+
+        $this->expectException(Exception::class);
 
         $subject->respondTo($opinion);
     }

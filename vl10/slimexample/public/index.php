@@ -1,76 +1,126 @@
 <?php
 
+use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
-use Slim\App;
-use Slim\Container;
-use Slim\Http\Environment;
-use Slim\Http\Request;
-use Slim\Http\Response;
-use Slim\Http\Uri;
+use Psr\Container\ContainerInterface;
+use Psr\Http\Message\ResponseInterface as Response;
+use Psr\Http\Message\ServerRequestInterface as Request;
+use Psr\Log\LoggerInterface;
+use Slim\Factory\AppFactory;
 use Slim\Views\Twig;
-use Slim\Views\TwigExtension;
+use Slim\Views\TwigMiddleware;
 
 require "../vendor/autoload.php";
 
-// Define Settings
-$settings = [
+###################################
+# Build container and definitions #
+###################################
+$containerBuilder = new ContainerBuilder();
+
+$containerBuilder->addDefinitions(
+    [
         "settings" => [
-                "displayErrorDetails" => "true",
-                "logger"              => [
-                        "name"  => "slimexample-logger",
-                        "path"  => "../logs/app.log",
-                        "level" => Logger::DEBUG
-                ],
-                "view"                => [
-                        "templates"   => "../templates",
-                        "cache"       => "../templates_c",
-                        "auto_reload" => true
+            "displayErrorDetails" => true,
+            "logErrors" => true,
+            "logErrorDetails" => true,
+            "logger" => [
+                "name" => "slimexample-logger",
+                "path" => "../logs/app.log",
+                "level" => Logger::DEBUG
+            ],
+            "view" => [
+                "templates" => "../templates",
+                "cache" => "../templates_c",
+                "auto_reload" => true
+            ]
+        ],
+        LoggerInterface::class => function (ContainerInterface $container) {
+            $settings = $container->get("settings");
+            $loggerSettings = $settings["logger"];
+
+            $logger = new Logger($loggerSettings["name"]);
+
+            $fileHandler = new StreamHandler($loggerSettings["path"], $loggerSettings["level"]);
+            $logger->pushHandler($fileHandler);
+
+            return $logger;
+        },
+        "view" => function (ContainerInterface $container) {
+            $settings = $container->get("settings");
+            $viewSettings = $settings["view"];
+            return Twig::create(
+                $viewSettings["templates"],
+                [
+                    "cache" => $viewSettings["cache"],
+                    "auto_reload" => $viewSettings["auto_reload"]
                 ]
-        ]
-];
+            );
+        }
+    ]
+);
 
-// Create app using the provided settings
-$app = new App($settings);
+$container = $containerBuilder->build();
+AppFactory::setContainer($container);
 
-// Set up dependencies
-$container = $app->getContainer();
+################################
+# Create app and set base path #
+################################
+$app = AppFactory::create();
 
-$container["logger"] = function (Container $c) {
-    $loggerSettings = $c->get("settings")["logger"];
-    $logger = new Logger($loggerSettings["name"]);
-    $fileHandler = new StreamHandler($loggerSettings["path"], $loggerSettings["level"]);
-    $logger->pushHandler($fileHandler);
-    return $logger;
-};
-$container->logger->info("Logger service registered");
+// Derives the base path from the current script name
+$basePath = dirname($_SERVER["SCRIPT_NAME"]);
+$app->setBasePath($basePath);
 
-$container["view"] = function (Container $c) {
-    $viewSettings = $c->get("settings")["view"];
-    $view = new Twig($viewSettings["templates"], [
-            "cache"       => $viewSettings["cache"],
-            "auto_reload" => $viewSettings["auto_reload"]
-    ]);
-    $router = $c->get("router");
-    $uri = Uri::createFromEnvironment(new Environment($_SERVER));
-    $view->addExtension(new TwigExtension($router, $uri));
-    return $view;
-};
-$container->logger->info("Template/View service registered");
+// Get the logger
+$logger = $container->get(LoggerInterface::class);
+$logger->info("Logger dependency created.");
 
-// Create routes
-$app->get("/", function (Request $request, Response $response, array $args) {
-    return $this->view->render($response, "form.html.twig");
-});
+##################
+# Add Middleware #
+##################
+$app->add(TwigMiddleware::createFromContainer($app));
+$logger->info("Twig middleware added.");
 
-$app->get("/{placeholder}[/]", function (Request $request, Response $response, array $args) {
-    return $this->view->render($response, "form.html.twig", ["placeholder" => $args["placeholder"]]);
-});
+$app->addRoutingMiddleware();
+$logger->info("Routing middleware added.");
 
-$app->post("/", function (Request $request, Response $response, array $args) {
-    $name = $request->getParsedBodyParam("name");
-    return $this->view->render($response, "result.html.twig", ["name" => $name]);
-})->setName("result");
+$settings = $container->get("settings");
+$app->addErrorMiddleware(
+    $settings["displayErrorDetails"],
+    $settings["logErrors"],
+    $settings["logErrorDetails"],
+    $logger
+);
+$logger->info("Error middleware added.");
 
-// Run the app
+#################
+# Create routes #
+#################
+$app->get(
+    "/",
+    function (Request $request, Response $response, $args) {
+        return $this->get("view")->render($response, "form.html.twig");
+    }
+);
+
+$app->get(
+    "/{placeholder}[/]",
+    function (Request $request, Response $response, array $args) {
+        return $this->get("view")->render($response, "form.html.twig", ["placeholder" => $args["placeholder"]]);
+    }
+);
+
+$app->post(
+    "/",
+    function (Request $request, Response $response, $args) {
+        $data = $request->getParsedBody();
+        $name = $data["name"];
+        return $this->get("view")->render($response, "result.html.twig", ["name" => $name]);
+    }
+)->setName("result");
+
+###############
+# Run the app #
+###############
 $app->run();
