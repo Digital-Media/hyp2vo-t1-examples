@@ -11,10 +11,9 @@ class SearchData
 {
     /**
      * The titles that are queried by the search suggest feature.
-     *
      * @var array
      */
-    private $titles;
+    private array $titles;
 
     /**
      * Fills the data array with a series of strings that are being queried by the search suggest feature.
@@ -28,7 +27,7 @@ class SearchData
             "Hagenberg",
             "jQuery",
             "Medientechnik und -design",
-            "MTD17",
+            "MTD19",
             "MTD",
             "PHP",
             "JavaScript",

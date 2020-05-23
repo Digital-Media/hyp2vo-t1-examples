@@ -1,4 +1,5 @@
 <?php
+
 if (isset($_POST)) {
     // Set $_POST to the last position and get the array key
     end($_POST);
