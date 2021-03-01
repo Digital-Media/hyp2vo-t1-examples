@@ -1,4 +1,8 @@
 <?php
+// Fehlermeldungen werden ausgegeben (auch wenn am Server deaktiviert).
+ini_set("display_errors", "1");
+ini_set("html_errors", "1");
+
 $value1 = 3;
 $value2 = "3";
 $name1 = "Fred";
@@ -20,7 +24,7 @@ if ($name1 < $name2) {
 }
 # Lexikografischer Vergleich von String mit Integer
 if ($name1 < $value1) {
-    echo "Fred < 3" . "<br>"; // ausgegeben (aber falsch!)
+    echo "Fred < 3" . "<br>"; // Vor PHP 8 ausgegeben (aber falsch!), mit PHP 8 nicht ausgegeben
 }
 # Vergleich mit strcmp von String mit Integer
 echo strcmp($name1, $value1); // 1 (Fred > 3)

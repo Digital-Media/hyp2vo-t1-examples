@@ -24,7 +24,7 @@ echo $name . "<br>";
 // $hero = "Batman";  // Diese Zeile ein- bzw. auskommentieren um die Funktionsweise zu testen
 $hero ??= "Superman";
 echo "<p>$hero</p>";
-// Entpricht = $hero = $hero ?? "Batman";
+// Entspricht = $hero = $hero ?? "Batman";
 
 
 // Spaceship Operator
