@@ -1,20 +1,34 @@
 <?php
 // Error Handling, um Fehlermeldungen zu sehen
-define('DEBUG', true);
+const DEBUG = true;
 
 if (DEBUG) {
     error_reporting(E_ALL);
-    ini_set('html_errors', '1');
-    ini_set('display_errors', '1');
-    ini_set('display_startup_errors', '1');
+    ini_set("html_errors", "1");
+    ini_set("display_errors", "1");
 }
 
+# Konstanten mit define()
+
 define("USERNAME", "John Doe");
-echo USERNAME; // John Doe
-echo Username; // Username (mit Notice)
+echo USERNAME . "<br>"; // John Doe
+// echo Username; // Führt beim Einkommentieren zu einem Fehler
+
+# Konstanten mit const
+
+const USER = "Jane Doe";
+echo USER . "<br>";
+
+# Konstanten überprüfen
 
 if (defined("USERNAME")) {
     echo "<p>Welcome " . USERNAME . "!</p>";
+}
+
+// const funktioniert nur am Top-Level
+if (!defined("FOO")) {
+    define("FOO", "bar");
+    //const FOO = "bar"; -> Funktioniert hier nicht
 }
 
 # Magische Konstanten

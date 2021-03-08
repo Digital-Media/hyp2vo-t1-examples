@@ -1,30 +1,30 @@
 <?php
 // Lokale Variable
 
-function foolokal()
+function fooLokal(): void
 {
     $x = "Lokal";
 }
 
 $x = "Global";
-foolokal();
+fooLokal();
 echo "<p>$x</p>"; // Global
 
 // Globale Variable
 
-function fooglobal()
+function fooGlobal(): void
 {
     global $x;
     $x = "Jetzt global";
 }
 
 $x = "Global";
-fooglobal();
+fooGlobal();
 echo "<p>$x</p>"; // Jetzt global
 
 // Statische Variable
 
-function counter()
+function counter(): int
 {
     static $count = 0;
     return $count++;

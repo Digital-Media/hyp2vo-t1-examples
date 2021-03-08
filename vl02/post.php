@@ -1,12 +1,13 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
     <title>POST-Formular</title>
     <meta charset="utf-8">
 </head>
 <body>
 <form method="post" action="post.php">
-    <input type="text" name="info">
+    <label for="infolabel">Info:</label>
+    <input type="text" name="info" id="infolabel">
     <button type="submit">Abschicken</button>
 </form>
 
