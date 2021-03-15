@@ -1,3 +1,3 @@
 <?php
 $test = "<p>Funktioniert!</p>";
-define("MESSAGE", "<p>Hallo Welt</p>");
+const MESSAGE = "<p>Hallo Welt</p>";

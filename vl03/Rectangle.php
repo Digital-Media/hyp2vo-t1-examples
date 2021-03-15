@@ -7,11 +7,12 @@ require("GeometricComponentInterface.php");
  */
 class Rectangle implements GeometricComponentInterface
 {
+    /* Vor PHP 8:
     public int $x1;
     public int $y1;
     public int $x2;
     public int $y2;
-    public string $color;
+    public string $color;*/
     public static string $version = "1.0.0";
     public const TYPE = "Rectangle";
 
@@ -23,14 +24,29 @@ class Rectangle implements GeometricComponentInterface
      * @param int $y2 The y-coordinate of the lower right corner.
      * @param string $color The rectangle's color.
      */
-    public function __construct(int $x1 = 0, int $y1 = 0, int $x2 = 0, int $y2 = 0, string $color = "white")
-    {
+    public function __construct(
+        public int $x1 = 0,
+        public int $y1 = 0,
+        public int $x2 = 0,
+        public int $y2 = 0,
+        public string $color = "white"
+    ) {
+    }
+
+    /* Vor PHP 8:
+    public function __construct(
+        int $x1 = 0,
+        int $y1 = 0,
+        int $x2 = 0,
+        int $y2 = 0,
+        string $color = "white"
+    ) {
         $this->x1 = $x1;
         $this->y1 = $y1;
         $this->x2 = $x2;
         $this->y2 = $y2;
         $this->color = $color;
-    }
+    }*/
 
     /**
      * Called, when the rectangle is destroyed.
