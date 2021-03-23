@@ -14,7 +14,7 @@ use Fhooe\NormForm\View\View;
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
  * @author Rimbert Rudisch-Sommer <rimbert.rudisch-sommer@fh-hagenberg.at>
- * @version 1.1.2
+ * @version 1.1.3
  */
 class NormFormDemo extends AbstractNormForm
 {

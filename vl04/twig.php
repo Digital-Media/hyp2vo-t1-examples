@@ -29,9 +29,9 @@ $twig = new Environment($loader, ["cache" => "templates_c", "auto_reload" => tru
 try {
     $twig->display("message.html.twig", ["name" => "John Doe", "message" => "I'm back baby!"]);
 } catch (LoaderError $e) {
-    // Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
+    // LoaderError Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
 } catch (RuntimeError $e) {
-    // Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
+    // RuntimeError Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
 } catch (SyntaxError $e) {
-    // Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
+    // SyntaxError Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
 }

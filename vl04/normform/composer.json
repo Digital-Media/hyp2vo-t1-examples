@@ -8,7 +8,7 @@
     ],
     "type": "project",
     "require": {
-        "php": "^7.1",
+        "php": ">=7.1",
         "fhooe/normform": "^1.2"
     },
     "require-dev": {
