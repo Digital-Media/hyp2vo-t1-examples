@@ -1,4 +1,5 @@
 <?php
+
 $string = "Hello World!";
 $fp = fopen("world.txt", "w");
 $bytes = fwrite($fp, $string);

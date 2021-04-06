@@ -1,4 +1,5 @@
 <?php
+
 $jsonString = file_get_contents("addressbook.json");
 
 // Ausgabe als Objekt

@@ -1,4 +1,5 @@
 <?php
+
 $fp = fopen("entchen.txt", "r");
 $lock = flock($fp, LOCK_SH); // Lock anfordern
 $contents = "";

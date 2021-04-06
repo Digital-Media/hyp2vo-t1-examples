@@ -1,4 +1,5 @@
 <?php
+
 $fp = fopen("person.csv", "r");
 $array = fgetcsv($fp);
 fclose($fp);

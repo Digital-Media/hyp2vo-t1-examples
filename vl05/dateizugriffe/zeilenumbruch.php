@@ -1,4 +1,5 @@
 <?php
+
 $line1 = "Das ist Zeile 1.";
 $line2 = "Und das Zeile 2.";
 

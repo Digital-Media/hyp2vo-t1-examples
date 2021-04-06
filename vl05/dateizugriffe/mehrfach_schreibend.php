@@ -1,4 +1,5 @@
 <?php
+
 $fp = fopen("datei.txt", "a");
 $lock = flock($fp, LOCK_EX); // Lock anfordern
 if ($lock) { // Wenn Lock erhalten

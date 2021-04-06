@@ -1,4 +1,5 @@
 <?php
+
 $fp = fopen("entchen.txt", "r");
 echo ftell($fp); // 0
 $str1 = fgets($fp);
