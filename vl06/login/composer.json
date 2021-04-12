@@ -1,5 +1,5 @@
 {
-    "name": "LoginExample",
+    "name": "fhooe/login-example",
     "description": "An login mechanism based on sessions and redirect using NormForm.",
     "keywords": [
         "form processing",
@@ -8,7 +8,7 @@
     ],
     "type": "project",
     "require": {
-        "php": "^7.1",
+        "php": ">=7.1",
         "fhooe/normform": "^1.2"
     },
     "require-dev": {

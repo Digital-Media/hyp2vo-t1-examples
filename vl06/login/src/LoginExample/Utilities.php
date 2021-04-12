@@ -13,7 +13,7 @@ namespace LoginExample;
  *
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2020
+ * @version 2021
  */
 trait Utilities
 {
@@ -29,7 +29,7 @@ trait Utilities
 
     /**
      * Checks if a given string is a valid e-mail address according to the employed pattern.
-     * @see https://www.regular-expressions.info/email.html More Information about e-mail validation using regex.
+     * @see https://www.regular-expressions.info/email.html More information about e-mail validation using regex.
      * @param string $string The input string that is to be checked.
      * @return bool Returns true if the string is a valid e-mail address, otherwise false.
      */
@@ -94,7 +94,7 @@ trait Utilities
         }
     }
 
-    /**
+    /**-+
      * Performs a white listing of the supplied characters and checks for minimum and maximum length. White spaces are
      * excluded, therefore only one search term can be entered. This is tailored for DAB, where LIKE is employed instead
      * of a full text search. Production environment will more likely use ElasticSearch or Google crawler.
@@ -118,8 +118,8 @@ trait Utilities
      * is enforced.
      * Use it like this: $this->isPassword("mySecurePassword") or Utilities::isPassword("mySecurePassword").
      * @param string $string The input string that is to be checked.
-     * @param int $min The passwords's minimum length.
-     * @param int $max The passwords's maximum length.
+     * @param int $min The password's minimum length.
+     * @param int $max The password's maximum length.
      * @return bool Returns true if the string is a valid password, otherwise false.
      */
     public static function isPassword(string $string, int $min, int $max): bool

@@ -5,12 +5,12 @@ namespace LoginExample;
 /**
  * Implements base functionality for reading data from a file and writing data into a file.
  *
- * This class is is able to read a JSON file (e.g. for user information) and store the retrieved data in a
+ * This class is is able to read a JSON file (e.g., for user information) and store the retrieved data in a
  * two-dimensional array as well as write a two-dimensional array back into a file.
  *
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2020
+ * @version 2021
  */
 class FileAccess
 {

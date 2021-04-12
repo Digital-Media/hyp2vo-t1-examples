@@ -8,7 +8,7 @@
  *
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2020
+ * @version 2021
  */
 
 use Fhooe\NormForm\Parameter\GenericParameter;
