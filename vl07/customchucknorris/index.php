@@ -32,7 +32,7 @@ if (isset($_POST["firstName"]) && isset($_POST["lastName"])) {
 
     $response = $client->request(
         "GET",
-        "http://api.icndb.com/jokes/random",
+        "https://api.icndb.com/jokes/random",
         [
             "query" => [
                 "firstName" => $firstName,
