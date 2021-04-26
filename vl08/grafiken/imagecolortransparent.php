@@ -16,8 +16,8 @@ imagecolortransparent($image, $blue);
 imagefilledrectangle($image, 50, 50, 250, 250, $red);
 
 // Set thickness and style
-imagesetthickness($image, 50);
-$style = array($white, $white, $white, IMG_COLOR_TRANSPARENT, IMG_COLOR_TRANSPARENT, IMG_COLOR_TRANSPARENT);
+imagesetthickness($image, 30);
+$style = [$white, $white, $white, IMG_COLOR_TRANSPARENT, IMG_COLOR_TRANSPARENT, IMG_COLOR_TRANSPARENT];
 imagesetstyle($image, $style);
 
 // Draw line

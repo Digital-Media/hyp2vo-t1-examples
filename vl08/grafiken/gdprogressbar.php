@@ -9,13 +9,13 @@ $width = 500;
 $height = 50;
 
 // Current percentage (50 if not set)
-$current = isset($_GET["c"]) ? $_GET["c"] : 50;
+$current = $_GET["c"] ?? 50;
 // Start percentage (0 if not set)
-$start = isset($_GET["s"]) ? $_GET["s"] : 0;
+$start = $_GET["s"] ?? 0;
 // End percentage (100 if not set)
-$end = isset($_GET["e"]) ? $_GET["e"] : 100;
+$end = $_GET["e"] ?? 100;
 // Print text (true if not set)
-$p = isset($_GET["p"]) ? $_GET["p"] : true;
+$p = !isset($_GET["p"]) || filter_input(INPUT_GET, "p", FILTER_VALIDATE_BOOLEAN);
 
 // Calculate current position in px
 $pos = floor($current / ($end - $start) * $width);
