@@ -16,7 +16,7 @@ class XMLManualWriter
      *
      * @var array
      */
-    private $shows;
+    private array $shows;
 
     /**
      * Initializes the data used for XML creation.

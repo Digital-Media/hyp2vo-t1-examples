@@ -101,8 +101,6 @@ class XMLEventParser
      */
     public function parse(string $file): void
     {
-        $fp = null;
-
         if (!$fp = fopen($file, "r")) {
             die("XML input not readable");
         }

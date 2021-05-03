@@ -2,8 +2,6 @@
 
 namespace Hypermedia2\Vl09;
 
-use SimpleXMLElement;
-
 /**
  * Creates a new object oriented parser based on SimpleXML and parses the XML Tirolerknödel recipe.
  *
@@ -11,15 +9,6 @@ use SimpleXMLElement;
  */
 class XMLOoSimpleParser
 {
-    // Parser related properties
-
-    /**
-     * The SimpleXML element containing the whole document.
-     *
-     * @var SimpleXMLElement
-     */
-    private SimpleXMLElement $xml;
-
     // Document related properties
 
     /**
@@ -66,17 +55,17 @@ class XMLOoSimpleParser
      */
     public function parse(string $file): void
     {
-        $this->xml = simplexml_load_file($file);
+        $xml = simplexml_load_file($file);
 
         /*ini_set('xdebug.var_display_max_depth', 10);
-        var_dump($this->xml);*/
+        var_dump($xml);*/
 
-        $attributes = $this->xml->attributes();
+        $attributes = $xml->attributes();
         $this->source = $attributes["quelle"];
 
-        $this->dish = $this->xml->gericht;
+        $this->dish = $xml->gericht;
 
-        foreach ($this->xml->zutaten->zutat as $ingredient) {
+        foreach ($xml->zutaten->zutat as $ingredient) {
             $this->ingredients[] = [
                 "ingredienz" => $ingredient->ingredienz,
                 "menge" => $ingredient->menge,
@@ -84,7 +73,7 @@ class XMLOoSimpleParser
             ];
         }
 
-        foreach ($this->xml->zubereitung->schritt as $step) {
+        foreach ($xml->zubereitung->schritt as $step) {
             $this->steps[] = $step;
         }
     }
