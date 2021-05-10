@@ -1,7 +1,7 @@
 <?php
 
 // Error Handling, um Fehlermeldungen zu sehen
-define("DEBUG", true);
+const DEBUG = true;
 
 if (DEBUG) {
     error_reporting(E_ALL);
@@ -24,7 +24,7 @@ $app->setBasePath($basePath);
 
 $app->get(
     "/",
-    function (Request $request, Response $response, $args) {
+    function (Request $request, Response $response, array $args) {
         $response->getBody()->write("Hello world!");
         return $response;
     }

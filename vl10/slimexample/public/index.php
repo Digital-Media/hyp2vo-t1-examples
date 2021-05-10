@@ -99,7 +99,7 @@ $logger->info("Error middleware added.");
 #################
 $app->get(
     "/",
-    function (Request $request, Response $response, $args) {
+    function (Request $request, Response $response, array $args) {
         return $this->get("view")->render($response, "form.html.twig");
     }
 );
@@ -113,7 +113,7 @@ $app->get(
 
 $app->post(
     "/",
-    function (Request $request, Response $response, $args) {
+    function (Request $request, Response $response, array $args) {
         $data = $request->getParsedBody();
         $name = $data["name"];
         return $this->get("view")->render($response, "result.html.twig", ["name" => $name]);

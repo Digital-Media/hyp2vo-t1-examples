@@ -7,6 +7,9 @@ vendor
 # Twig template cache directories
 templates_c
 
+# PHPUnit Cache
+.phpunit.result.cache
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
