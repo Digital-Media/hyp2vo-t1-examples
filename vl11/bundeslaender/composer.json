@@ -1,5 +1,7 @@
 {
-    "require": {
-        "components/jquery": "^3.5"
-    }
+  "name": "fhooe/hm2-simple-ajax",
+  "description": "A simple example example to demonstrate AJAX with vanilla JavaScript and jQuery.",
+  "require": {
+    "components/jquery": "^3.5"
+  }
 }

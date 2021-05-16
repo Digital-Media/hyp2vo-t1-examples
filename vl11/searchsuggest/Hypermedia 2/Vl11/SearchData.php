@@ -27,7 +27,7 @@ class SearchData
             "Hagenberg",
             "jQuery",
             "Medientechnik und -design",
-            "MTD19",
+            "MTD20",
             "MTD",
             "PHP",
             "JavaScript",
