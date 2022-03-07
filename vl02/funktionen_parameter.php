@@ -1,6 +1,6 @@
 <?php
-// Call by value
 
+// Call by value
 function cbv($x)
 {
     return $x += 5;
@@ -13,7 +13,6 @@ echo "Variable: $test1 </p>";
 
 
 // Call by reference
-
 function cbr(&$x)
 {
     return $x += 5;

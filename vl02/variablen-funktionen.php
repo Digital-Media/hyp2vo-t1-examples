@@ -1,4 +1,5 @@
 <?php
+
 $var = ["test", "wert", "eintrag"];
 
 // Ausgabe mit print_r

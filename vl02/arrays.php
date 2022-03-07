@@ -1,4 +1,5 @@
 <?php
+
 $a1 = []; // Leeres Array
 $a2 = ["a", "b", "c"]; // Indiziertes Array
 $a3 = [3, "Hallo", 5.1]; // Gemische Datentypen als Werte
