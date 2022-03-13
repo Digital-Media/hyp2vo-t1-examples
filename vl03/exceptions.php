@@ -1,7 +1,8 @@
 <?php
+
 try {
     throw new Exception("Allgemeiner Fehler!");
-    echo "Wird nicht mehr anzegeigt.";
+    echo "Wird nicht mehr angezeigt.";
 } catch (Exception $e) {
     echo "Exception: " . $e->getMessage();
 }

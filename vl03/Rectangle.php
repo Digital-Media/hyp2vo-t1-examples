@@ -8,6 +8,7 @@ require("GeometricComponentInterface.php");
 class Rectangle implements GeometricComponentInterface
 {
     /* Vor PHP 8:
+    public readonly int $id;
     public int $x1;
     public int $y1;
     public int $x2;
@@ -18,6 +19,7 @@ class Rectangle implements GeometricComponentInterface
 
     /**
      * Creates a new rectangle.
+     * @param int $id The ID of this very rectangle.
      * @param int $x1 The x-coordinate of the upper left corner.
      * @param int $y1 The y-coordinate of the upper left corner.
      * @param int $x2 The x-coordinate of the lower right corner.
@@ -25,6 +27,7 @@ class Rectangle implements GeometricComponentInterface
      * @param string $color The rectangle's color.
      */
     public function __construct(
+        public readonly int $id,
         public int $x1 = 0,
         public int $y1 = 0,
         public int $x2 = 0,
@@ -116,8 +119,8 @@ class Rectangle implements GeometricComponentInterface
 $green = "green";
 
 // Objekt erzeugen und Methoden aufrufen
-$rect1 = new Rectangle();
-$rect2 = new Rectangle(45, 60, 110, 112, $green);
+$rect1 = new Rectangle(1);
+$rect2 = new Rectangle(2, 45, 60, 110, 112, $green);
 $rect1->move(10, 10);
 
 // Statische Variablen ausgeben
@@ -133,3 +136,6 @@ $rect1->printVersion(); // Funktioniert, aber nicht nötig/empfehlenswert
 echo Rectangle::TYPE; // Rectangle
 echo $rect1->getType(); // Rectangle
 //echo $rect1->TYPE; // FEHLER!
+
+// Der Versuch, eine nur lesbare Eigenschaft ($id) zu ändern, erzeugt einen Fehler
+//$rect1->id = 3; // FEHLER!

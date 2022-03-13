@@ -12,10 +12,14 @@ final class NoInheritance
 }
 
 /**
- * Klasse mit finaler Methode. Diese Methode kann nicht in einer abgeleiteten Klasse überschrieben werden.
+ * Klasse mit finaler Methode und Konstante. Diese Methode und diese Konstante können nicht in einer abgeleiteten Klasse
+ * überschrieben werden.
  */
 class CantOverrideEverything
 {
+    public const CAN_OVERRIDE = 1;
+    final public const CANNOT_OVERRIDE = 2;
+
     public function canOverride()
     {
         // ...
@@ -28,10 +32,13 @@ class CantOverrideEverything
 }
 
 /**
- * Diese Klasse erbt von CantOverrideEverything und kann aber nur canOverride() überschreiben.
+ * Diese Klasse erbt von CantOverrideEverything und kann aber nur canOverride() und die Konstante CAN_OVERRIDE
+ * überschreiben.
  */
 class InheritParts extends CantOverrideEverything
 {
+    public const CAN_OVERRIDE = 3;
+
     public function canOverride()
     {
         // ...

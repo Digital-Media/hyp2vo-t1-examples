@@ -1,6 +1,6 @@
 <?php
 
-require "LocatableTrait.php";
+require("LocatableTrait.php");
 
 /**
  * Eine Person, die über Koordinaten ortbar sein möchte.

@@ -1,4 +1,5 @@
 <?php
+
 include("vars.inc.php");
 echo $test;
 echo MESSAGE;
