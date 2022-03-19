@@ -20,7 +20,8 @@
 
 require "vendor/autoload.php";
 
-if (isset($_POST["firstName"]) && isset($_POST["lastName"])) {
+if (isset($_POST["firstName"]) && isset($_POST["lastName"]))
+{
     $firstName = trim(
         htmlspecialchars($_POST["firstName"], ENT_QUOTES | ENT_HTML5)
     );
