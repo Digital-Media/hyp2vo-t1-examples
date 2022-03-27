@@ -1,10 +1,16 @@
 <?php
 
+declare(strict_types=1);
+
+namespace Fhooe\Mtd\Hypermedia\Vl05;
+
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
+
+require "vendor/autoload.php";
 
 /**
  * A simple class representing a person by name, gender and age.

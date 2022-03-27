@@ -1,13 +1,20 @@
 <?php
 
+declare(strict_types=1);
+
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
 use Twig\Error\SyntaxError;
 use Twig\Loader\FilesystemLoader;
 
+require "vendor/autoload.php";
+
 $loader = new FilesystemLoader("templates");
-$twig = new Environment($loader, ["cache" => "templates_c", "auto_reload" => true]);
+$twig = new Environment($loader, [
+    "cache" => "templates_c",
+    "auto_reload" => true
+]);
 
 try {
     $twig->display("message.html.twig", ["name" => "John Doe", "message" => "I'm back baby!"]);
