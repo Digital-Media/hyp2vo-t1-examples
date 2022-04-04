@@ -23,8 +23,8 @@ if (isset($_GET["eingabe"])) {
     $text = $_GET["eingabe"];
     echo "<section>" . PHP_EOL;
     echo "unfiltered (EVIL!): <div>$text</div><br>" . PHP_EOL;
-    echo "htmlspecialchars(): <div>" . htmlspecialchars($text, ENT_QUOTES | ENT_HTML5) . "</div><br>" . PHP_EOL;
-    echo "htmlentities(): <div>" . htmlentities($text, ENT_QUOTES | ENT_HTML5) . "</div><br>" . PHP_EOL;
+    echo "htmlspecialchars(): <div>" . htmlspecialchars($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5) . "</div><br>" . PHP_EOL;
+    echo "htmlentities(): <div>" . htmlentities($text, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5) . "</div><br>" . PHP_EOL;
     echo "filter_var(): <div>" . filter_var($text, FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "</div><br>" . PHP_EOL;
     echo "filter_input(): <div>" . filter_input(INPUT_GET, "eingabe", FILTER_SANITIZE_FULL_SPECIAL_CHARS) . "</div><br>" . PHP_EOL;
     echo "strip_tags(): <div>" . strip_tags($text) . "</div>" . PHP_EOL;
