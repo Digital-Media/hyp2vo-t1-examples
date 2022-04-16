@@ -4,16 +4,14 @@ namespace LoginExample;
 
 /**
  * Offers static helper methods for often used tasks.
- *
  * This trait offers methods for sanitizing form input, checks for valid e-mail addresses, phone numbers and other kinds
  * of data. This code can be used in different classes.
- *
- * combined with "use Utilities" at the beginning of a class declaration this methods can be accessed via
- * self::method() or with Utilities::method() in any context
- *
+ * Combined with "use Utilities" at the beginning of a class declaration these methods can be accessed via
+ * self::method() in any context.
+ * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2021
+ * @version 2022
  */
 trait Utilities
 {
@@ -24,7 +22,7 @@ trait Utilities
      */
     public static function sanitizeFilter(string $input): string
     {
-        return htmlspecialchars($input, ENT_QUOTES | ENT_HTML5);
+        return htmlspecialchars($input, ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5);
     }
 
     /**
@@ -172,7 +170,7 @@ trait Utilities
 
     /**
      * Generates a 128 character hash value using the SHA-512 algorithm. The user's IP address as well as the user agent
-     * string are hashed. This hash can then be stored in the $_SESSION array to act as a token for a logged in user.
+     * string are hashed. This hash can then be stored in the $_SESSION array to act as a token for a logged-in user.
      * @return string The login hash value.
      */
     public static function generateLoginHash(): string

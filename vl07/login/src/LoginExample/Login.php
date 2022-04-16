@@ -2,126 +2,170 @@
 
 namespace LoginExample;
 
-use Fhooe\NormForm\Core\AbstractNormForm;
-use Fhooe\NormForm\Parameter\GenericParameter;
-use Fhooe\NormForm\View\View;
+use Fhooe\Router\Router;
+use PDO;
+use Twig\Environment;
 
 /**
- * The login page.
- *
- * This class enables users to log in to the system with a provided user name and password. Both items are matched with
+ * This class enables users to log in to the system with a provided username and password. Both items are matched with
  * stored credentials. If they match, a login hash is stored in the session that acts as a token for a successful login.
  * Other pages can then use check for this token before the site is initialized and perform a redirect to prevent
  * accessing the page
- *
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2021
+ * @version 2022
  */
-final class Login extends AbstractNormForm
+final class Login
 {
     /**
      * The trait Utilities can now be used as part of the class Login.
-     * For Example: self::sanitizeFilter($string) instead of Utilities::sanitizeFilter($string)
+     * For Example: self::sanitizeFilter($string).
      */
     use Utilities;
 
     /**
-     * @var string USERNAME Form field constant that defines how the form field for holding the username is called
-     * (id/name).
+     * @var PDO The PDO object.
      */
-    public const USERNAME = "username";
+    private PDO $dbh;
 
     /**
-     * @var string PASSWORD Form field constant that defines how the form field for holding the password is called
-     * (id/name).
+     * @var array This array is used to store error and status messages after a form was sent and validated.
      */
-    public const PASSWORD = "password";
+    private array $messages = [];
 
     /**
-     * @var string USER_DATA_PATH The full path for the user meta data JSON file.
+     * @var Environment Provides a Twig object to display HTML templates.
      */
-    private const USER_DATA_PATH = DATA_DIRECTORY . "userdata.json";
+    private Environment $twig;
 
     /**
-     * @var FileAccess $fileAccess The object handling all file access operations.
+     * Creates a new Login object. It takes a Twig Environment object that is used to display a response (output).
+     * The constructor needs to initialize the database for reading and updating user information.
+     * @param Environment $twig The Twig object for displaying a response.
      */
-    private FileAccess $fileAccess;
-
-    /**
-     * Creates a new Login object based on AbstractNormForm. Takes a View object that holds the information about which
-     * template will be shown and which parameters (e.g. for form fields) are passed on to the template.
-     * The constructor needs to initialize the object for file handling.
-     * @param View $defaultView Holds the initial @View object used for displaying the form.
-     */
-    public function __construct(View $defaultView)
+    public function __construct(Environment $twig)
     {
-        parent::__construct($defaultView);
-
-        $this->fileAccess = new FileAccess();
+        $this->twig = $twig;
+        $this->initDB();
     }
 
     /**
-     * Validates user input after submitting login credentials. The function first has to check if both fields were
-     * filled out and then checks the result of authenticateUser() to see if the credentials match ones that are
-     * already stored in the system.
-     * @return bool Returns true if no errors occurred and therefore no error messages were set, otherwise false.
+     * Initializes the database connection. Connects to the database "login_example".
+     * @return void Returns nothing.
      */
-    protected function isValid(): bool
+    private function initDB(): void
     {
-        if ($this->isEmptyPostField(self::USERNAME)) {
-            $this->errorMessages[self::USERNAME] = "Please enter your user name.";
+        $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
+        // DSN for Docker
+        // $dsn = "mysql:host=db;port=3306;dbname=login_example";
+        // DSN for Vagrant
+        $dsn = "mysql:host=localhost;port=3306;dbname=login_example";
+        $mysqlUser = "onlineshop";
+        $mysqlPwd = "geheim";
+        $options = [
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            PDO::MYSQL_ATTR_INIT_COMMAND => $charsetAttr,
+            PDO::MYSQL_ATTR_MULTI_STATEMENTS => false
+        ];
+        $this->dbh = new PDO($dsn, $mysqlUser, $mysqlPwd, $options);
+    }
+
+    /**
+     * Validates the user input. If errors are detected, they are stored in the messages array.
+     * If no errors are found, the method business() is invoked which continues the login process and forwards the
+     * logged-in user to the protected content.
+     * @return void Returns nothing.
+     */
+    public function isValid(): void
+    {
+        if (self::isEmptyString($_POST["email"])) {
+            $this->messages["email"] = "Please enter your email address.";
         }
-        if ($this->isEmptyPostField(self::PASSWORD)) {
-            $this->errorMessages[self::PASSWORD] = "Please enter your password.";
+        if (!self::isEmptyString($_POST["email"]) && !self::isEmail($_POST["email"])) {
+            $this->messages["email"] = "Please enter a valid email address";
         }
-        if (!$this->isEmptyPostField(self::USERNAME) &&
-            !$this->isEmptyPostField(self::PASSWORD) &&
-            !$this->authenticateUser()) {
-            $this->errorMessages[self::PASSWORD] = "Invalid user name or password.";
+        if (self::isEmptyString($_POST["password"])) {
+            $this->messages["password"] = "Please enter your password.";
         }
 
-        $this->currentView->setParameter(new GenericParameter("errorMessages", $this->errorMessages));
-
-        return (count($this->errorMessages) === 0);
+        if (count($this->messages) === 0) {
+            if (!$this->authenticateUser()) {
+                $this->messages["login"] = "Invalid account email address or password.";
+            } else {
+                $this->business();
+            }
+        }
     }
 
     /**
      * This method is only called when the form input was validated successfully.
-     * It stores the username in the session for further use (e.g. in the template) and a hash value to identify a
+     * It stores the e-mail address in the session for further use (e.g. in the template) and a hash value to identify a
      * successful login.
-     * It then forwards to the index page.
+     * It then forwards to the protected main page.
+     * @return void Returns nothing.
      */
     protected function business(): void
     {
-        $_SESSION[self::USERNAME] = $_POST[self::USERNAME];
+        $_SESSION["email"] = $_POST["email"];
 
-        $_SESSION[IS_LOGGED_IN] = self::generateLoginHash();
+        $_SESSION["isloggedin"] = self::generateLoginHash();
 
-        View::redirectTo("index.php");
+        Router::redirectTo("/main");
     }
 
     /**
-     * Authenticates a user by matching the entered username and password with the stored records. If the username is
-     * present and the entered password matches the stored password, a valid login is assumed and stored in $_SESSION.
-     * After a successful login, the current password encryption is checked and if necessary, a rehash is performed.
+     * Authenticates a user by matching the entered e-mail address (username) and password with the stored records.
+     * If the username is present and the entered password matches the stored password, a valid login is assumed and
+     * stored in $_SESSION. After a successful login, the current password encryption is checked and if necessary, a
+     * rehash is performed and the updated password is stored in the database.
      * @return bool Returns true if the combination of username and password is valid, otherwise false.
      */
     private function authenticateUser(): bool
     {
-        $users = $this->fileAccess->loadContents(self::USER_DATA_PATH);
+        $query = "SELECT iduser, email, password FROM user WHERE email = :email";
+        $params = [":email" => $_POST["email"]];
+        $rows = [];
 
-        foreach ($users as &$user) {
-            if ($user[self::USERNAME] === $_POST[self::USERNAME] &&
-                password_verify($_POST[self::PASSWORD], $user[self::PASSWORD])) {
-                if (password_needs_rehash($user[self::PASSWORD], PASSWORD_DEFAULT)) {
-                    $user[self::PASSWORD] = password_hash($_POST[self::PASSWORD], PASSWORD_DEFAULT);
-                    $this->fileAccess->storeContents(self::USER_DATA_PATH, $users);
-                }
-                return true;
+        if ($this->dbh) {
+            $statement = $this->dbh->prepare($query);
+            $statement->execute($params);
+            $rows = $statement->fetchAll();
+        }
+
+        if (count($rows) === 1 && password_verify($_POST["password"], $rows[0]->password)) {
+            if (password_needs_rehash($rows[0]->password, PASSWORD_DEFAULT)) {
+                $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
+                $this->updateUser($rows[0]->iduser, $password);
             }
+            return true;
         }
         return false;
+    }
+
+    /**
+     * Replaces a user's password with a new one if an outdated hashing algorithm has been detected.
+     * @param string $iduser The user ID.
+     * @param string $password The new password.
+     * @return void Returns nothing.
+     */
+    private function updateUser(string $iduser, string $password): void
+    {
+        $query = "UPDATE user SET password = :password WHERE iduser = :iduser";
+        $params = [':password' => $password, ':iduser' => $iduser];
+        if ($this->dbh) {
+            $statement = $this->dbh->prepare($query);
+            $statement->execute($params);
+        }
+    }
+
+    public function displayOutput(): void
+    {
+        $this->twig->display("login.html.twig", [
+            "email" => $_POST["email"],
+            "messages" => $this->messages
+        ]);
     }
 }

@@ -1,19 +1,12 @@
 {
-    "name": "fhooe/login-example",
-    "description": "An login mechanism based on sessions and redirect using NormForm.",
-    "keywords": [
-        "form processing",
-        "login",
-        "sessions"
-    ],
+    "name": "fhooe/router-skeleton",
     "type": "project",
-    "require": {
-        "php": ">=7.1",
-        "fhooe/normform": "^1.2"
-    },
-    "require-dev": {
-        "phpunit/phpunit": "^9.0"
-    },
+    "description": "An example application or skeleton for getting started with fhooe/router.",
+    "keywords": [
+        "routing",
+        "example",
+        "education"
+    ],
     "license": "MIT",
     "authors": [
         {
@@ -27,16 +20,31 @@
             "role": "Developer"
         }
     ],
+    "require": {
+        "php": ">=7.4",
+        "fhooe/router": "^0.3.0",
+        "monolog/monolog": "^2.3",
+        "twig/twig": "^3.3",
+        "twbs/bootstrap": "^5.1",
+        "twbs/bootstrap-icons": "^1.7"
+    },
+    "require-dev": {
+        "phpstan/phpstan": "^1.4"
+    },
     "minimum-stability": "stable",
     "autoload": {
         "psr-4": {
-            "": ["src/"]
+            "": ["src/", "tests/"]
         }
     },
     "scripts": {
         "start": [
             "echo 'Web server launched on http://localhost:8888'",
-            "php -S localhost:8888 -t htdocs"
-        ]
+            "php -S localhost:8888 -t public"
+        ],
+        "test": [
+            "@phpstan"
+        ],
+        "phpstan": "phpstan analyse public views --memory-limit=-1 --level 9"
     }
 }
