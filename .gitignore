@@ -5,6 +5,7 @@
 vendor
 
 # Twig template cache directories
+cache
 templates_c
 
 # PHPUnit Cache
