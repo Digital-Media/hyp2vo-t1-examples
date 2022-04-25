@@ -1,0 +1,14 @@
+<?php
+
+$messages = [
+    "selectLabel" => "Bitte die Sprache wählen.",
+    "optionLabel" => "Sprache wählen",
+    "messageLabel" => "Bitte die Anzahl der Nachrichten wählen.",
+    "sendButton" => "Absenden",
+    "welcome" => "Willkommen auf der Seite!",
+    "messages" => [
+        "zero" => "Du hast keine Nachrichten.",
+        "one" => "Du hast eine Nachricht.",
+        "other" => "Du hast %d Nachrichten."
+    ]
+];
