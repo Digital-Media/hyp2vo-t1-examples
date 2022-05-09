@@ -6,7 +6,6 @@ use XMLReader;
 
 /**
  * Creates a new pull parser based on XMLReader and parses the XML Tirolerknödel recipe.
- *
  * @package Hypermedia2\Vl09
  */
 class XMLPullParser
@@ -15,7 +14,6 @@ class XMLPullParser
 
     /**
      * The XML event parser instance.
-     *
      * @var XMLReader
      */
     private XMLReader $parser;
@@ -24,28 +22,24 @@ class XMLPullParser
 
     /**
      * The URL source of the recipe.
-     *
      * @var string
      */
     private string $source;
 
     /**
      * The name of the current dish.
-     *
      * @var string
      */
     private string $dish;
 
     /**
      * The list of ingredients.
-     *
      * @var array
      */
     private array $ingredients;
 
     /**
      * The list of preparation steps.
-     *
      * @var array
      */
     private array $steps;
@@ -70,7 +64,6 @@ class XMLPullParser
 
     /**
      * Parses the XML file and writes its values into the respective properties.
-     *
      * @param string $file The file to be parsed.
      */
     public function parse(string $file): void
@@ -106,7 +99,6 @@ class XMLPullParser
 
     /**
      * Returns the source URL once it's been parsed.
-     *
      * @return string The source URL.
      */
     public function getSource(): string
@@ -116,7 +108,6 @@ class XMLPullParser
 
     /**
      * Returns the dish once it's been parsed.
-     *
      * @return string The name of the dish.
      */
     public function getDish(): string
@@ -126,7 +117,6 @@ class XMLPullParser
 
     /**
      * Returns the list of ingredients once they've been parsed.
-     *
      * @return array The list of ingredients.
      */
     public function getIngredients(): array
@@ -136,7 +126,6 @@ class XMLPullParser
 
     /**
      * Returns the list of preparation steps once they've been parsed.
-     *
      * @return array The list of preparation steps.
      */
     public function getSteps(): array

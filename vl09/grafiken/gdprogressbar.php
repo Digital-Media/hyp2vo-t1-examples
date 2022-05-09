@@ -18,7 +18,7 @@ $end = $_GET["e"] ?? 100;
 $p = !isset($_GET["p"]) || filter_input(INPUT_GET, "p", FILTER_VALIDATE_BOOLEAN);
 
 // Calculate current position in px
-$pos = floor($current / ($end - $start) * $width);
+$pos = intval(floor($current / ($end - $start) * $width));
 
 // Create an image and set colors
 $image = imagecreate($width, $height); // width , height px
@@ -27,23 +27,23 @@ $black = imagecolorallocate($image, 0, 0, 0);
 $green = imagecolorallocate($image, 0, 204, 51);
 
 // Set the border thickness
-imagesetthickness($image, $height * 0.1);
+imagesetthickness($image, intval($height * 0.1));
 
 // Fill the rectangle with the amount needed and draw the border
 imagefilledrectangle($image, 0, 0, $pos, $height, $green);
 imagerectangle($image, 0, 0, $width, $height, $black);
 
-// Display text text centered if enabled
+// Display the text centered if enabled
 if ($p) {
     $text = floor($pos / $width * 100) . " %";
     $font = __DIR__ . "/arial.ttf";
-    $font_size = $height * 0.3;
+    $fontSize = intval($height * 0.3);
     $black = imagecolorallocate($image, 0, 0, 0);
-    $text_size = imagettfbbox($font_size, 0, $font, $text);
-    $text_length = $text_size[2] - $text_size[0];
-    $textX = $width / 2 - $text_length / 2;
-    $textY = $height / 2 + $font_size / 2;
-    imagettftext($image, $font_size, 0, $textX, $textY, $black, $font, $text);
+    $textSize = imagettfbbox($fontSize, 0, $font, $text);
+    $textLength = $textSize[2] - $textSize[0];
+    $textX = intval($width / 2 - $textLength / 2);
+    $textY = intval($height / 2 + $fontSize / 2);
+    imagettftext($image, $fontSize, 0, $textX, $textY, $black, $font, $text);
 }
 
 // Output the image

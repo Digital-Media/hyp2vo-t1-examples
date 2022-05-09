@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <shows>
  <show>
-  <name>Die Simpsons</name>
-  <kanal>FOX</kanal>
-  <beginn>20:00</beginn>
-  <dauer>20</dauer>
+  <name>The Mandalorian</name>
+  <service>Disney+</service>
+  <resolution>2160p</resolution>
+  <duration>40</duration>
  </show>
  <show>
-  <name>Game of Thrones</name>
-  <kanal>HBO</kanal>
-  <beginn>21:00</beginn>
-  <dauer>60</dauer>
+  <name>Rick and Morty</name>
+  <service>Netflix</service>
+  <resolution>1080p</resolution>
+  <duration>20</duration>
  </show>
 </shows>

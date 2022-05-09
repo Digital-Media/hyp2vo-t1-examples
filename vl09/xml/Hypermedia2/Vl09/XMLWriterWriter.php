@@ -5,8 +5,7 @@ namespace Hypermedia2\Vl09;
 use XMLWriter;
 
 /**
- * Creates a new XML file based on the data created in the constructor using XMLWriter.
- *
+ * Creates a new XML file based on the data passed to the constructor using XMLWriter.
  * @package Hypermedia2\Vl09
  */
 class XMLWriterWriter
@@ -15,7 +14,6 @@ class XMLWriterWriter
 
     /**
      * The XMLWriter instance.
-     *
      * @var XMLWriter
      */
     private XMLWriter $writer;
@@ -24,37 +22,22 @@ class XMLWriterWriter
 
     /**
      * The data used for creating the XML file.
-     *
      * @var array
      */
     private array $shows;
 
     /**
-     * Initializes the writer and the data used for XML creation.
+     * Initializes the writer with the data used for XML creation.
+     * @param array $shows The data used for creating the XML file.
      */
-    public function __construct()
+    public function __construct(array $shows)
     {
         $this->writer = new XMLWriter();
-
-        $this->shows = [
-            [
-                "name" => "Die Simpsons",
-                "kanal" => "FOX",
-                "beginn" => "20:00",
-                "dauer" => "20"
-            ],
-            [
-                "name" => "Game of Thrones",
-                "kanal" => "HBO",
-                "beginn" => "21:00",
-                "dauer" => "60"
-            ]
-        ];
+        $this->shows = $shows;
     }
 
     /**
      * Creates a new XML file based on the $shows property and writes it to a file.
-     *
      * @param string $file The XML file name.
      */
     public function generateXML(string $file): void

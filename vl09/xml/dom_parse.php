@@ -1,10 +1,10 @@
 <?php
 
-require "Hypermedia2/Vl09/XMLOoDomParser.php";
+require "Hypermedia2/Vl09/XMLOOParser.php";
 
-use Hypermedia2\Vl09\XMLOoDomParser;
+use Hypermedia2\Vl09\XMLOOParser;
 
-$xmlParser = new XMLOoDomParser();
+$xmlParser = new XMLOOParser();
 $xmlParser->parse("rezept.xml");
 ?>
 

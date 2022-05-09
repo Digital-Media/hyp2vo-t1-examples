@@ -5,15 +5,15 @@
  */
 
 // Define measurements
-$max_length = 150;
+$maxLength = 150;
 $marker = 5;
-$origin_x = $origin_y = $max_length / 2;
-$radius = $max_length / 2 - 2;
-$hour_segment = $radius * 0.50;
-$minute_segment = $radius * 0.80;
+$originX = $originY = $maxLength / 2;
+$radius = $maxLength / 2 - 2;
+$hourSegment = $radius * 0.50;
+$minuteSegment = $radius * 0.80;
 
 // Create image
-$image = imagecreatetruecolor($max_length, $max_length);
+$image = imagecreatetruecolor($maxLength, $maxLength);
 
 // Allocate colors
 $black = imagecolorallocate($image, 0, 0, 0);
@@ -26,19 +26,19 @@ date_default_timezone_set("Europe/Vienna");
 $lt = localtime();
 
 // Calculate hand angles
-$hour_angle = deg2rad(($lt[2] + ($lt[1] / 60) - 3) * 30);
-$minute_angle = deg2rad(($lt[1] + ($lt[0] / 60) - 15) * 6);
+$hourAngle = deg2rad(($lt[2] + ($lt[1] / 60) - 3) * 30);
+$minuteAngle = deg2rad(($lt[1] + ($lt[0] / 60) - 15) * 6);
 
 // White background
-imagefilledrectangle($image, 0, 0, $max_length, $max_length, $white);
+imagefilledrectangle($image, 0, 0, $maxLength, $maxLength, $white);
 
 // Outer clock circle
 imagearc(
     $image,
-    $origin_x,
-    $origin_y,
-    $max_length - 2,
-    $max_length - 2,
+    $originX,
+    $originY,
+    $maxLength - 2,
+    $maxLength - 2,
     0,
     360,
     $blue
@@ -49,10 +49,10 @@ for ($i = 0; $i < 360; $i = $i + 30) {
     $degrees = deg2rad($i);
     imageline(
         $image,
-        $origin_x + (($radius - $marker) * cos($degrees)),
-        $origin_y + (($radius - $marker) * sin($degrees)),
-        $origin_x + ($radius * cos($degrees)),
-        $origin_y + ($radius * sin($degrees)),
+        intval($originX + (($radius - $marker) * cos($degrees))),
+        intval($originY + (($radius - $marker) * sin($degrees))),
+        intval($originX + ($radius * cos($degrees))),
+        intval($originY + ($radius * sin($degrees))),
         $red
     );
 }
@@ -60,26 +60,26 @@ for ($i = 0; $i < 360; $i = $i + 30) {
 // Hour hand
 imageline(
     $image,
-    $origin_x,
-    $origin_y,
-    $origin_x + ($hour_segment * cos($hour_angle)),
-    $origin_y + ($hour_segment * sin($hour_angle)),
+    $originX,
+    $originY,
+    intval($originX + ($hourSegment * cos($hourAngle))),
+    intval($originY + ($hourSegment * sin($hourAngle))),
     $black
 );
 
 // Minute hand
 imageline(
     $image,
-    $origin_x,
-    $origin_y,
-    $origin_x + ($minute_segment * cos($minute_angle)),
-    $origin_y + ($minute_segment * sin($minute_angle)),
+    $originX,
+    $originY,
+    intval($originX + ($minuteSegment * cos($minuteAngle))),
+    intval($originY + ($minuteSegment * sin($minuteAngle))),
     $black
 );
 
 // Center dot
-imagearc($image, $origin_x, $origin_y, 6, 6, 0, 360, $red);
-imagefill($image, $origin_x + 1, $origin_y + 1, $red);
+imagearc($image, $originX, $originY, 6, 6, 0, 360, $red);
+imagefill($image, $originX + 1, $originY + 1, $red);
 
 // Draw image
 header("Content-type: image/png");

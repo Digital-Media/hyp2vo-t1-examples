@@ -1,3 +1,0 @@
-<?php
-
-readfile("entchen.txt"); // Alle meine Entchen\nschwimmen auf dem See,\nschwimmen...

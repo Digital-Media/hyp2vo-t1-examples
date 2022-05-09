@@ -11,20 +11,20 @@ $image = imagecreatetruecolor($width, $height);
 // Allocate some colors
 $white = imagecolorallocate($image, 0xFF, 0xFF, 0xFF);
 $gray = imagecolorallocate($image, 0xC0, 0xC0, 0xC0);
-$dark_gray = imagecolorallocate($image, 0x90, 0x90, 0x90);
+$darkGray = imagecolorallocate($image, 0x90, 0x90, 0x90);
 $navy = imagecolorallocate($image, 0x00, 0x00, 0x80);
-$dark_navy = imagecolorallocate($image, 0x00, 0x00, 0x50);
+$darkNavy = imagecolorallocate($image, 0x00, 0x00, 0x50);
 $red = imagecolorallocate($image, 0xFF, 0x00, 0x00);
-$dark_red = imagecolorallocate($image, 0x90, 0x00, 0x00);
+$darkRed = imagecolorallocate($image, 0x90, 0x00, 0x00);
 
 // Set background to white
 imagefilledrectangle($image, 0, 0, $width, $height, $white);
 
 // Make the 3D effect
 for ($i = $height * 0.6; $i > $height / 2; $i--) {
-    imagefilledarc($image, $width / 2, $i, $width, $height / 2, 0, 45, $dark_navy, IMG_ARC_PIE);
-    imagefilledarc($image, $width / 2, $i, $width, $height / 2, 45, 75, $dark_gray, IMG_ARC_PIE);
-    imagefilledarc($image, $width / 2, $i, $width, $height / 2, 75, 360, $dark_red, IMG_ARC_PIE);
+    imagefilledarc($image, $width / 2, $i, $width, $height / 2, 0, 45, $darkNavy, IMG_ARC_PIE);
+    imagefilledarc($image, $width / 2, $i, $width, $height / 2, 45, 75, $darkGray, IMG_ARC_PIE);
+    imagefilledarc($image, $width / 2, $i, $width, $height / 2, 75, 360, $darkRed, IMG_ARC_PIE);
 }
 
 // Draw the top with lighter colors

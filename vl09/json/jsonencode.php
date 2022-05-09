@@ -1,27 +1,8 @@
 <?php
 
-/**
- * Simple class to demonstrate JSON functionalities.
- */
-class Person
-{
-    public string $name;
-    public int $age;
-    public string $country;
+require "Hypermedia2/Vl09/Person.php";
 
-    /**
-     * Person constructor.
-     * @param string $name The person's name.
-     * @param int $age The person's age.
-     * @param string $country The person's country of residence.
-     */
-    public function __construct(string $name, int $age, string $country)
-    {
-        $this->name = $name;
-        $this->age = $age;
-        $this->country = $country;
-    }
-}
+use Hypermedia2\Vl09\Person;
 
 $array = ["Good", "Bad", "Ugly"];
 

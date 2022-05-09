@@ -8,7 +8,7 @@ use DOMDocument;
  * Creates a new object-oriented parser based on DOM and parses the XML Tirolerknödel recipe.
  * @package Hypermedia2\Ue09
  */
-class XMLOoDomParser
+class XMLOOParser
 {
     // Parser related properties
 
