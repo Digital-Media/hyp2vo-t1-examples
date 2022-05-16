@@ -4,6 +4,10 @@ const request = new XMLHttpRequest();
 const form = document.getElementById("registerform");
 form.addEventListener("submit", sendAJAXRequest);
 
+/**
+ * Send a new asynchronous request to the specified resource.
+ * @param event The event object.
+ */
 function sendAJAXRequest(event) {
     const formData = new FormData(form);
     request.open("POST", "details.php", true);
@@ -12,6 +16,9 @@ function sendAJAXRequest(event) {
     event.preventDefault();
 }
 
+/**
+ * Handle the response and include the content into the page.
+ */
 function handleResponse() {
     const ul = document.getElementById("logindetails");
     if (request.status === 200) {
@@ -23,7 +30,7 @@ function handleResponse() {
         }
     } else {
         const error = document.createElement("li");
-        error.textContent = "Ein Fehler ist aufgetreten!";
+        error.textContent = "An error occurred!";
         ul.appendChild(error);
     }
 }

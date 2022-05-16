@@ -1,0 +1,19 @@
+{% extends "base.html.twig" %}
+
+{% block title %}fhooe/router-skeleton: 404 – Not Found{% endblock title %}
+{% block head %}
+    {{ parent() }}
+{% endblock head %}
+{% block main %}
+    <h2>404 – Not Found</h2>
+    <p>This is the 404 view.</p>
+    <p>It is displayed when a route is accessed that has not been defined in the router. It also triggers the HTTP
+        status code 404, which you can see in the console of your dev tools.</p>
+    <div class="alert alert-warning">
+        <h4>No styles?</h4>
+        <p>If you see this page without any styles and instead of the index page, your router setup isn't working right.
+            Your base path might not be set correctly or missing at all. Go to index.php and use
+            <code>$router->setBasePath("/path/to/fhooe-router-skeleton/public");</code> to set it according to the
+            location of your project to your webserver's web root.</p>
+    </div>
+{% endblock main %}

@@ -2,26 +2,24 @@
 
 const xhr = new XMLHttpRequest();
 
+/**
+ * Send a new asynchronous request to the specified resource.
+ */
 function sendAJAXRequest() {
     const str = encodeURIComponent(search.value);
     xhr.open("GET", "search.php?search=" + str, true);
     xhr.responseType = "json";
     xhr.setRequestHeader("Accept", "application/json");
     xhr.addEventListener("load", handleResponse);
-    xhr.send(null);
+    xhr.send();
 }
 
 function handleResponse() {
     if (xhr.status === 200) {
         const suggestDiv = document.getElementById("suggestions");
         suggestDiv.innerHTML = "";
-        let data;
-        // If parsing as JSON worked, we can use the response directly
-        if (xhr.responseType === "json") {
-            data = xhr.response;
-        } else { // otherwise we have to parse it ourselves
-            data = JSON.parse(xhr.responseText);
-        }
+        const data = xhr.response;
+
         // Only do something, if data sets actually came back
         if (data.count > 0) {
             for (let i = 0; i < data.count; i++) {

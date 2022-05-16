@@ -1,0 +1,27 @@
+{% extends "base.html.twig" %}
+
+{% block title %}REST API Example: Add User{% endblock title %}
+{% block main %}
+    <h2>GET /adduser</h2>
+    <p>This is a form for adding a new user. It calls the route <code>POST /users</code> and submits the entered
+        username and real name to be added to the database.</p>
+
+    <div class="border p-3 mt-5">
+        <h3>Enter User Details</h3>
+        <form method="post" action="{{ url_for("/users") }}">
+            <div class="mb-5">
+                <label for="usernameInput" class="form-label">Username</label>
+                <input type="text" class="form-control" id="usernameInput" name="username"
+                       placeholder="The username" aria-describedby="nameHelp" autocomplete="name" required>
+                <div id="nameHelp" class="form-text">Please enter a username.</div>
+
+                <label for="realnameInput" class="form-label">Real name</label>
+                <input type="text" class="form-control" id="realnameInput" name="realname"
+                       placeholder="The real name" aria-describedby="nameHelp" autocomplete="name" required>
+                <div id="nameHelp" class="form-text">Please enter the real name.</div>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Send</button>
+        </form>
+    </div>
+{% endblock main %}

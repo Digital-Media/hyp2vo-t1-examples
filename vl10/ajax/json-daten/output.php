@@ -1,8 +1,8 @@
 <?php
 
-use Hypermedia2\Vl11\SearchData;
+use Hypermedia2\Vl10\SearchData;
 
-require_once("Hypermedia 2/Vl11/SearchData.php");
+require_once("Hypermedia 2/Vl10/SearchData.php");
 
 $data = new SearchData();
 $titles = $data->getTitles();

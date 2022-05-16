@@ -1,6 +1,6 @@
 <?php
 
-namespace Hypermedia2\Vl11;
+namespace Hypermedia2\Vl10;
 
 /**
  * Contains dummy data that is being searched using the search suggest feature.
@@ -22,12 +22,12 @@ class SearchData
     {
         $this->titles = [
             "Die FH",
-            "HM2",
+            "HYP2",
             "FH",
             "Hagenberg",
-            "jQuery",
+            "Datenbanken",
             "Medientechnik und -design",
-            "MTD20",
+            "MTD21",
             "MTD",
             "PHP",
             "JavaScript",
