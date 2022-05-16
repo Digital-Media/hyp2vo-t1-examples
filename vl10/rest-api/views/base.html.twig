@@ -16,7 +16,7 @@
                 <a class="navbar-brand" href="{{ url_for("/") }}">
                     <img src="{{ get_base_path() }}/../views/images/fhooe.svg" alt="" height="30"
                          class="d-inline-block align-text-top">
-                    fhooe/router-skeleton
+                    REST API Example
                 </a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarNavDropdown"
@@ -26,16 +26,16 @@
                 <div class="collapse navbar-collapse" id="navbarNavDropdown">
                     <ul class="navbar-nav">
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for("/form") }}">PHP Form</a>
+                            <a class="nav-link" href="{{ url_for("/users") }}">List All Users</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for("/twigform") }}">Twig Form</a>
+                            <a class="nav-link" href="{{ url_for("/users?id=1") }}">List User With ID 1</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for("/staticpage") }}">Static HTML Page</a>
+                            <a class="nav-link" href="{{ url_for("/adduser") }}">Add a New User</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="{{ url_for("/a/route/that/does/not/exist") }}">404 Page</a>
+                            <a class="nav-link" href="{{ url_for("/createdb") }}">CreateDB</a>
                         </li>
                     </ul>
                 </div>
