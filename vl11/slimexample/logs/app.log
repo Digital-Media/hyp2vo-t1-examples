@@ -1,4 +1,0 @@
-[2021-05-10T03:39:29.612407+03:00] slimexample-logger.INFO: Logger dependency created. [] []
-[2021-05-10T03:39:29.614666+03:00] slimexample-logger.INFO: Twig middleware added. [] []
-[2021-05-10T03:39:29.614904+03:00] slimexample-logger.INFO: Routing middleware added. [] []
-[2021-05-10T03:39:29.615102+03:00] slimexample-logger.INFO: Error middleware added. [] []

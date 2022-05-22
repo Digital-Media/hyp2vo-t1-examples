@@ -1,12 +1,12 @@
 <?php
 
-namespace Hypermedia2\Vl10;
+namespace Hypermedia2\Vl11;
 
 use Exception;
 
 /**
  * Stores and prints a user's favorite subject of the Media Technology and Design program.
- * @package Hypermedia2\Vl10
+ * @package Hypermedia2\Vl11
  */
 class FavoriteMTDSubject
 {

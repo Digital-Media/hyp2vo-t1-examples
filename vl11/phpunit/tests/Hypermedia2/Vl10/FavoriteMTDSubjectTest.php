@@ -1,15 +1,15 @@
 <?php
 
-namespace Hypermedia2\Vl10;
+namespace Hypermedia2\Vl11;
 
-require dirname(__DIR__) . "../../../src/Hypermedia2/Vl10/FavoriteMTDSubject.php";
+require dirname(__DIR__) . "../../../src/Hypermedia2/Vl11/FavoriteMTDSubject.php";
 
 use Exception;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Test class for FavoriteMTDSubject
- * @package Hypermedia2\Vl10
+ * @package Hypermedia2\Vl11
  */
 class FavoriteMTDSubjectTest extends TestCase
 {
@@ -27,7 +27,7 @@ class FavoriteMTDSubjectTest extends TestCase
     /**
      * Tests if the say method outputs the correct string.
      */
-    public function testSaysFavoriteSubject()
+    public function testSayFavoriteSubject()
     {
         $subject = new FavoriteMTDSubject("Hypermedia 2");
         $this->assertEquals("The best subject in MTD is Hypermedia 2!", $subject->say());
@@ -52,7 +52,7 @@ class FavoriteMTDSubjectTest extends TestCase
     public function testRespondToInDisagreement()
     {
         $subject = new FavoriteMTDSubject("Hypermedia 2");
-        $opinion = "I love Digitale Medientechnik 2!";
+        $opinion = "I love Media Technology 2!";
 
         $this->expectException(Exception::class);
 

@@ -2,6 +2,7 @@
 
 use DI\ContainerBuilder;
 use Monolog\Handler\StreamHandler;
+use Monolog\Level;
 use Monolog\Logger;
 use Psr\Container\ContainerInterface;
 use Psr\Http\Message\ResponseInterface as Response;
@@ -27,11 +28,11 @@ $containerBuilder->addDefinitions(
             "logger" => [
                 "name" => "slimexample-logger",
                 "path" => "../logs/app.log",
-                "level" => Logger::DEBUG
+                "level" => Level::Debug
             ],
             "view" => [
                 "templates" => "../templates",
-                "cache" => "../templates_c",
+                "cache" => "../cache",
                 "auto_reload" => true
             ]
         ],
@@ -68,9 +69,8 @@ AppFactory::setContainer($container);
 ################################
 $app = AppFactory::create();
 
-// Derives the base path from the current script name
-$basePath = dirname($_SERVER["SCRIPT_NAME"]);
-$app->setBasePath($basePath);
+// Set the base path
+$app->setBasePath("/code/hyp2vo-t1-examples/vl11/slim-framework/slimexample/public");
 
 // Get the logger
 $logger = $container->get(LoggerInterface::class);
