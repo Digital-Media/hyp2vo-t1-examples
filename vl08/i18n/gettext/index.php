@@ -5,6 +5,7 @@ if (isset($_GET["locale"])) {
     $locale = $_GET["locale"];
 }
 
+putenv("LANGUAGE=$locale");
 putenv("LANG=$locale");
 setlocale(LC_ALL, $locale);
 $domain = "messages";
