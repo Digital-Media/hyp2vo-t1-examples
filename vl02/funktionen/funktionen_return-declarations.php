@@ -40,3 +40,13 @@ function redirect(string $uri): never
 }
 
 //redirect("https://www.fh-ooe.at/");
+
+// False als standalone Rückgabewert
+function alwaysFalse(): false
+{
+    return false;
+}
+
+if (alwaysFalse()) {
+    echo "<p>Das wird nie ausgegeben.</p>";
+}
