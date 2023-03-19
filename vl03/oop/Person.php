@@ -3,7 +3,7 @@
 require("LocatableTrait.php");
 
 /**
- * Eine Person, die über Koordinaten ortbar sein möchte.
+ * A person who wants to be locatable by coordinates.
  */
 class Person
 {

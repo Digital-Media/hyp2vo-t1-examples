@@ -1,8 +1,7 @@
 <?php
 
 /**
- * Abstrakte Basisklasse. Die Funktion printOut() ist implementiert, getValue() jedoch nicht. Eine Kindklasse muss dies
- * übernehmen.
+ * Abstract base class. The function printOut() is implemented, getValue() is not. A child class must do this.
  */
 abstract class AbstractClass
 {

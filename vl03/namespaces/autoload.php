@@ -3,10 +3,11 @@
 use Fhooe\Mtd\Hypermedia\Exercise;
 
 /**
- * Lädt eine Klasse automatisch anhang des angegebenen Namespace, wenn die Verzeichnisstruktur den Namespace abbildet.
- * @param $className Der Name der zu ladenden Klasse (inklusive Namespace).
+ * Loads a class automatically based on the given namespace, if the directory structure maps the namespace.
+ * @param $className string The name of the class to load (including namespace).
+ * @return void Returns nothing.
  */
-function autoload($className)
+function autoload(string $className): void
 {
     $className = ltrim($className, "\\");
     $fileName = "";

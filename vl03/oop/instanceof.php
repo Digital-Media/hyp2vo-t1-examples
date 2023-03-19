@@ -1,17 +1,17 @@
 <?php
 
 /**
- * A person.
+ * A human.
  */
-class Person
+class Human
 {
     // ...
 }
 
 /**
- * An employee based on Person.
+ * An employee based on Human.
  */
-class Employee extends Person
+class Employee extends Human
 {
     // ...
 }
@@ -29,8 +29,8 @@ $obj = new Employee();
 if ($obj instanceof Employee) { // true
     echo "Object is Employee";
 }
-if ($obj instanceof Person) { // true
-    echo "Object is Person";
+if ($obj instanceof Human) { // true
+    echo "Object is Human";
 }
 if ($obj instanceof Animal) { // false
     echo "Object is Animal";

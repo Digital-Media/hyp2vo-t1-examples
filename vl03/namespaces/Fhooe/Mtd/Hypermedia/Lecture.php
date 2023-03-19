@@ -3,7 +3,7 @@
 namespace Fhooe\Mtd\Hypermedia;
 
 /**
- * Eine Klasse, welche die Hypermedia 2-Vorlesung repräsentiert.
+ * A class representing the Hypermedia 2 lecture.
  * @package Fhooe\Mtd\Hypermedia
  */
 class Lecture

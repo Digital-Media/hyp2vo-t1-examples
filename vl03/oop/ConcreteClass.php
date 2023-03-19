@@ -3,7 +3,7 @@
 require("AbstractClass.php");
 
 /**
- * Konkrete Implementierung der abstrakten Basisklasse. Die "fehlende", abstrakte Methode wird hier implementiert.
+ * Concrete implementation of the abstract base class. The "missing", abstract method is implemented here.
  */
 class ConcreteClass extends AbstractClass
 {

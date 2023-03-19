@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Trait, der die Speicherung und Ausgabe von Positionsdaten (Breiten- und Längengrad) ermöglicht.
+ * Trait with methods to store and output position data (latitude and longitude).
  */
 trait LocatableTrait
 {
@@ -9,8 +9,9 @@ trait LocatableTrait
     private float $longitude;
 
     /**
-     * Setzt ein Koordinatenpaar aus Breiten- und Längengrad.
-     * @param array $pos Das Array mit Breiten (Pos. 0) und Längengrad (Pos. 1).
+     * Sets a coordinate pair from latitude and longitude.
+     * @param array $pos The array with latitude (Pos. 0) and longitude (Pos. 1).
+     * @return void Returns nothing.
      */
     public function setPosition(array $pos): void
     {
@@ -19,8 +20,9 @@ trait LocatableTrait
     }
 
     /**
-     * Setzt den Breitengrad.
-     * @param float $lat Der Breitengrad.
+     * Sets the latitude.
+     * @param float $lat The latitude.
+     * @return void Returns nothing.
      */
     public function setLatitude(float $lat): void
     {
@@ -28,8 +30,9 @@ trait LocatableTrait
     }
 
     /**
-     * Setzt den Längengrad.
-     * @param float $lon Der Längengrad.
+     * Sets the longitude.
+     * @param float $lon The longitude.
+     * @return void Returns nothing.
      */
     public function setLongitude(float $lon): void
     {
@@ -37,8 +40,8 @@ trait LocatableTrait
     }
 
     /**
-     * Gibt die gespeicherte Position als Koordinatenpaar zurück.
-     * @return array Das Array mit Breiten (Pos. 0) und Längengrad (Pos. 1).
+     * Returns the stored position as a coordinate pair.
+     * @return array The array with latitude (Pos. 0) and longitude (Pos. 1).
      */
     public function getPosition(): array
     {
@@ -46,8 +49,8 @@ trait LocatableTrait
     }
 
     /**
-     * Gibt den Breitengrad zurück.
-     * @return float Der Breitengrad.
+     * Returns the latitude.
+     * @return float The latitude.
      */
     public function getLatitude(): float
     {
@@ -55,8 +58,8 @@ trait LocatableTrait
     }
 
     /**
-     * Gibt den Längengrad zurück.
-     * @return float Der Längengrad
+     * Returns the longitude.
+     * @return float The longitude.
      */
     public function getLongitude(): float
     {

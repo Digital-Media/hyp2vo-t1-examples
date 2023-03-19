@@ -126,7 +126,7 @@ $rect1->move(10, 10);
 // Statische Variablen ausgeben
 echo Rectangle::$version; // 1.0.0
 echo $rect1->getVersion(); // 1.0.0
-//echo $rect1->version; // FEHLER!
+//echo $rect1->version; // NOTICE & WARNING!
 
 // Statische Methoden aufrufen
 Rectangle::printVersion(); // 1.0.0
