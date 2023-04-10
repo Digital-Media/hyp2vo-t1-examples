@@ -12,7 +12,7 @@ require "vendor/autoload.php";
 
 $loader = new FilesystemLoader("templates");
 $twig = new Environment($loader, [
-    "cache" => "templates_c",
+    "cache" => "cache",
     "auto_reload" => true
 ]);
 

@@ -10,7 +10,7 @@ require "vendor/autoload.php";
 $router = new Router();
 
 // 2. Optional: set the base path if the application is in a subdirectory
-$router->setBasePath("/code/hyp2vo-t1-examples/vl05/fhooe-router");
+$router->setBasePath("/hyp2vo-t1-examples/vl05/fhooe-router");
 
 // 3. Define all the needed routes
 $router->get("/", function () {

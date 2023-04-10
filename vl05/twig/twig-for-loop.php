@@ -11,7 +11,7 @@ use Twig\Loader\FilesystemLoader;
 require "vendor/autoload.php";
 
 $loader = new FilesystemLoader("templates");
-$twig = new Environment($loader, ["cache" => "templates_c", "auto_reload" => true]);
+$twig = new Environment($loader, ["cache" => "cache", "auto_reload" => true]);
 
 $array = ["Red", "Green", "Blue"];
 

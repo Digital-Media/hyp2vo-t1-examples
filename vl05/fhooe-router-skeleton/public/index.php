@@ -46,7 +46,7 @@ if (isset($_SESSION)) {
 }
 
 // Set a base path if your code is not in your server's document root.
-$router->setBasePath("/code/hyp2vo-t1-examples/vl05/fhooe-router-skeleton/public");
+$router->setBasePath("/hyp2vo-t1-examples/vl05/fhooe-router-skeleton/public");
 
 // Set a 404 callback that is executed when no route matches.
 // Example for the use of an arrow function. It automatically includes variables from the parent scope (such as $twig).
