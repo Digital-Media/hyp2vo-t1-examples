@@ -1,10 +1,3 @@
-<?php
-
-// Exclude deprecated notices (issues with siriusphp/upload and PHP 8.1)
-error_reporting(E_ALL & ~E_DEPRECATED);
-
-?>
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -19,7 +12,6 @@ error_reporting(E_ALL & ~E_DEPRECATED);
 </form>
 
 <?php
-
 // Wenn Formular abgeschickt
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     require "vendor/autoload.php";

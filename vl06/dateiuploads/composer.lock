@@ -67,16 +67,16 @@
         },
         {
             "name": "siriusphp/validation",
-            "version": "3.0.2",
+            "version": "3.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/siriusphp/validation.git",
-                "reference": "1d03185dfbf34a45d7c415b43605a699cfc3af71"
+                "reference": "14dd292b10053d6269126f4cb6e334f78d4686c4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/siriusphp/validation/zipball/1d03185dfbf34a45d7c415b43605a699cfc3af71",
-                "reference": "1d03185dfbf34a45d7c415b43605a699cfc3af71",
+                "url": "https://api.github.com/repos/siriusphp/validation/zipball/14dd292b10053d6269126f4cb6e334f78d4686c4",
+                "reference": "14dd292b10053d6269126f4cb6e334f78d4686c4",
                 "shasum": ""
             },
             "require": {
@@ -111,9 +111,9 @@
             ],
             "support": {
                 "issues": "https://github.com/siriusphp/validation/issues",
-                "source": "https://github.com/siriusphp/validation/tree/3.0.2"
+                "source": "https://github.com/siriusphp/validation/tree/3.1.0"
             },
-            "time": "2020-11-24T14:58:51+00:00"
+            "time": "2022-09-21T19:51:46+00:00"
         }
     ],
     "packages-dev": [],
@@ -124,5 +124,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
