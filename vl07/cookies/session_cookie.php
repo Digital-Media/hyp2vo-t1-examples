@@ -1,3 +1,9 @@
+<?php
+
+if (!isset($_COOKIE["user"])) {
+    setcookie("user", "John Doe");
+}
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -8,7 +14,6 @@
 <?php
 if (!isset($_COOKIE["user"])) {
     echo "<p>Cookie nicht vorhanden. Setze neues Cookie...</p>";
-    setcookie("user", "John Doe");
 } else {
     echo "<p>Cookie vorhanden. Lese aus...</p>";
     echo "<p>User*innenname: " . $_COOKIE["user"] . "</p>";

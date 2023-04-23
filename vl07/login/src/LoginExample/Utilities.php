@@ -11,7 +11,7 @@ namespace LoginExample;
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2022
+ * @version 2023
  */
 trait Utilities
 {
@@ -68,7 +68,7 @@ trait Utilities
      */
     public static function isPrice(string $string): bool
     {
-        $price_pattern = "/(?!0,00)((^[1-9])(\d)*|^[0])((,|\.)\d{2})?$/";
+        $price_pattern = "/(?!0,00)((^[1-9])(\d)*|^0)(([,.])\d{2})?$/";
         if (preg_match($price_pattern, $string)) {
             return true;
         } else {
@@ -84,7 +84,7 @@ trait Utilities
      */
     public static function isInt(string $string): bool
     {
-        $int_pattern = "/(^[1-9][0-9]*|0{1,1}$)/";
+        $int_pattern = "/(^[1-9][0-9]*|0$)/";
         if (!preg_match($int_pattern, $string)) {
             return false;
         } else {

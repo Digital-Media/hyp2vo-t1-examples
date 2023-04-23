@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 
 session_start(["cookie_lifetime" => 3600]);
 // session_start(); // Kann alternativ einkommentiert werden - ergibt 0 bei der Lifetime

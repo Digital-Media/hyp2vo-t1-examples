@@ -3,6 +3,7 @@
 namespace LoginExample;
 
 use PDO;
+use PDOException;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -13,7 +14,7 @@ use Twig\Error\SyntaxError;
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2022
+ * @version 2023
  */
 class CreateDB
 {
@@ -82,9 +83,9 @@ class CreateDB
     {
         $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
         // DSN for Docker
-        // $dsn = "mysql:host=db;port=3306";
+        $dsn = "mysql:host=db;port=3306";
         // DSN for Vagrant
-        $dsn = "mysql:host=localhost;port=3306";
+        //$dsn = "mysql:host=localhost;port=3306";
         $mysqlUser = "onlineshop";
         $mysqlPwd = "geheim";
         $options = [
@@ -120,7 +121,6 @@ class CreateDB
     public function createTable(): void
     {
         if ($this->dbh) {
-
             $query = "CREATE TABLE login_example.user (iduser BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
                                    email VARCHAR(255) NOT NULL,
                                    password VARCHAR(255) NOT NULL,
@@ -128,7 +128,7 @@ class CreateDB
             try {
                 $this->dbh->exec($query);
                 $this->tableCreated = true;
-            } catch (\PDOException $exception) {
+            } catch (PDOException $exception) {
                 // If there's an exception the table was already created. Do nothing.
             }
         }
@@ -152,7 +152,10 @@ class CreateDB
             foreach ($this->users as $user) {
                 if (!in_array($user["email"], $emailRows)) {
                     $statement = $this->dbh->prepare($insertQuery);
-                    $params = [":email" => $user["email"], ":password" => password_hash($user["password"], PASSWORD_DEFAULT)];
+                    $params = [
+                        ":email" => $user["email"],
+                        ":password" => password_hash($user["password"], PASSWORD_DEFAULT)
+                    ];
                     $success = $statement->execute($params);
                     if ($success) {
                         $this->nrOfUsersCreated++;

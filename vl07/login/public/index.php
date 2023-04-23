@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use Fhooe\Router\Router;
 use LoginExample\CreateDB;
+use LoginExample\PasswordHash;
 use LoginExample\Login;
 use LoginExample\RouteGuard;
 use LoginExample\Utilities;
@@ -50,7 +51,7 @@ if (isset($_SESSION)) {
 }
 
 // Set a base path if your code is not in your server's document root.
-$router->setBasePath("/code/hyp2vo-t1-examples/vl07/login/public");
+$router->setBasePath("/hyp2vo-t1-examples/vl07/login/public");
 
 // Set a 404 callback that is executed when no route matches.
 // Example for the use of an arrow function. It automatically includes variables from the parent scope (such as $twig).
@@ -92,6 +93,16 @@ $router->get("/createdb", function () use ($twig) {
     $createDB->createTable();
     $createDB->addUsers();
     $createDB->displayOutput();
+});
+
+$router->get("/passwordhash", function () use ($twig) {
+    $generatePassword = new PasswordHash($twig);
+    $generatePassword->displayOutput();
+});
+
+$router->post("/passwordhash", function () use ($twig) {
+    $generatePassword = new PasswordHash($twig);
+    $generatePassword->displayOutput();
 });
 
 // Run the router to get the party started.

@@ -1,3 +1,9 @@
+<?php
+
+if (!isset($_COOKIE["username"])) {
+    setcookie("username", "Jane Doe", ["expires" => time() + 604800]);
+}
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -8,7 +14,6 @@
 <?php
 if (!isset($_COOKIE["username"])) {
     echo "<p>Cookie nicht vorhanden. Setze neues Cookie...</p>";
-    setcookie("username", "Jane Doe", ["expires" => time() + 604800]);
 } else {
     echo "<p>Cookie vorhanden. Lese aus...</p>";
     echo "<p>User*innenname: " . $_COOKIE["username"] . "</p>";

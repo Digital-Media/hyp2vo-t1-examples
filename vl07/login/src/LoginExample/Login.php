@@ -5,6 +5,9 @@ namespace LoginExample;
 use Fhooe\Router\Router;
 use PDO;
 use Twig\Environment;
+use Twig\Error\LoaderError;
+use Twig\Error\RuntimeError;
+use Twig\Error\SyntaxError;
 
 /**
  * This class enables users to log in to the system with a provided username and password. Both items are matched with
@@ -14,7 +17,7 @@ use Twig\Environment;
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2022
+ * @version 2023
  */
 final class Login
 {
@@ -58,9 +61,9 @@ final class Login
     {
         $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
         // DSN for Docker
-        // $dsn = "mysql:host=db;port=3306;dbname=login_example";
+        $dsn = "mysql:host=db;port=3306;dbname=login_example";
         // DSN for Vagrant
-        $dsn = "mysql:host=localhost;port=3306;dbname=login_example";
+        //$dsn = "mysql:host=localhost;port=3306;dbname=login_example";
         $mysqlUser = "onlineshop";
         $mysqlPwd = "geheim";
         $options = [
@@ -161,6 +164,12 @@ final class Login
         }
     }
 
+    /**
+     * Renders the login form and displays it.
+     * @throws SyntaxError
+     * @throws RuntimeError
+     * @throws LoaderError
+     */
     public function displayOutput(): void
     {
         $this->twig->display("login.html.twig", [
