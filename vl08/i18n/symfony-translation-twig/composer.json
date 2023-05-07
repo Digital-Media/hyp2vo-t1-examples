@@ -1,7 +1,7 @@
 {
     "require": {
-        "symfony/translation": "^6.0",
-        "twig/twig": "^3.3",
-        "symfony/twig-bridge": "^6.0"
+        "symfony/translation": "^6.2",
+        "twig/twig": "^3.6",
+        "symfony/twig-bridge": "^6.2"
     }
 }
