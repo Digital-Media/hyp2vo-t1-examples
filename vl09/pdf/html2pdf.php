@@ -28,5 +28,5 @@ $html2pdf->setDefaultFont("Arial");
 $html2pdf->writeHTML($html);
 
 # Output erzeugen (im Browser und als Datei)
-$html2pdf->output("pdf2html-hypermedia.pdf", "I");
-$html2pdf->output(__DIR__ . "/pdf2html-hypermedia.pdf", "F");
+$html2pdf->output("html2pdf-hypermedia.pdf", "I");
+$html2pdf->output(__DIR__ . "/html2pdf-hypermedia.pdf", "F");

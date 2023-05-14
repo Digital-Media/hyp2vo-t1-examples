@@ -20,4 +20,8 @@ $shows = [
 ];
 
 $xmlWriter = new XMLDomWriter($shows);
-$xmlWriter->generateXML("dom_shows.xml");
+try {
+    $xmlWriter->generateXML("dom_shows.xml");
+} catch (DOMException $e) {
+    echo "An error occurred: " . $e->getMessage();
+}
