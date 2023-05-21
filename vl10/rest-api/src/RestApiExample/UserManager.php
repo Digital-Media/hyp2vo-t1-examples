@@ -4,6 +4,11 @@ namespace RestApiExample;
 
 use PDO;
 
+/**
+ * A simple REST API example for listing and creating users.
+ * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
+ * @version 2023
+ */
 class UserManager
 {
     /**
@@ -33,15 +38,13 @@ class UserManager
     {
         $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
         // DSN for Docker
-        // $dsn = "mysql:host=db;port=3306;dbname=rest_api_example";
-        // DSN for Vagrant
-        $dsn = "mysql:host=localhost;port=3306;dbname=rest_api_example";
+        $dsn = "mysql:host=db;port=3306;dbname=rest_api_example";
         $mysqlUser = "onlineshop";
         $mysqlPwd = "geheim";
         $options = [
             PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
             PDO::MYSQL_ATTR_INIT_COMMAND => $charsetAttr,
             PDO::MYSQL_ATTR_MULTI_STATEMENTS => false
         ];
@@ -60,7 +63,7 @@ class UserManager
 
         if ($this->dbh) {
             $statement = $this->dbh->query($query);
-            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $users = $statement->fetchAll();
         }
 
         $jsonResponse = [];
@@ -69,7 +72,7 @@ class UserManager
 
         foreach ($users as $user) {
             $newUser = $user;
-            $newUser["link"] = $link . "/" . $user["id"];
+            $newUser["link"] = $link . "?id=" . $user["id"];
             $jsonResponse["users"][] = $newUser;
         }
 
@@ -93,13 +96,13 @@ class UserManager
             $statement = $this->dbh->prepare($query);
             $params = [":id" => $id];
             $statement->execute($params);
-            $users = $statement->fetchAll(PDO::FETCH_ASSOC);
+            $users = $statement->fetchAll();
         }
 
         // If there's exactly one user that has been retrieved, generate output. Otherwise, generate a 404 response.
         if (count($users) === 1) {
             $jsonResponse = $users[0];
-            $jsonResponse["link"] = $link . "/" . $id;
+            $jsonResponse["link"] = $link . "?id=" . $id;
             $this->showResponse(200, $jsonResponse);
         } else {
             $this->showResponse(404);

@@ -14,7 +14,7 @@ use Twig\Error\SyntaxError;
  * @package RestApiExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
  * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2022
+ * @version 2023
  */
 class CreateDB
 {
@@ -87,9 +87,7 @@ class CreateDB
     {
         $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
         // DSN for Docker
-        // $dsn = "mysql:host=db;port=3306";
-        // DSN for Vagrant
-        $dsn = "mysql:host=localhost;port=3306";
+        $dsn = "mysql:host=db;port=3306";
         $mysqlUser = "onlineshop";
         $mysqlPwd = "geheim";
         $options = [
