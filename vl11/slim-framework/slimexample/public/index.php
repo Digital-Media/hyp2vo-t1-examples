@@ -70,7 +70,7 @@ AppFactory::setContainer($container);
 $app = AppFactory::create();
 
 // Set the base path
-$app->setBasePath("/code/hyp2vo-t1-examples/vl11/slim-framework/slimexample/public");
+$app->setBasePath("/hyp2vo-t1-examples/vl11/slim-framework/slimexample/public");
 
 // Get the logger
 $logger = $container->get(LoggerInterface::class);

@@ -8,7 +8,7 @@ require "../vendor/autoload.php";
 
 $app = AppFactory::create();
 
-$app->setBasePath("/code/hyp2vo-t1-examples/vl11/slim-framework/helloworld/public");
+$app->setBasePath("/hyp2vo-t1-examples/vl11/slim-framework/helloworld/public");
 
 $app->get(
     "/",
