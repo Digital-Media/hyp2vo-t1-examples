@@ -74,7 +74,7 @@ class WeatherGenerator
         $imageName = "current_weather.png";
 
         $client = new Client();
-        $weatherUri = "http://www.7timer.info/bin/civil.php?lon=$longitude&lat=$latitude&lang=en&unit=metric&output=internal&tzshift=0";
+        $weatherUri = "https://www.7timer.info/bin/civil.php?lon=$longitude&lat=$latitude&lang=en&unit=metric&output=internal&tzshift=0";
         $response = $client->get($weatherUri);
 
         file_put_contents($imageName, $response->getBody());

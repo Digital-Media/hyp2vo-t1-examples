@@ -5,7 +5,7 @@ use GuzzleHttp\Client;
 require "vendor/autoload.php";
 
 $client = new Client([
-    "base_uri" => "http://httpbin.org"
+    "base_uri" => "https://httpbin.org"
 ]);
 
 $getResponse = $client->get("/get", [
