@@ -8,7 +8,7 @@ Files in the `main` branch will change continuously throughout the summer semest
 
 ## Usage
 
-1. Get a development webserver stack (e.g., the [fhooe-web-dock](https://github.com/Digital-Media/fhooe-web-dock) Docker containers or the [fhooe-webdev](https://github.com/Digital-Media/fhooe-webdev) Vagrant image).
+1. Get a development webserver stack with PHP enabled (e.g., the [fhooe-web-dock](https://github.com/Digital-Media/fhooe-web-dock) Docker containers or the [fhooe-webdev](https://github.com/Digital-Media/fhooe-webdev) Vagrant image).
 2. Get a proper PHP IDE (e.g., [PhpStorm](https://www.jetbrains.com/phpstorm/)).
 3. Clone the repository or download it as a ZIP file into your server's document root, the Docker or Vagrant shared folder.
 4. Open the files in your web browser. The examples for each lecture are in the respective folder (e.g., `vl01` for lecture 1).
