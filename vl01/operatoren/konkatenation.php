@@ -1,7 +1,4 @@
 <?php
-// Fehlermeldungen werden ausgegeben (auch wenn am Server deaktiviert).
-ini_set("display_errors", "1");
-ini_set("html_errors", "1");
 
 $first = 100;
 $second = 50;
