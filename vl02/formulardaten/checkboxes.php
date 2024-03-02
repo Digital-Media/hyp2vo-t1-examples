@@ -6,15 +6,15 @@
 </head>
 <body>
 <form method="post" action="checkboxes.php">
-    <p>My Hobbies:</p>
-    <label for="music">Music:</label>
+    <p>Meine Hobbys:</p>
+    <label for="music">Musik:</label>
     <input type="checkbox" name="hobbies[]" value="music" id="music">
-    <label for="sports">Sports:</label>
+    <label for="sports">Sport:</label>
     <input type="checkbox" name="hobbies[]" value="sports" id="sports">
-    <label for="reading">Reading:</label>
+    <label for="reading">Lesen:</label>
     <input type="checkbox" name="hobbies[]" value="reading" id="reading">
-    <label for="horses">Horses:</label>
-    <input type="checkbox" name="hobbies[]" value="horses" id="horses">
+    <label for="horses">Tiere:</label>
+    <input type="checkbox" name="hobbies[]" value="animals" id="horses">
     <button type="submit">Abschicken</button>
 </form>
 
