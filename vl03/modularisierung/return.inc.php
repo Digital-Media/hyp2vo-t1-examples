@@ -1,3 +1,3 @@
 <?php
 
-return "<p>Da schau her!</p>";
+return "<p>Look at that!</p>";

@@ -1,10 +1,10 @@
 <?php
 
 try {
-    throw new Exception("Allgemeiner Fehler!");
-    echo "Wird nicht mehr angezeigt.";
+    throw new Exception("General error!");
+    echo "This output isn't shown anymore.";
 } catch (Exception $e) {
     echo "Exception: " . $e->getMessage();
 }
 
-echo "Weiter nach Fehlerbehandlung";
+echo "Continue after exception handling.";

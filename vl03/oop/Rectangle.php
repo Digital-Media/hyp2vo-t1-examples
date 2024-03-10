@@ -15,7 +15,7 @@ class Rectangle implements GeometricComponentInterface
     public int $y2;
     public string $color;*/
     public static string $version = "1.0.0";
-    public const TYPE = "Rectangle";
+    public const string TYPE = "Rectangle";
 
     /**
      * Creates a new rectangle.

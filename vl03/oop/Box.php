@@ -14,9 +14,9 @@ class Box extends Rectangle
      */
     public function draw(): void
     {
-        // Vorderseite zeichnen (Rechteck)
+        // Draw the front (Rectangle)
         parent::draw();
-        // Andere Seiten zeichen
+        // Draw the other sides
         // ...
     }
 }

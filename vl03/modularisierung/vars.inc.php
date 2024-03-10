@@ -1,4 +1,4 @@
 <?php
 
-$test = "<p>Funktioniert!</p>";
-const MESSAGE = "<p>Hallo Welt</p>";
+$test = "<p>Works!</p>";
+const MESSAGE = "<p>Hello World</p>";
