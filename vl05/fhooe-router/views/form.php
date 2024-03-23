@@ -1,8 +1,6 @@
 <?php
 
-use Fhooe\Router\Router;
-
-require "vendor/autoload.php"
+global $router;
 
 ?>
 
@@ -16,7 +14,7 @@ require "vendor/autoload.php"
 <h1>Form</h1>
 <p>This is the form page!</p>
 
-<form action="<?= Router::urlFor("/form") ?>" method="post">
+<form action="<?= $router->urlFor("/form") ?>" method="post">
     <label for="message">Message:</label>
     <input type="text" name="msg" id="message">
     <button type="submit">Send Message</button>
@@ -28,6 +26,6 @@ if (isset($_POST["msg"])) {
 }
 ?>
 
-<p>Why not also try the <a href="<?= Router::urlFor("/") ?>">main page</a>?</p>
+<p>Why not also try the <a href="<?= $router->urlFor("/") ?>">main page</a>?</p>
 </body>
 </html>

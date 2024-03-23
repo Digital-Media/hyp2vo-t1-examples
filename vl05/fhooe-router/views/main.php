@@ -1,8 +1,6 @@
 <?php
 
-use Fhooe\Router\Router;
-
-require "vendor/autoload.php"
+global $router;
 
 ?>
 
@@ -16,6 +14,6 @@ require "vendor/autoload.php"
 <h1>Main</h1>
 <p>This is the main page!</p>
 
-<p>Why not also try the <a href="<?= Router::urlFor("/form") ?>">form</a>?</p>
+<p>Why not also try the <a href="<?= $router->urlFor("/form") ?>">form</a>?</p>
 </body>
 </html>
