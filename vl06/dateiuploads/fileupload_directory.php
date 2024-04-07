@@ -17,6 +17,18 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $nrOfFiles = count($_FILES["userfiles"]["name"]);
     for ($i = 0; $i < $nrOfFiles; $i++) {
         if ($_FILES["userfiles"]["error"][$i] === UPLOAD_ERR_OK) {
+            // Verzeichnispfad extrahieren
+            $directoryPath = dirname($_FILES["userfiles"]["full_path"][$i]);
+
+            // Überprüfen, ob das Verzeichnis bereits existiert
+            if (!is_dir($directoryPath)) {
+                // Wenn nicht, Verzeichnis rekursiv erstellen
+                if (!mkdir($directoryPath, 0777, true)) {
+                    echo "<p>Fehler beim Erstellen des Verzeichnisses für " . htmlspecialchars($_FILES["userfiles"]["full_path"][$i]) . "</p>";
+                    continue; // Abbruch, falls ein Fehler passiert ist
+                }
+            }
+
             move_uploaded_file($_FILES["userfiles"]["tmp_name"][$i], $_FILES["userfiles"]["full_path"][$i]);
             echo "<p>Upload von " . $_FILES["userfiles"]["full_path"][$i] . " erfolgreich!</p>";
         } else {

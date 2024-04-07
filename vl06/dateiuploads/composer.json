@@ -1,5 +1,5 @@
 {
     "require": {
-        "siriusphp/upload": "^3.0"
+        "siriusphp/upload": "^4.0"
     }
 }

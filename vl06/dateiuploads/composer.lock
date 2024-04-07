@@ -4,30 +4,33 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5f605d6678dc98c575175bcdf24bacbc",
+    "content-hash": "d6cd74ed65a91ea271c8dfb93919ec8b",
     "packages": [
         {
             "name": "siriusphp/upload",
-            "version": "3.0.1",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/siriusphp/upload.git",
-                "reference": "3a5a1d130c91d505bb6d06f4c9e2428ea5c01214"
+                "reference": "b3c2bb40a90641421c7e12be00f50eaf62942b91"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/siriusphp/upload/zipball/3a5a1d130c91d505bb6d06f4c9e2428ea5c01214",
-                "reference": "3a5a1d130c91d505bb6d06f4c9e2428ea5c01214",
+                "url": "https://api.github.com/repos/siriusphp/upload/zipball/b3c2bb40a90641421c7e12be00f50eaf62942b91",
+                "reference": "b3c2bb40a90641421c7e12be00f50eaf62942b91",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1",
-                "siriusphp/validation": "~3.0"
+                "php": ">=8.1",
+                "siriusphp/validation": "^4.0"
             },
             "require-dev": {
-                "laminas/laminas-diactoros": "^2.2",
-                "phpunit/phpunit": "~8.5",
-                "symfony/http-foundation": "^4.4"
+                "laminas/laminas-diactoros": "^3.3",
+                "pestphp/pest": "^2.24",
+                "pestphp/pest-plugin-drift": "^2.5",
+                "phpstan/phpstan": "^1.10",
+                "symfony/http-foundation": "^6.3",
+                "symfony/mime": "^6.3"
             },
             "suggest": {
                 "knplabs/gaufrette": "Alternative filesystem abstraction library for upload destinations",
@@ -61,29 +64,31 @@
             ],
             "support": {
                 "issues": "https://github.com/siriusphp/upload/issues",
-                "source": "https://github.com/siriusphp/upload/tree/3.0.1"
+                "source": "https://github.com/siriusphp/upload/tree/4.0.0"
             },
-            "time": "2020-03-14T15:02:29+00:00"
+            "time": "2023-11-19T17:38:36+00:00"
         },
         {
             "name": "siriusphp/validation",
-            "version": "3.1.0",
+            "version": "4.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/siriusphp/validation.git",
-                "reference": "14dd292b10053d6269126f4cb6e334f78d4686c4"
+                "reference": "4704128b2b8e6fc781025e1594b337202478a197"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/siriusphp/validation/zipball/14dd292b10053d6269126f4cb6e334f78d4686c4",
-                "reference": "14dd292b10053d6269126f4cb6e334f78d4686c4",
+                "url": "https://api.github.com/repos/siriusphp/validation/zipball/4704128b2b8e6fc781025e1594b337202478a197",
+                "reference": "4704128b2b8e6fc781025e1594b337202478a197",
                 "shasum": ""
             },
             "require": {
-                "php": ">=7.1"
+                "php": ">=8.0"
             },
             "require-dev": {
-                "phpunit/phpunit": "^8.5"
+                "pestphp/pest": "*",
+                "pestphp/pest-plugin-drift": "^2.5",
+                "phpstan/phpstan": "^1.10"
             },
             "type": "library",
             "autoload": {
@@ -111,9 +116,9 @@
             ],
             "support": {
                 "issues": "https://github.com/siriusphp/validation/issues",
-                "source": "https://github.com/siriusphp/validation/tree/3.1.0"
+                "source": "https://github.com/siriusphp/validation/tree/4.0.0"
             },
-            "time": "2022-09-21T19:51:46+00:00"
+            "time": "2023-11-19T15:40:43+00:00"
         }
     ],
     "packages-dev": [],
@@ -124,5 +129,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }
