@@ -5,7 +5,7 @@
         <h2>GET /main</h2>
         <p>This is main page. You can only access it after a successful login.</p>
 
-        <h3>Welcome {{ _session.email }}</h3>
+        <h3>Welcome {{ session("email") }}</h3>
         <p>You have successfully logged in!</p>
 
         <p><a href="{{ url_for("/logout") }}">Log out</a></p>

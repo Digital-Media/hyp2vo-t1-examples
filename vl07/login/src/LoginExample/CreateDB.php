@@ -13,8 +13,7 @@ use Twig\Error\SyntaxError;
  * Creates the database, table and user entries for this example to work.
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2023
+ * @version 2024
  */
 class CreateDB
 {
@@ -82,11 +81,8 @@ class CreateDB
     private function initDB(): void
     {
         $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
-        // DSN for Docker
         $dsn = "mysql:host=db;port=3306";
-        // DSN for Vagrant
-        //$dsn = "mysql:host=localhost;port=3306";
-        $mysqlUser = "onlineshop";
+        $mysqlUser = "hypermedia";
         $mysqlPwd = "geheim";
         $options = [
             PDO::ATTR_PERSISTENT => true,
@@ -104,12 +100,10 @@ class CreateDB
      */
     public function createSchema(): void
     {
-        if ($this->dbh) {
-            $rowsAffected = $this->dbh->exec("CREATE SCHEMA IF NOT EXISTS login_example DEFAULT CHARACTER SET utf8;");
+        $rowsAffected = $this->dbh->exec("CREATE SCHEMA IF NOT EXISTS login_example DEFAULT CHARACTER SET utf8;");
 
-            if ($rowsAffected > 0) {
-                $this->schemaCreated = true;
-            }
+        if ($rowsAffected > 0) {
+            $this->schemaCreated = true;
         }
     }
 
@@ -120,17 +114,15 @@ class CreateDB
      */
     public function createTable(): void
     {
-        if ($this->dbh) {
-            $query = "CREATE TABLE login_example.user (iduser BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
-                                   email VARCHAR(255) NOT NULL,
-                                   password VARCHAR(255) NOT NULL,
-                                   PRIMARY KEY (iduser)) ENGINE = InnoDB";
-            try {
-                $this->dbh->exec($query);
-                $this->tableCreated = true;
-            } catch (PDOException $exception) {
-                // If there's an exception the table was already created. Do nothing.
-            }
+        $query = "CREATE TABLE login_example.user (iduser BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+                                                   email VARCHAR(255) NOT NULL,
+                                                   password VARCHAR(255) NOT NULL,
+                                                   PRIMARY KEY (iduser)) ENGINE = InnoDB";
+        try {
+            $this->dbh->exec($query);
+            $this->tableCreated = true;
+        } catch (PDOException $exception) {
+            // If there's an exception the table was already created. Do nothing.
         }
     }
 
@@ -145,21 +137,19 @@ class CreateDB
         $checkQuery = "SELECT email FROM login_example.user";
         $insertQuery = "INSERT INTO login_example.user SET email = :email, password = :password";
 
-        if ($this->dbh) {
-            $checkStatement = $this->dbh->query($checkQuery);
-            $emailRows = $checkStatement->fetchAll(PDO::FETCH_COLUMN);
+        $checkStatement = $this->dbh->query($checkQuery);
+        $emailRows = $checkStatement->fetchAll(PDO::FETCH_COLUMN);
 
-            foreach ($this->users as $user) {
-                if (!in_array($user["email"], $emailRows)) {
-                    $statement = $this->dbh->prepare($insertQuery);
-                    $params = [
-                        ":email" => $user["email"],
-                        ":password" => password_hash($user["password"], PASSWORD_DEFAULT)
-                    ];
-                    $success = $statement->execute($params);
-                    if ($success) {
-                        $this->nrOfUsersCreated++;
-                    }
+        foreach ($this->users as $user) {
+            if (!in_array($user["email"], $emailRows)) {
+                $statement = $this->dbh->prepare($insertQuery);
+                $params = [
+                    ":email" => $user["email"],
+                    ":password" => password_hash($user["password"], PASSWORD_DEFAULT)
+                ];
+                $success = $statement->execute($params);
+                if ($success) {
+                    $this->nrOfUsersCreated++;
                 }
             }
         }

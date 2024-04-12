@@ -4,16 +4,13 @@ namespace LoginExample;
 
 /**
  * Offers static helper methods for often used tasks.
- * This trait offers methods for sanitizing form input, checks for valid e-mail addresses, phone numbers and other kinds
+ * This class offers methods for sanitizing form input, checks for valid e-mail addresses, phone numbers and other kinds
  * of data. This code can be used in different classes.
- * Combined with "use Utilities" at the beginning of a class declaration these methods can be accessed via
- * self::method() in any context.
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2023
+ * @version 2024
  */
-trait Utilities
+class Utilities
 {
     /**
      * Filters unwanted HTML tags from an input string and returns the filtered (a.k.a. sanitized) string.
@@ -33,13 +30,10 @@ trait Utilities
      */
     public static function isEmail(string $string): bool
     {
-        // $email_pattern = "/^[\w.-]+@[\w.-]+\.[A-Za-z]{2,6}$/"; // easy pattern
-        $email_pattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/"; // more complicate pattern
-        if (preg_match($email_pattern, $string)) {
-            return true;
-        } else {
-            return false;
-        }
+        // $emailPattern = "/^[\w.-]+@[\w.-]+\.[A-Za-z]{2,6}$/"; // easy pattern
+        $emailPattern = "/^[a-zA-Z0-9._-]+@[a-zA-Z0-9-]+\.[a-zA-Z.]{2,5}$/"; // more complicate pattern
+
+        return preg_match($emailPattern, $string) === 1;
     }
 
     /**
@@ -51,12 +45,19 @@ trait Utilities
      */
     public static function isPhone(string $string): bool
     {
-        $phone_pattern = "/^(?!(?:\d*-){5,})(?!(?:\d* ){5,})\+?[\d- ]+$/";
-        if (preg_match($phone_pattern, $string)) {
-            return true;
-        } else {
-            return false;
-        }
+        // Regex explanation:
+        // ^\+? - Starts with an optional plus sign
+        // \d{1,3} - Followed by 1 to 3 digits (country code)
+        // [-\s]? - Optional dash or space
+        // ((\d{3}[-\s]?){2}\d{4}) - Follows a pattern of three digits, an optional dash or space,
+        // repeated twice, then four digits (typical format)
+        // | - OR
+        // (\d{2,4}[-\s]?){2,3}\d+ - Allows for 2 to 4 digits followed by an optional dash or space,
+        // repeating 2 to 3 times, ending in digits
+        // $ - End of the string
+        $phonePattern = "/^\+?\d{1,3}[-\s]?((\d{3}[-\s]?){2}\d{4}|(\d{2,4}[-\s]?){2,3}\d+)$/";
+
+        return preg_match($phonePattern, $string) === 1;
     }
 
     /**
@@ -68,12 +69,9 @@ trait Utilities
      */
     public static function isPrice(string $string): bool
     {
-        $price_pattern = "/(?!0,00)((^[1-9])(\d)*|^0)(([,.])\d{2})?$/";
-        if (preg_match($price_pattern, $string)) {
-            return true;
-        } else {
-            return false;
-        }
+        $pricePattern = "/(?!0,00)((^[1-9])(\d)*|^0)(([,.])\d{2})?$/";
+
+        return preg_match($pricePattern, $string) === 1;
     }
 
     /**
@@ -84,12 +82,9 @@ trait Utilities
      */
     public static function isInt(string $string): bool
     {
-        $int_pattern = "/(^[1-9][0-9]*|0$)/";
-        if (!preg_match($int_pattern, $string)) {
-            return false;
-        } else {
-            return true;
-        }
+        $intPattern = "/(^[1-9][0-9]*|0$)/";
+
+        return preg_match($intPattern, $string) === 1;
     }
 
     /**-+
@@ -103,18 +98,15 @@ trait Utilities
      */
     public static function isSingleWord(string $string, int $min = 0, int $max = 50): bool
     {
-        $string_pattern = "/^[a-zäöüA-ZÄÖÜ0-9]{" . $min . "," . $max . "}$/i";
-        if (preg_match($string_pattern, $string)) {
-            return true;
-        } else {
-            return false;
-        }
+        $stringPattern = "/^[a-zäöüA-ZÄÖÜ0-9]{" . $min . "," . $max . "}$/i";
+
+        return preg_match($stringPattern, $string) === 1;
     }
 
     /**
      * Checks if a given string is a valid password. Only certain characters are allowed, a minimum and maximum length
      * is enforced.
-     * Use it like this: $this->isPassword("mySecurePassword") or Utilities::isPassword("mySecurePassword").
+     * Use it like this: Utilities::isPassword("mySecurePassword", 12, 50).
      * @param string $string The input string that is to be checked.
      * @param int $min The password's minimum length.
      * @param int $max The password's maximum length.
@@ -122,12 +114,9 @@ trait Utilities
      */
     public static function isPassword(string $string, int $min, int $max): bool
     {
-        $regex = "/^[a-zA-Z0-9_]{" . $min . "," . $max . "}$/";
-        if (preg_match($regex, $string)) {
-            return true;
-        } else {
-            return false;
-        }
+        $passwordPattern = "/^[a-zA-Z0-9_]{" . $min . "," . $max . "}$/";
+
+        return preg_match($passwordPattern, $string) === 1;
     }
 
     /**
@@ -143,7 +132,7 @@ trait Utilities
     /**
      * Quick and dirty method for replacing the most common umlauts in a string with regular ASCII characters.
      * Useful when dealing with file names that are provided by the file system. Windows actually delivers e.g. an "ä",
-     * whereas MacOS does a diaeresis of a and two dots, which is seen as e.g. \x61\xcc\x88
+     * whereas macOS does a diaeresis of a and two dots, which is seen as e.g. \x61\xcc\x88
      * @param string $string The input string where replacements should be performed.
      * @return string A string without umlauts.
      */

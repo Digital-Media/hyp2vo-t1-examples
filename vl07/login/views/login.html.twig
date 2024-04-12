@@ -8,9 +8,9 @@
     <div class="border p-3 mt-5">
         <h3>Login</h3>
 
-        {{ include('errors.html.twig') }}
+        {{ include("errors.html.twig") }}
 
-        <form method="post" action="{{ url_for("/login") }}">
+        <form method="post" action="{{ url_for("/login") }}" novalidate>
             <div class="mb-3">
                 <label for="email" class="form-label">Email address</label>
                 <input type="email" class="form-control" id="email" name="email" value="{{ email }}"

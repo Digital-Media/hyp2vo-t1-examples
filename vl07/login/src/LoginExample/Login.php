@@ -16,24 +16,18 @@ use Twig\Error\SyntaxError;
  * accessing the page
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2023
+ * @version 2024
  */
 final class Login
 {
-    /**
-     * The trait Utilities can now be used as part of the class Login.
-     * For Example: self::sanitizeFilter($string).
-     */
-    use Utilities;
-
     /**
      * @var PDO The PDO object.
      */
     private PDO $dbh;
 
     /**
-     * @var array This array is used to store error and status messages after a form was sent and validated.
+     * @var array<string, string> This array is used to store error and status messages
+     * after a form was sent and validated.
      */
     private array $messages = [];
 
@@ -43,13 +37,20 @@ final class Login
     private Environment $twig;
 
     /**
+     * @var Router The Router object for redirecting the user to the main page after a successful login.
+     */
+    private Router $router;
+
+    /**
      * Creates a new Login object. It takes a Twig Environment object that is used to display a response (output).
      * The constructor needs to initialize the database for reading and updating user information.
      * @param Environment $twig The Twig object for displaying a response.
+     * @param Router $router The Router object for redirecting the user to the main page after a successful login.
      */
-    public function __construct(Environment $twig)
+    public function __construct(Environment $twig, Router $router)
     {
         $this->twig = $twig;
+        $this->router = $router;
         $this->initDB();
     }
 
@@ -60,11 +61,8 @@ final class Login
     private function initDB(): void
     {
         $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
-        // DSN for Docker
         $dsn = "mysql:host=db;port=3306;dbname=login_example";
-        // DSN for Vagrant
-        //$dsn = "mysql:host=localhost;port=3306;dbname=login_example";
-        $mysqlUser = "onlineshop";
+        $mysqlUser = "hypermedia";
         $mysqlPwd = "geheim";
         $options = [
             PDO::ATTR_PERSISTENT => true,
@@ -84,13 +82,12 @@ final class Login
      */
     public function isValid(): void
     {
-        if (self::isEmptyString($_POST["email"])) {
+        if (Utilities::isEmptyString($_POST["email"])) {
             $this->messages["email"] = "Please enter your email address.";
-        }
-        if (!self::isEmptyString($_POST["email"]) && !self::isEmail($_POST["email"])) {
+        } elseif (!Utilities::isEmail($_POST["email"])) {
             $this->messages["email"] = "Please enter a valid email address";
         }
-        if (self::isEmptyString($_POST["password"])) {
+        if (Utilities::isEmptyString($_POST["password"])) {
             $this->messages["password"] = "Please enter your password.";
         }
 
@@ -114,9 +111,9 @@ final class Login
     {
         $_SESSION["email"] = $_POST["email"];
 
-        $_SESSION["isloggedin"] = self::generateLoginHash();
+        $_SESSION["isLoggedIn"] = Utilities::generateLoginHash();
 
-        Router::redirectTo("/main");
+        $this->router->redirectTo("/main");
     }
 
     /**
@@ -132,11 +129,9 @@ final class Login
         $params = [":email" => $_POST["email"]];
         $rows = [];
 
-        if ($this->dbh) {
-            $statement = $this->dbh->prepare($query);
-            $statement->execute($params);
-            $rows = $statement->fetchAll();
-        }
+        $statement = $this->dbh->prepare($query);
+        $statement->execute($params);
+        $rows = $statement->fetchAll();
 
         if (count($rows) === 1 && password_verify($_POST["password"], $rows[0]->password)) {
             if (password_needs_rehash($rows[0]->password, PASSWORD_DEFAULT)) {
@@ -158,10 +153,8 @@ final class Login
     {
         $query = "UPDATE user SET password = :password WHERE iduser = :iduser";
         $params = [':password' => $password, ':iduser' => $iduser];
-        if ($this->dbh) {
-            $statement = $this->dbh->prepare($query);
-            $statement->execute($params);
-        }
+        $statement = $this->dbh->prepare($query);
+        $statement->execute($params);
     }
 
     /**

@@ -11,8 +11,7 @@ use Twig\Error\SyntaxError;
  * This class allows users to generate a hash for a given password and algorithm using PHP's password_hash function.
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2023
+ * @version 2024
  */
 class PasswordHash
 {

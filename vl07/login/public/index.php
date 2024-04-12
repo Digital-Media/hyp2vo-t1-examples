@@ -3,17 +3,17 @@
 declare(strict_types=1);
 
 use Fhooe\Router\Router;
+use Fhooe\Twig\RouterExtension;
+use Fhooe\Twig\SessionExtension;
 use LoginExample\CreateDB;
-use LoginExample\PasswordHash;
 use LoginExample\Login;
+use LoginExample\PasswordHash;
 use LoginExample\RouteGuard;
-use LoginExample\Utilities;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
-use Twig\TwigFunction;
 
 require "../vendor/autoload.php";
 
@@ -33,7 +33,7 @@ $logger = new Logger("skeleton-logger");
 $logger->pushHandler(new StreamHandler(__DIR__ . "/../logs/router.log"));
 $router->setLogger($logger);
 
-// Create a new twig instance for advanced templates.
+// Create a new Twig instance for advanced templates.
 $twig = new Environment(
     new FilesystemLoader("../views"),
     [
@@ -42,13 +42,13 @@ $twig = new Environment(
         "debug" => true
     ]
 );
-$twig->addFunction(new TwigFunction("url_for", [Router::class, "urlFor"]));
-$twig->addFunction(new TwigFunction("get_base_path", [Router::class, "getBasePath"]));
-$twig->addExtension(new DebugExtension());
 
-if (isset($_SESSION)) {
-    $twig->addGlobal("_session", $_SESSION);
-}
+// Add the router extension to Twig. This makes the url_for() and get_base_path() functions available in templates.
+$twig->addExtension(new RouterExtension($router));
+// Add the session extension to Twig. This makes the session() function available in templates to access entries in $_SESSION.
+$twig->addExtension(new SessionExtension());
+// Add the debug extension to Twig. This makes the dump() function available in templates to dump variables.
+$twig->addExtension(new DebugExtension());
 
 // Set a base path if your code is not in your server's document root.
 $router->setBasePath("/hyp2vo-t1-examples/vl07/login/public");
@@ -62,29 +62,29 @@ $router->get("/", function () use ($twig) {
     $twig->display("index.html.twig");
 });
 
-$router->get("/login", function () use ($twig) {
-    RouteGuard::requireNotLoggedIn("/main");
+$router->get("/login", function () use ($twig, $router) {
+    RouteGuard::requireNotLoggedIn($router, "/main");
     $twig->display("login.html.twig");
 });
 
-$router->post("/login", function () use ($twig) {
-    $login = new Login($twig);
+$router->post("/login", function () use ($twig, $router) {
+    $login = new Login($twig, $router);
     $login->isValid();
     $login->displayOutput();
 });
 
-$router->get("/main", function () use ($twig) {
-    RouteGuard::requireLoggedIn("/login");
+$router->get("/main", function () use ($twig, $router) {
+    RouteGuard::requireLoggedIn($router, "/login");
     $twig->display("main.html.twig");
 });
 
-$router->get("/logout", function () {
+$router->get("/logout", function () use ($router) {
     $_SESSION = [];
     if (isset($_COOKIE[session_name()])) {
         setcookie(session_name(), "", time() - 86400, "/");
     }
     session_destroy();
-    Router::redirectTo("/");
+    $router->redirectTo("/");
 });
 
 $router->get("/createdb", function () use ($twig) {
