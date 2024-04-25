@@ -1,7 +1,7 @@
 <?php
 
-$d1 = new DateTime("2023-05-08T08:50:00+02:00");
-$d2 = new DateTimeImmutable("2023-05-08T08:50:00+02:00");
+$d1 = new DateTime("2024-04-29T10:30:00+02:00");
+$d2 = new DateTimeImmutable("2024-04-29T10:30:00+02:00");
 $fortyFiveMinutes = new DateInterval("PT45M");
 
 $d1->add($fortyFiveMinutes);
