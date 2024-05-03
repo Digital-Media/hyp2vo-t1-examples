@@ -12,11 +12,11 @@ $html2pdf->pdf->setCreator(PDF_CREATOR);
 // PDF-Autor*in
 $html2pdf->pdf->setAuthor("Wolfgang Hochleitner");
 // Titel des PDFs
-$html2pdf->pdf->setTitle("PDF2HTML-Beispieldokument");
+$html2pdf->pdf->setTitle("HTML2PDF-Beispieldokument");
 // Beschreibung des Dokuments
-$html2pdf->pdf->setSubject("PDF erstellen mit PDF2HTML");
+$html2pdf->pdf->setSubject("PDF erstellen mit HTML2PDF");
 // Schlüsselwörter setzen
-$html2pdf->pdf->setKeywords("PDF2HTML, Beispiel, PDF, Hypermedia 2");
+$html2pdf->pdf->setKeywords("HTML2PDF, Beispiel, PDF, Hypermedia 2");
 
 # Inhalt der HTML-Datei einlesen
 $html = file_get_contents(__DIR__ . "/htmlcontent/hypermedia.php");
