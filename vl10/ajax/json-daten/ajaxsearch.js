@@ -1,24 +1,24 @@
 "use strict";
 
-const xhr = new XMLHttpRequest();
+const request = new XMLHttpRequest();
 
 /**
  * Send a new asynchronous request to the specified resource.
  */
 function sendAJAXRequest() {
     const str = encodeURIComponent(search.value);
-    xhr.open("GET", "search.php?search=" + str, true);
-    xhr.responseType = "json";
-    xhr.setRequestHeader("Accept", "application/json");
-    xhr.addEventListener("load", handleResponse);
-    xhr.send();
+    request.open("GET", "search.php?search=" + str, true);
+    request.responseType = "json";
+    request.setRequestHeader("Accept", "application/json");
+    request.addEventListener("load", handleResponse);
+    request.send();
 }
 
 function handleResponse() {
-    if (xhr.status === 200) {
+    if (request.status === 200) {
         const suggestDiv = document.getElementById("suggestions");
         suggestDiv.innerHTML = "";
-        const data = xhr.response;
+        const data = request.response;
 
         // Only do something, if data sets actually came back
         if (data.count > 0) {

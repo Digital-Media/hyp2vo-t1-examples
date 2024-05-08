@@ -14,10 +14,12 @@ $capitals = [
 ];
 
 header("Content-Type: text/plain");
-if (isset($_GET["index"])) {
+
+$index = $_GET["index"] ?? null;
+
+if (array_key_exists($index, $capitals)) {
     http_response_code(200);
-    echo $capitals[$_GET["index"]];
-}
-else {
-    http_response_code(400);
+    echo $capitals[$index];
+} else {
+    http_response_code($index === null ? 400 : 404);
 }

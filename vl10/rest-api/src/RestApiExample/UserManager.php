@@ -6,8 +6,9 @@ use PDO;
 
 /**
  * A simple REST API example for listing and creating users.
+ * @package RestApiExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @version 2023
+ * @version 2024
  */
 class UserManager
 {
@@ -37,9 +38,8 @@ class UserManager
     private function initDB(): void
     {
         $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
-        // DSN for Docker
         $dsn = "mysql:host=db;port=3306;dbname=rest_api_example";
-        $mysqlUser = "onlineshop";
+        $mysqlUser = "hypermedia";
         $mysqlPwd = "geheim";
         $options = [
             PDO::ATTR_PERSISTENT => true,
@@ -58,17 +58,15 @@ class UserManager
     public function listUsers(): void
     {
         $query = "SELECT * FROM rest_api_example.user";
-        $users = [];
         $link = "/users";
 
-        if ($this->dbh) {
-            $statement = $this->dbh->query($query);
-            $users = $statement->fetchAll();
-        }
+        $statement = $this->dbh->query($query);
+        $users = $statement->fetchAll();
 
-        $jsonResponse = [];
-        $jsonResponse["size"] = count($users);
-        $jsonResponse["link"] = $link;
+        $jsonResponse = [
+            "size" => count($users),
+            "link" => $link
+        ];
 
         foreach ($users as $user) {
             $newUser = $user;
@@ -88,16 +86,13 @@ class UserManager
     public function listUser(int $id): void
     {
         $query = "SELECT * FROM rest_api_example.user WHERE id = :id";
-        $users = [];
         $link = "/users";
 
         // Select and retrieve this one user.
-        if ($this->dbh) {
-            $statement = $this->dbh->prepare($query);
-            $params = [":id" => $id];
-            $statement->execute($params);
-            $users = $statement->fetchAll();
-        }
+        $statement = $this->dbh->prepare($query);
+        $params = [":id" => $id];
+        $statement->execute($params);
+        $users = $statement->fetchAll();
 
         // If there's exactly one user that has been retrieved, generate output. Otherwise, generate a 404 response.
         if (count($users) === 1) {
@@ -115,14 +110,11 @@ class UserManager
      */
     public function addUser(): void
     {
-        $success = false;
         $query = "INSERT into rest_api_example.user SET username = :username, realname = :realname";
 
-        if ($this->dbh) {
-            $statement = $this->dbh->prepare($query);
-            $params = [":username" => $_POST["username"], ":realname" => $_POST["realname"]];
-            $success = $statement->execute($params);
-        }
+        $statement = $this->dbh->prepare($query);
+        $params = [":username" => $_POST["username"], ":realname" => $_POST["realname"]];
+        $success = $statement->execute($params);
 
         // If adding the user was successful, show 201 otherwise an error 500 because something internally went wrong.
         if ($success) {

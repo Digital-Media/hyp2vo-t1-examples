@@ -13,8 +13,7 @@ use Twig\Error\SyntaxError;
  * Creates the database, table and user entries for this example to work.
  * @package RestApiExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @author Martin Harrer <martin.harrer@fh-hagenberg.at>
- * @version 2023
+ * @version 2024
  */
 class CreateDB
 {
@@ -86,9 +85,8 @@ class CreateDB
     private function initDB(): void
     {
         $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
-        // DSN for Docker
         $dsn = "mysql:host=db;port=3306";
-        $mysqlUser = "onlineshop";
+        $mysqlUser = "hypermedia";
         $mysqlPwd = "geheim";
         $options = [
             PDO::ATTR_PERSISTENT => true,
@@ -106,12 +104,10 @@ class CreateDB
      */
     public function createSchema(): void
     {
-        if ($this->dbh) {
-            $rowsAffected = $this->dbh->exec("CREATE SCHEMA IF NOT EXISTS rest_api_example DEFAULT CHARACTER SET utf8;");
+        $rowsAffected = $this->dbh->exec("CREATE SCHEMA IF NOT EXISTS rest_api_example DEFAULT CHARACTER SET utf8;");
 
-            if ($rowsAffected > 0) {
-                $this->schemaCreated = true;
-            }
+        if ($rowsAffected > 0) {
+            $this->schemaCreated = true;
         }
     }
 
@@ -122,18 +118,16 @@ class CreateDB
      */
     public function createTable(): void
     {
-        if ($this->dbh) {
 
-            $query = "CREATE TABLE rest_api_example.user (id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+        $query = "CREATE TABLE rest_api_example.user (id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
                                    username VARCHAR(100) NOT NULL,
                                    realname VARCHAR(255) NOT NULL,
                                    PRIMARY KEY (id)) ENGINE = InnoDB";
-            try {
-                $this->dbh->exec($query);
-                $this->tableCreated = true;
-            } catch (PDOException $exception) {
-                // If there's an exception the table was already created. Do nothing.
-            }
+        try {
+            $this->dbh->exec($query);
+            $this->tableCreated = true;
+        } catch (PDOException $exception) {
+            // If there's an exception the table was already created. Do nothing.
         }
     }
 
@@ -148,18 +142,16 @@ class CreateDB
         $checkQuery = "SELECT username FROM rest_api_example.user";
         $insertQuery = "INSERT INTO rest_api_example.user SET username = :username, realname = :realname";
 
-        if ($this->dbh) {
-            $checkStatement = $this->dbh->query($checkQuery);
-            $emailRows = $checkStatement->fetchAll(PDO::FETCH_COLUMN);
+        $checkStatement = $this->dbh->query($checkQuery);
+        $emailRows = $checkStatement->fetchAll(PDO::FETCH_COLUMN);
 
-            foreach ($this->users as $user) {
-                if (!in_array($user["username"], $emailRows)) {
-                    $statement = $this->dbh->prepare($insertQuery);
-                    $params = [":username" => $user["username"], ":realname" => $user["realname"]];
-                    $success = $statement->execute($params);
-                    if ($success) {
-                        $this->nrOfUsersCreated++;
-                    }
+        foreach ($this->users as $user) {
+            if (!in_array($user["username"], $emailRows)) {
+                $statement = $this->dbh->prepare($insertQuery);
+                $params = [":username" => $user["username"], ":realname" => $user["realname"]];
+                $success = $statement->execute($params);
+                if ($success) {
+                    $this->nrOfUsersCreated++;
                 }
             }
         }

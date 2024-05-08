@@ -7,7 +7,7 @@ namespace Hypermedia2\Vl10;
  * This class serves as a simple data source that is being used for the search suggest feature. Since this example does
  * not work with actual data, you can define the strings that are being queried here.
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @version 2023
+ * @version 2024
  */
 class SearchData
 {
@@ -29,7 +29,7 @@ class SearchData
             "Hagenberg",
             "Datenbanken",
             "Medientechnik und -design",
-            "MTD22",
+            "MTD23",
             "MTD",
             "PHP",
             "JavaScript",
