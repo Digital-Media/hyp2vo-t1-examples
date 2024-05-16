@@ -11,6 +11,9 @@ templates_c
 # PHPUnit Cache
 .phpunit.result.cache
 
+# Log files
+*.log
+
 # Windows image file caches
 Thumbs.db
 ehthumbs.db
