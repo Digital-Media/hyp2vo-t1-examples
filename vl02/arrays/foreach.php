@@ -11,7 +11,7 @@ foreach ($array1 as $value) {
 $array2 = [
     "eins" => 1,
     "zwei" => 2,
-    "drei" => 3
+    "drei" => 3,
 ];
 
 foreach ($array2 as $key => $value) {

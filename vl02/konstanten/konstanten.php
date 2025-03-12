@@ -19,7 +19,7 @@ if (defined("USERNAME")) {
 // const funktioniert nur am Top-Level
 if (!defined("FOO")) {
     define("FOO", "bar");
-    //const FOO = "bar"; -> Funktioniert hier nicht
+    // const FOO = "bar"; -> Funktioniert hier nicht
 }
 
 

@@ -15,4 +15,4 @@ $arr1 = [7, 4, 3]; // Stellen 0, 1, 2 sind belegt
 $arr1[7] = 14; // Landet an Stelle 7
 $arr1["test"] = 5; // Landet an Stelle "test"
 
-// Vorsicht: Hier werden nur Arrays definiert, aber nichts ausgegeben. Daher bleibt die Seite weiß.
+// Vorsicht: Hier werden nur Arrays definiert, aber nichts ausgegeben. Daher bleibt die Seite leer.
