@@ -1,6 +1,6 @@
 <?php
 
-include("vars.inc.php");
+include "vars.inc.php";
 echo $test;
 echo MESSAGE;
-echo include("return.inc.php");
+echo include "return.inc.php";

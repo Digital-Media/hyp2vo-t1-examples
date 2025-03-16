@@ -1,6 +1,6 @@
 <?php
 
-require("AbstractClass.php");
+require "AbstractClass.php";
 
 /**
  * Concrete implementation of the abstract base class. The "missing", abstract method is implemented here.

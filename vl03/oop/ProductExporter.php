@@ -1,6 +1,6 @@
 <?php
 
-require("ExportFormat.php");
+require "ExportFormat.php";
 
 /**
  * Product exporter class that uses an enum to define the export format.

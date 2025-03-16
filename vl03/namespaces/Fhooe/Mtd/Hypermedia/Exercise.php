@@ -8,5 +8,7 @@ namespace Fhooe\Mtd\Hypermedia;
  */
 class Exercise
 {
-    // ...
+    public function __construct() {
+        echo "Exercise class instantiated.";
+    }
 }

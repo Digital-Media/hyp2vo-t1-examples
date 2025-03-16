@@ -1,7 +1,5 @@
 <?php
 
-use Fhooe\Mtd\Hypermedia\Exercise;
-
 /**
  * Loads a class automatically based on the given namespace, if the directory structure maps the namespace.
  * @param $className string The name of the class to load (including namespace).
@@ -24,6 +22,3 @@ function autoload(string $className): void
 }
 
 spl_autoload_register("autoload");
-
-$lecture = new \Fhooe\Mtd\Hypermedia\Lecture();
-$exercise = new Exercise();

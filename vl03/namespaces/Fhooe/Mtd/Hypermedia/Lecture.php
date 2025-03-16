@@ -8,5 +8,7 @@ namespace Fhooe\Mtd\Hypermedia;
  */
 class Lecture
 {
-    // ...
+    public function __construct() {
+        echo "Lecture class instantiated.";
+    }
 }

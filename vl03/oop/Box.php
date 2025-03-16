@@ -1,6 +1,6 @@
 <?php
 
-require("Rectangle.php");
+require "Rectangle.php";
 
 /**
  * Implementation of a 3D box based on a 2D rectangle.

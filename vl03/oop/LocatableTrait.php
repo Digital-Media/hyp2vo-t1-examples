@@ -5,38 +5,31 @@
  */
 trait LocatableTrait
 {
-    private float $latitude;
-    private float $longitude;
-
     /**
-     * Sets a coordinate pair from latitude and longitude.
-     * @param array $pos The array with latitude (Pos. 0) and longitude (Pos. 1).
-     * @return void Returns nothing.
+     * @var float The latitude of the position.
      */
-    public function setPosition(array $pos): void
-    {
-        $this->latitude = $pos[0];
-        $this->longitude = $pos[1];
+    public float $latitude {
+        /** @return float */
+        get {
+            return $this->latitude;
+        }
+        /** @param float $value */
+        set (float $value) {
+            $this->latitude = $value;
+        }
     }
-
     /**
-     * Sets the latitude.
-     * @param float $lat The latitude.
-     * @return void Returns nothing.
+     * @var float The longitude of the position.
      */
-    public function setLatitude(float $lat): void
-    {
-        $this->latitude = $lat;
-    }
-
-    /**
-     * Sets the longitude.
-     * @param float $lon The longitude.
-     * @return void Returns nothing.
-     */
-    public function setLongitude(float $lon): void
-    {
-        $this->longitude = $lon;
+    public float $longitude {
+        /** @return float */
+        get {
+            return $this->longitude;
+        }
+        /** @param float $value */
+        set (float $value) {
+            $this->longitude = $value;
+        }
     }
 
     /**
@@ -49,20 +42,13 @@ trait LocatableTrait
     }
 
     /**
-     * Returns the latitude.
-     * @return float The latitude.
+     * Sets a coordinate pair from latitude and longitude.
+     * @param array $pos The array with latitude (Pos. 0) and longitude (Pos. 1).
+     * @return void Returns nothing.
      */
-    public function getLatitude(): float
+    public function setPosition(array $pos): void
     {
-        return $this->latitude;
-    }
-
-    /**
-     * Returns the longitude.
-     * @return float The longitude.
-     */
-    public function getLongitude(): float
-    {
-        return $this->longitude;
+        $this->latitude = $pos[0];
+        $this->longitude = $pos[1];
     }
 }

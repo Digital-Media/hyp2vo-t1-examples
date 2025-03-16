@@ -4,12 +4,17 @@ require "GeometricComponentInterface.php";
 
 /**
  * Generic implementation of a Rectangle with upper left and lower right corner and a color.
- * Modern version with property promotion and property hooks.
+ * Classic version without property promotion and property hooks.
  */
-class Rectangle implements GeometricComponentInterface
+class RectangleClassic implements GeometricComponentInterface
 {
     public static string $version = "1.0.0";
-    public const string TYPE = "Rectangle";
+    public const string TYPE = "RectangleClassic";
+    public int $x1 = 0;
+    public int $y1 = 0;
+    public int $x2 = 0;
+    public int $y2 = 0;
+    public private(set) string $color = "white";
 
     /**
      * Creates a new rectangle.
@@ -22,20 +27,18 @@ class Rectangle implements GeometricComponentInterface
      */
     public function __construct(
         public readonly int $id,
-        public int $x1 = 0 {
-            /**
-             * Returns the upper left x-position.
-             * @return int The upper left x-position.@return int
-             */
-            get {
-                return $this->x1;
-            }
-        },
-        public int $y1 = 0,
-        public int $x2 = 0,
-        public int $y2 = 0,
-        public private(set) string $color = "white",
-    ) {}
+        int $x1 = 0,
+        int $y1 = 0,
+        int $x2 = 0,
+        int $y2 = 0,
+        string $color = "white",
+    ) {
+        $this->color = $color;
+        $this->y2 = $y2;
+        $this->x2 = $x2;
+        $this->y1 = $y1;
+        $this->x1 = $x1;
+    }
 
     /**
      * Called, when the rectangle is destroyed.
@@ -56,6 +59,15 @@ class Rectangle implements GeometricComponentInterface
         $this->y1 += $dy;
         $this->x2 += $dx;
         $this->y2 += $dy;
+    }
+
+    /**
+     * Returns the upper left x-position.
+     * @return int The upper left x-position.@return int
+     */
+    public function getX1(): int
+    {
+        return $this->x1;
     }
 
     /**
@@ -101,18 +113,18 @@ $rect2 = new Rectangle(2, 45, 60, 110, 112, $green);
 $rect1->move(10, 10);
 
 // Output the static variable
-echo Rectangle::$version; // 1.0.0
+echo RectangleClassic::$version; // 1.0.0
 echo $rect1->getVersion(); // 1.0.0
 //echo $rect1->version; // NOTICE & WARNING!
 
 // Call static methods
-Rectangle::printVersion(); // 1.0.0
+RectangleClassic::printVersion(); // 1.0.0
 $rect1->printVersion(); // Works, but not necessary/recommended
 
 // Print out constants
-echo Rectangle::TYPE; // Rectangle
-echo $rect1->getType(); // Rectangle
-//echo $rect1->TYPE; // ERROR!
+echo RectangleClassic::TYPE; // RectangleClassic
+echo $rect1->getType(); // RectangleClassic
+//echo $rect1->TYPE; // FEHLER!
 
 // Trying to change a read-only property ($id) will cause an error
 //$rect1->id = 3; // ERROR!

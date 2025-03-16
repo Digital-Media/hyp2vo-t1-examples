@@ -16,8 +16,8 @@ final class NoInheritance
  */
 class CantOverrideEverything
 {
-    public const CAN_OVERRIDE = 1;
-    final public const CANNOT_OVERRIDE = 2;
+    public const int CAN_OVERRIDE = 1;
+    final public const int CANNOT_OVERRIDE = 2;
 
     public function canOverride(): void
     {
@@ -35,7 +35,7 @@ class CantOverrideEverything
  */
 class InheritParts extends CantOverrideEverything
 {
-    public const CAN_OVERRIDE = 3;
+    public const int CAN_OVERRIDE = 3;
 
     public function canOverride(): void
     {
