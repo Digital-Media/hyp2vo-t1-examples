@@ -6,7 +6,7 @@ $client = new GuzzleHttp\Client();
 
 $categoriesResponse = $client->request(
     "GET",
-    "https://api.chucknorris.io/jokes/categories"
+    "https://api.chucknorris.io/jokes/categories",
 );
 
 $categoriesBody = $categoriesResponse->getBody();
@@ -43,9 +43,9 @@ if (isset($_POST["category"]))
         "https://api.chucknorris.io/jokes/random",
         [
             "query" => [
-                "category" => $_POST["category"]
-            ]
-        ]
+                "category" => $_POST["category"],
+            ],
+        ],
     );
 
     $factBody = $factResponse->getBody();
@@ -53,6 +53,5 @@ if (isset($_POST["category"]))
   echo "<p>" . $fact->value . "</p>";
 }
 ?>
-
 </body>
 </html>

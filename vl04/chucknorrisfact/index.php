@@ -6,7 +6,7 @@ $client = new GuzzleHttp\Client();
 
 $categoriesResponse = $client->request(
     "GET",
-    "https://api.chucknorris.io/jokes/categories"
+    "https://api.chucknorris.io/jokes/categories",
 );
 
 $categoriesBody = $categoriesResponse->getBody();
@@ -22,8 +22,8 @@ $categories = json_decode($categoriesBody);
 <body>
 <h1>Get a Random Chuck Norris Fact</h1>
 <form action="<?= $_SERVER["SCRIPT_NAME"] ?>" method="post">
-    <label for="category_selector">Select a category for a fact:</label>
-    <select name="category" id="category_selector">
+    <label for="categorySelector">Select a category for a fact:</label>
+    <select name="category" id="categorySelector">
         <?php
         foreach ($categories as $category) {
             echo "<option value=\"$category\">$category</option>";
@@ -42,9 +42,9 @@ if (isset($_POST["category"])) {
         "https://api.chucknorris.io/jokes/random",
         [
             "query" => [
-                "category" => $_POST["category"]
-            ]
-        ]
+                "category" => $_POST["category"],
+            ],
+        ],
     );
 
     $factBody = $factResponse->getBody();
@@ -52,6 +52,5 @@ if (isset($_POST["category"])) {
     echo "<p>" . $fact->value . "</p>";
 }
 ?>
-
 </body>
 </html>
