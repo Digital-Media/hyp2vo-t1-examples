@@ -23,24 +23,43 @@ class Person
      * @param string $gender The person's gender.
      * @param int $age The person's age.
      */
-    public function __construct(public string $name, public string $gender, public int $age)
-    {
-    }
+    public function __construct(public string $name, public string $gender, public int $age) {}
 }
 
 $loader = new FilesystemLoader("templates");
-$twig = new Environment($loader, ["cache" => "cache", "auto_reload" => true]);
+$twig = new Environment($loader, [
+    "cache" => "cache",
+    "auto_reload" => true,
+]);
 
-$array = ["John Doe", "male", 25];
-$assocArray = ["name" => "Jane Doe", "details" => ["gender" => "female", "age" => 23]];
-$object = new Person("Jim Doe", "male", 3);
+$array = [
+    "John Doe",
+    "male",
+    25,
+];
+$assocArray = [
+    "name" => "Jane Doe",
+    "details" => [
+        "gender" => "female",
+        "age" => 23,
+    ],
+];
+$object = new Person(
+    "Jim Doe",
+    "male",
+    3,
+);
 
 try {
-    $twig->display("arrayexample.html.twig", ["data1" => $array, "data2" => $assocArray, "data3" => $object]);
-} catch (LoaderError $e) {
+    $twig->display("arrayexample.html.twig", [
+        "data1" => $array,
+        "data2" => $assocArray,
+        "data3" => $object,
+    ]);
+} catch (LoaderError) {
     // LoaderError Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
-} catch (RuntimeError $e) {
+} catch (RuntimeError) {
     // RuntimeError Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
-} catch (SyntaxError $e) {
+} catch (SyntaxError) {
     // SyntaxError Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
 }

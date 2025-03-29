@@ -1,7 +1,6 @@
 <?php
 
 global $router;
-
 ?>
 
 <!DOCTYPE html>

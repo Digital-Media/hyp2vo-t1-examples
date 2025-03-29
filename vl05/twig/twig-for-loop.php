@@ -11,16 +11,25 @@ use Twig\Loader\FilesystemLoader;
 require "vendor/autoload.php";
 
 $loader = new FilesystemLoader("templates");
-$twig = new Environment($loader, ["cache" => "cache", "auto_reload" => true]);
+$twig = new Environment($loader, [
+    "cache" => "cache",
+    "auto_reload" => true,
+]);
 
-$array = ["Red", "Green", "Blue"];
+$array = [
+    "Red",
+    "Green",
+    "Blue",
+];
 
 try {
-    $twig->display("for.html.twig", ["colors" => $array]);
-} catch (LoaderError $e) {
+    $twig->display("for.html.twig", [
+        "colors" => $array,
+    ]);
+} catch (LoaderError) {
     // LoaderError Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
-} catch (RuntimeError $e) {
+} catch (RuntimeError) {
     // RuntimeError Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
-} catch (SyntaxError $e) {
+} catch (SyntaxError) {
     // SyntaxError Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
 }

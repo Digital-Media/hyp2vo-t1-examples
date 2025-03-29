@@ -10,12 +10,12 @@ $path = $_SERVER["REQUEST_URI"];
 $basePath = "/hyp2vo-t1-examples/vl05/routing";
 
 // If we have a base path set we need to remove it now in order to only get the important path of the route
-if ($basePath) {
-    $path = str_replace($basePath, "", $path);
+if (!empty($basePath)) {
+    $path = substr($path, strlen($basePath));
 }
 
-// Our route consists of method and path
-$route = $method . " " . $path;
+// Our route consists of method and path, separated by a space
+$route = "$method $path";
 
 // Go through the routes and see if we defined one. If not, send back a 404 code with a message
 switch ($route) {

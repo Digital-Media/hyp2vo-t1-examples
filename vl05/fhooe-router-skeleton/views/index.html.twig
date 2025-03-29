@@ -14,7 +14,7 @@
 
     <div class="list-group">
         <a href="{{ url_for("/form") }}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
-            <svg class="bi-2 align-self-center">
+            <svg class="bi-2 align-self-center flex-shrink-0">
                 <use href="{{ get_base_path() }}/../views/images/bootstrap-icons.svg#input-cursor"></use>
             </svg>
             <div class="flex-fill">
@@ -23,7 +23,7 @@
             </div>
         </a>
         <a href="{{ url_for("/twigform") }}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
-            <svg class="bi-2 align-self-center">
+            <svg class="bi-2 align-self-center flex-shrink-0">
                 <use href="{{ get_base_path() }}/../views/images/bootstrap-icons.svg#input-cursor-text"></use>
             </svg>
             <div class="flex-fill">
@@ -32,8 +32,18 @@
                     via POST method.</p>
             </div>
         </a>
-        <a href="{{ url_for("/staticpage") }}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+        <a href="{{ url_for("/product/1") }}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
             <svg class="bi-2 align-self-center">
+                <use href="{{ get_base_path() }}/../views/images/bootstrap-icons.svg#box"></use>
+            </svg>
+            <div class="flex-fill">
+                <h6 class="mb-0">GET /product/{id}[/]</h6>
+                <p class="mb-0 opacity-75">A product detail page demonstrating the use of URL placeholders and optional
+                    parts.</p>
+            </div>
+        </a>
+        <a href="{{ url_for("/staticpage") }}" class="list-group-item list-group-item-action d-flex gap-3 py-3">
+            <svg class="bi-2 align-self-center flex-shrink-0">
                 <use href="{{ get_base_path() }}/../views/images/bootstrap-icons.svg#code-square"></use>
             </svg>
             <div class="flex-fill">
@@ -43,7 +53,7 @@
         </a>
         <a href="{{ url_for("/a/route/that/does/not/exist") }}"
            class="list-group-item list-group-item-action d-flex gap-3 py-3">
-            <svg class="bi-2 align-self-center">
+            <svg class="bi-2 align-self-center flex-shrink-0">
                 <use href="{{ get_base_path() }}/../views/images/bootstrap-icons.svg#exclamation-circle"></use>
             </svg>
             <div class="flex-fill">

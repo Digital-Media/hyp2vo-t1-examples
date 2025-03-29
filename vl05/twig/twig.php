@@ -13,11 +13,14 @@ require "vendor/autoload.php";
 $loader = new FilesystemLoader("templates");
 $twig = new Environment($loader, [
     "cache" => "cache",
-    "auto_reload" => true
+    "auto_reload" => true,
 ]);
 
 try {
-    $twig->display("message.html.twig", ["name" => "John Doe", "message" => "I'm back baby!"]);
+    $twig->display("message.html.twig", [
+        "name" => "John Doe",
+        "message" => "I'm back baby!",
+    ]);
 } catch (LoaderError $e) {
     // LoaderError Exception behandeln (z.B. auf eine Fehlerseite weiterleiten).
 } catch (RuntimeError $e) {

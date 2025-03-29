@@ -4,30 +4,32 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "97b7a90a7a81e3b4883a794de1767794",
+    "content-hash": "37f15e413e3e8557312487640abc8e76",
     "packages": [
         {
             "name": "fhooe/router",
-            "version": "v1.0.0",
+            "version": "v2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Digital-Media/fhooe-router.git",
-                "reference": "f267b61ba64297a040af91eb2b60094feab684f5"
+                "reference": "dceef0abf4cbc53fa8e4b3c21183c0b7e09a45b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Digital-Media/fhooe-router/zipball/f267b61ba64297a040af91eb2b60094feab684f5",
-                "reference": "f267b61ba64297a040af91eb2b60094feab684f5",
+                "url": "https://api.github.com/repos/Digital-Media/fhooe-router/zipball/dceef0abf4cbc53fa8e4b3c21183c0b7e09a45b4",
+                "reference": "dceef0abf4cbc53fa8e4b3c21183c0b7e09a45b4",
                 "shasum": ""
             },
             "require": {
                 "ext-mbstring": "*",
-                "php": "^8.3",
+                "php": "^8.4",
                 "psr/log": "^3.0"
             },
             "require-dev": {
-                "pestphp/pest": "^2.33",
-                "phpstan/phpstan": "^1.10"
+                "ergebnis/composer-normalize": "^2.45",
+                "mockery/mockery": "^1.6",
+                "pestphp/pest": "^3.7",
+                "phpstan/phpstan": "^2.1"
             },
             "type": "library",
             "autoload": {
@@ -54,9 +56,9 @@
             ],
             "support": {
                 "issues": "https://github.com/Digital-Media/fhooe-router/issues",
-                "source": "https://github.com/Digital-Media/fhooe-router/tree/v1.0.0"
+                "source": "https://github.com/Digital-Media/fhooe-router/tree/v2.0.0"
             },
-            "time": "2024-02-05T15:22:45+00:00"
+            "time": "2025-03-26T16:51:08+00:00"
         },
         {
             "name": "psr/log",
@@ -112,10 +114,10 @@
     "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": [],
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
-    "platform": [],
-    "platform-dev": [],
+    "platform": {},
+    "platform-dev": {},
     "plugin-api-version": "2.6.0"
 }

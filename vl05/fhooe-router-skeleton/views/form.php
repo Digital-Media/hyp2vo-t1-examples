@@ -32,6 +32,9 @@ $basePath = $router->getBasePath();
                 <a href="<?= $router->urlFor("/twigform") ?>" class="nav-link">Twig Form</a>
             </li>
             <li class="nav-item">
+                <a href="<?= $router->urlFor("/product/1") ?>" class="nav-link">Product Page</a>
+            </li>
+            <li class="nav-item">
                 <a href="<?= $router->urlFor("/staticpage") ?>" class="nav-link">Static HTML Page</a>
             </li>
             <li class="nav-item">
@@ -126,7 +129,10 @@ $basePath = $router->getBasePath();
                         <p>Lorem ipsum dolor sit amet.</p>
                     </blockquote>
                     <figcaption class="blockquote-footer">
-                        <?= htmlspecialchars($_POST["nameInput"], ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5) ?>
+                        <?= htmlspecialchars(
+                            is_string($_POST["nameInput"]) ? $_POST["nameInput"] : "",
+                            ENT_QUOTES | ENT_SUBSTITUTE | ENT_HTML5,
+                        ) ?>
                     </figcaption>
                 </figure>
             </div>
