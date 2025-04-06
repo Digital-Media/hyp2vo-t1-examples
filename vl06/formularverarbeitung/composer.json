@@ -1,5 +1,5 @@
 {
     "require": {
-        "ezyang/htmlpurifier": "^4.17"
+        "ezyang/htmlpurifier": "^4.18"
     }
 }

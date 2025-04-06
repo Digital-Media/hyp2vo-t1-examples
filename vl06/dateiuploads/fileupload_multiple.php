@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Datei-Uploads</title>
+    <title>Datei-Upload: Mehrere Dateien</title>
     <meta charset="utf-8">
 </head>
 <body>
@@ -10,7 +10,6 @@
     <input type="file" name="userfiles[]" multiple>
     <button type="submit">Hochladen</button>
 </form>
-
 <?php
 // Wenn Formular abgeschickt
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -26,6 +25,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
-
 </body>
 </html>

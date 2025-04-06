@@ -1,3 +1,8 @@
+<?php
+
+// Exclude deprecation notices (issues with siriusphp/upload and PHP 8.4)
+error_reporting(E_ALL & ~E_DEPRECATED);
+?>
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -10,7 +15,6 @@
     <input type="file" name="userfile">
     <button type="submit">Hochladen</button>
 </form>
-
 <?php
 // Wenn Formular abgeschickt
 if ($_SERVER["REQUEST_METHOD"] === "POST") {

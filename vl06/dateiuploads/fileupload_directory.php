@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="de">
 <head>
-    <title>Datei-Uploads</title>
+    <title>Datei-Upload: Verzeichnisse</title>
     <meta charset="utf-8">
 </head>
 <body>
@@ -10,7 +10,6 @@
     <input type="file" name="userfiles[]" webkitdirectory multiple>
     <button type="submit">Hochladen</button>
 </form>
-
 <?php
 // Wenn Formular abgeschickt
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
@@ -24,7 +23,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
             if (!is_dir($directoryPath)) {
                 // Wenn nicht, Verzeichnis rekursiv erstellen
                 if (!mkdir($directoryPath, 0777, true)) {
-                    echo "<p>Fehler beim Erstellen des Verzeichnisses für " . htmlspecialchars($_FILES["userfiles"]["full_path"][$i]) . "</p>";
+                    echo "<p>Fehler beim Erstellen des Verzeichnisses für " . htmlspecialchars(
+                            $_FILES["userfiles"]["full_path"][$i]
+                        ) . "</p>";
                     continue; // Abbruch, falls ein Fehler passiert ist
                 }
             }
@@ -38,6 +39,5 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
     }
 }
 ?>
-
 </body>
 </html>

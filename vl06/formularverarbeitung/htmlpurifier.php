@@ -4,9 +4,7 @@ require "vendor/autoload.php";
 
 $config = HTMLPurifier_Config::createDefault();
 $purifier = new HTMLPurifier($config);
-
 ?>
-
 <!DOCTYPE html>
 <html lang="de">
 <head>
@@ -14,7 +12,6 @@ $purifier = new HTMLPurifier($config);
     <meta charset="utf-8">
 </head>
 <body>
-
 <form method="post" action="<?= $_SERVER["SCRIPT_NAME"] ?>">
     <label for="datenlabel">Eingabe:</label>
     <input type="text" name="daten" id="datenlabel">
@@ -22,10 +19,9 @@ $purifier = new HTMLPurifier($config);
 </form>
 <ul>
     <li>HTML wird generell erlaubt.</li>
-    <li>Schadhaftes HTML (&lt;script&gt; Tags) wird gefiltert.</li>
+    <li>Schädliches HTML (&lt;script&gt;-Tags) wird gefiltert.</li>
     <li>Fehlerhaftes HTML wird korrigiert.</li>
 </ul>
-
 <?php
 if (isset($_POST["daten"])) {
     $datenBereinigt = $purifier->purify($_POST["daten"]);
