@@ -9,8 +9,10 @@ use LoginExample\CreateDB;
 use LoginExample\Login;
 use LoginExample\PasswordHash;
 use LoginExample\RouteGuard;
+use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Monolog\Processor\PsrLogMessageProcessor;
 use Twig\Environment;
 use Twig\Extension\DebugExtension;
 use Twig\Loader\FilesystemLoader;
@@ -20,18 +22,33 @@ require "../vendor/autoload.php";
 /**
  * When working with sessions, start them here.
  */
-session_start();
+session_start([
+    // send cookie only over HTTPS (localhost is considered secure by browsers, so it works too)
+    "cookie_secure" => true,
+    // cookie can only be accessed over HTTP(S), not via local scripting languages
+    "cookie_httponly" => true,
+    // limit the cookie to the same site only
+    "cookie_samesite" => "Strict",
+]);
 
 /**
  * Instantiated Router invocation. Create an object, define the routes and run it.
  */
-// Create a new Router object.
-$router = new Router();
-
-// Create a monolog instance for logging in the skeleton. Pass it to the router to receive its log messages too.
+// Create a monolog instance for logging in the skeleton.
 $logger = new Logger("skeleton-logger");
-$logger->pushHandler(new StreamHandler(__DIR__ . "/../logs/router.log"));
-$router->setLogger($logger);
+$logger->pushProcessor(new PsrLogMessageProcessor());
+$formatter = new LineFormatter(
+    "[%datetime%] %channel%.%level_name%: %message%\n",
+    "d.m.Y H:i:s T",
+    true,
+    true,
+);
+$handler = new StreamHandler(__DIR__ . "/../logs/router.log");
+$handler->setFormatter($formatter);
+$logger->pushHandler($handler);
+
+// Create a new Router object with the logger.
+$router = new Router($logger);
 
 // Create a new Twig instance for advanced templates.
 $twig = new Environment(
@@ -39,8 +56,8 @@ $twig = new Environment(
     [
         "cache" => "../cache",
         "auto_reload" => true,
-        "debug" => true
-    ]
+        "debug" => true,
+    ],
 );
 
 // Add the router extension to Twig. This makes the url_for() and get_base_path() functions available in templates.
@@ -63,7 +80,7 @@ $router->get("/", function () use ($twig) {
 });
 
 $router->get("/login", function () use ($twig, $router) {
-    RouteGuard::requireNotLoggedIn($router, "/main");
+    RouteGuard::requireNotLoggedIn("loginToken", $router, "/main");
     $twig->display("login.html.twig");
 });
 
@@ -74,7 +91,7 @@ $router->post("/login", function () use ($twig, $router) {
 });
 
 $router->get("/main", function () use ($twig, $router) {
-    RouteGuard::requireLoggedIn($router, "/login");
+    RouteGuard::requireLoggedIn("loginToken", $router, "/login");
     $twig->display("main.html.twig");
 });
 

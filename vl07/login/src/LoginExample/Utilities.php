@@ -2,13 +2,15 @@
 
 namespace LoginExample;
 
+use Random\RandomException;
+
 /**
  * Offers static helper methods for often used tasks.
  * This class offers methods for sanitizing form input, checks for valid e-mail addresses, phone numbers and other kinds
  * of data. This code can be used in different classes.
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @version 2024
+ * @version 2025
  */
 class Utilities
 {
@@ -89,8 +91,9 @@ class Utilities
 
     /**-+
      * Performs a white listing of the supplied characters and checks for minimum and maximum length. White spaces are
-     * excluded, therefore only one search term can be entered. This is tailored for DAB, where LIKE is employed instead
-     * of a full text search. Production environment will more likely use ElasticSearch or Google crawler.
+     * excluded, therefore only one search term can be entered. This is tailored for database exercises, where LIKE is
+     * employed instead of a full text search. Production environment will more likely use ElasticSearch or Google
+     * crawler.
      * @param string $string The input string that is to be checked.
      * @param int $min The string's minimum length. Default value is 0.
      * @param int $max The string's maximum length. Default value is 50.
@@ -106,17 +109,17 @@ class Utilities
     /**
      * Checks if a given string is a valid password. Only certain characters are allowed, a minimum and maximum length
      * is enforced.
-     * Use it like this: Utilities::isPassword("mySecurePassword", 12, 50).
+     * Use it like this: $this->isPassword("mySecurePassword") or Utilities::isPassword("mySecurePassword").
      * @param string $string The input string that is to be checked.
      * @param int $min The password's minimum length.
-     * @param int $max The password's maximum length.
+     * @param int|null $max The password's maximum length. Can be optional (null).
      * @return bool Returns true if the string is a valid password, otherwise false.
      */
-    public static function isPassword(string $string, int $min, int $max): bool
+    public static function isPassword(string $string, int $min = 8, ?int $max = null): bool
     {
-        $passwordPattern = "/^[a-zA-Z0-9_]{" . $min . "," . $max . "}$/";
+        $regex = "/^[a-zA-Z0-9_!@#$%^&*(),.?:{}|<>-]{" . $min . "," . ($max !== null ? $max : "") . "}$/";
 
-        return preg_match($passwordPattern, $string) === 1;
+        return preg_match($regex, $string) === 1;
     }
 
     /**
@@ -152,18 +155,19 @@ class Utilities
             "Ü" => "Ue",
             "\x55\xcc\x88" => "Ue",
             "ß" => "ss",
-            " " => "_"
+            " " => "_",
         ];
         return strtr($string, $charReplace);
     }
 
     /**
-     * Generates a 128 character hash value using the SHA-512 algorithm. The user's IP address as well as the user agent
-     * string are hashed. This hash can then be stored in the $_SESSION array to act as a token for a logged-in user.
-     * @return string The login hash value.
+     * Generates a cryptographically secure random token for login purposes. It is meant to be stored in the session and
+     * used to identify if someone is logged in.
+     * @return string The login token.
+     * @throws RandomException
      */
-    public static function generateLoginHash(): string
+    public static function generateLoginToken(): string
     {
-        return hash("sha512", $_SERVER["REMOTE_ADDR"] . $_SERVER["HTTP_USER_AGENT"]);
+        return bin2hex(random_bytes(32));
     }
 }

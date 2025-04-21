@@ -13,7 +13,7 @@ if (isset($_COOKIE["username"])) {
 <body>
 <?php
 if (isset($_COOKIE["username"])) {
-    echo "<p>Cookie vorhanden. Lösche...</p>";
+    echo "<p>Cookie vorhanden. Lösche&nbsp;…</p>";
     unset($_COOKIE["username"]);
 } else {
     echo "<p>Kein Cookie vorhanden!</p>";

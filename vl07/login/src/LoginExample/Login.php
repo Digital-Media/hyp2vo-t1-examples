@@ -4,6 +4,7 @@ namespace LoginExample;
 
 use Fhooe\Router\Router;
 use PDO;
+use Random\RandomException;
 use Twig\Environment;
 use Twig\Error\LoaderError;
 use Twig\Error\RuntimeError;
@@ -16,14 +17,14 @@ use Twig\Error\SyntaxError;
  * accessing the page
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @version 2024
+ * @version 2025
  */
 final class Login
 {
     /**
-     * @var PDO The PDO object.
+     * @var PDO The PDO object for database access.
      */
-    private PDO $dbh;
+    private PDO $pdo;
 
     /**
      * @var array<string, string> This array is used to store error and status messages
@@ -42,7 +43,7 @@ final class Login
     private Router $router;
 
     /**
-     * Creates a new Login object. It takes a Twig Environment object that is used to display a response (output).
+     * Creates a new Login object. It takes a Twig Environment object used to display a response (output).
      * The constructor needs to initialize the database for reading and updating user information.
      * @param Environment $twig The Twig object for displaying a response.
      * @param Router $router The Router object for redirecting the user to the main page after a successful login.
@@ -60,18 +61,19 @@ final class Login
      */
     private function initDB(): void
     {
-        $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
-        $dsn = "mysql:host=db;port=3306;dbname=login_example";
-        $mysqlUser = "hypermedia";
-        $mysqlPwd = "geheim";
+        $host = "db";
+        $port = 3306;
+        $database = "login_example";
+        $dsn = "mysql:host=$host;port=$port;dbname=$database";
+        $username = "hypermedia";
+        $password = "geheim";
         $options = [
-            PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-            PDO::MYSQL_ATTR_INIT_COMMAND => $charsetAttr,
-            PDO::MYSQL_ATTR_MULTI_STATEMENTS => false
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ];
-        $this->dbh = new PDO($dsn, $mysqlUser, $mysqlPwd, $options);
+        $this->pdo = new PDO($dsn, $username, $password, $options);
     }
 
     /**
@@ -79,6 +81,7 @@ final class Login
      * If no errors are found, the method business() is invoked which continues the login process and forwards the
      * logged-in user to the protected content.
      * @return void Returns nothing.
+     * @throws RandomException Thrown when the login token cannot be generated.
      */
     public function isValid(): void
     {
@@ -102,16 +105,17 @@ final class Login
 
     /**
      * This method is only called when the form input was validated successfully.
-     * It stores the e-mail address in the session for further use (e.g. in the template) and a hash value to identify a
-     * successful login.
+     * It stores the e-mail address in the session for further use (e.g., in the template) and a login token to identify
+     * a successful login.
      * It then forwards to the protected main page.
      * @return void Returns nothing.
+     * @throws RandomException Thrown when the login token cannot be generated.
      */
     protected function business(): void
     {
         $_SESSION["email"] = $_POST["email"];
 
-        $_SESSION["isLoggedIn"] = Utilities::generateLoginHash();
+        $_SESSION["loginToken"] = Utilities::generateLoginToken();
 
         $this->router->redirectTo("/main");
     }
@@ -119,24 +123,23 @@ final class Login
     /**
      * Authenticates a user by matching the entered e-mail address (username) and password with the stored records.
      * If the username is present and the entered password matches the stored password, a valid login is assumed and
-     * stored in $_SESSION. After a successful login, the current password encryption is checked and if necessary, a
+     * stored in $_SESSION. After a successful login, the current password encryption is checked, and if necessary, a
      * rehash is performed and the updated password is stored in the database.
      * @return bool Returns true if the combination of username and password is valid, otherwise false.
      */
     private function authenticateUser(): bool
     {
-        $query = "SELECT iduser, email, password FROM user WHERE email = :email";
+        $query = "SELECT user_id, email, password FROM user WHERE email = :email";
         $params = [":email" => $_POST["email"]];
-        $rows = [];
 
-        $statement = $this->dbh->prepare($query);
+        $statement = $this->pdo->prepare($query);
         $statement->execute($params);
-        $rows = $statement->fetchAll();
+        $row = $statement->fetch();
 
-        if (count($rows) === 1 && password_verify($_POST["password"], $rows[0]->password)) {
-            if (password_needs_rehash($rows[0]->password, PASSWORD_DEFAULT)) {
+        if ($row && password_verify($_POST["password"], $row["password"])) {
+            if (password_needs_rehash($row["password"], PASSWORD_DEFAULT)) {
                 $password = password_hash($_POST["password"], PASSWORD_DEFAULT);
-                $this->updateUser($rows[0]->iduser, $password);
+                $this->updateUser($row["user_id"], $password);
             }
             return true;
         }
@@ -145,15 +148,15 @@ final class Login
 
     /**
      * Replaces a user's password with a new one if an outdated hashing algorithm has been detected.
-     * @param string $iduser The user ID.
+     * @param string $userID The user ID.
      * @param string $password The new password.
      * @return void Returns nothing.
      */
-    private function updateUser(string $iduser, string $password): void
+    private function updateUser(string $userID, string $password): void
     {
-        $query = "UPDATE user SET password = :password WHERE iduser = :iduser";
-        $params = [':password' => $password, ':iduser' => $iduser];
-        $statement = $this->dbh->prepare($query);
+        $query = "UPDATE user SET password = :password WHERE user_id = :user_id";
+        $params = [':password' => $password, ':user_id' => $userID];
+        $statement = $this->pdo->prepare($query);
         $statement->execute($params);
     }
 
@@ -167,7 +170,7 @@ final class Login
     {
         $this->twig->display("login.html.twig", [
             "email" => $_POST["email"],
-            "messages" => $this->messages
+            "messages" => $this->messages,
         ]);
     }
 }

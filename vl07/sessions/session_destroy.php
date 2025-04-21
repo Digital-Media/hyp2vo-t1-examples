@@ -15,14 +15,13 @@ if (isset($_COOKIE[session_name()])) {
             "domain" => $params["domain"],
             "secure" => $params["secure"],
             "httponly" => $params["httponly"],
-            "samesite" => $params["samesite"]
-        ]
+            "samesite" => $params["samesite"],
+        ],
     );
 }
 
 session_destroy();
 ?>
-
 <!DOCTYPE html>
 <html lang="de">
 <head>

@@ -12,7 +12,7 @@ session_start(["cookie_lifetime" => 3600]);
 <body>
 <?php
 $params = session_get_cookie_params();
-echo "<p>Cookie Lifetime: " . $params["lifetime"] . "</p>";
+echo "<p>Cookie Lifetime: {$params["lifetime"]}</p>";
 ?>
 </body>
 </html>

@@ -13,14 +13,14 @@ use Twig\Error\SyntaxError;
  * Creates the database, table and user entries for this example to work.
  * @package LoginExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @version 2024
+ * @version 2025
  */
 class CreateDB
 {
     /**
      * @var PDO The PDO object.
      */
-    private PDO $dbh;
+    private PDO $pdo;
 
     /**
      * @var Environment Provides a Twig object to display HTML templates.
@@ -57,12 +57,12 @@ class CreateDB
         $this->users = [
             [
                 "email" => "user1@email.com",
-                "password" => "geheim"
+                "password" => "geheim",
             ],
             [
                 "email" => "user2@email.com",
-                "password" => "geheim"
-            ]
+                "password" => "geheim",
+            ],
         ];
 
         $this->twig = $twig;
@@ -80,18 +80,18 @@ class CreateDB
      */
     private function initDB(): void
     {
-        $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
-        $dsn = "mysql:host=db;port=3306";
-        $mysqlUser = "hypermedia";
-        $mysqlPwd = "geheim";
+        $host = "db";
+        $port = 3306;
+        $dsn = "mysql:host=$host;port=$port";
+        $username = "hypermedia";
+        $password = "geheim";
         $options = [
-            PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-            PDO::MYSQL_ATTR_INIT_COMMAND => $charsetAttr,
-            PDO::MYSQL_ATTR_MULTI_STATEMENTS => false
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ];
-        $this->dbh = new PDO($dsn, $mysqlUser, $mysqlPwd, $options);
+        $this->pdo = new PDO($dsn, $username, $password, $options);
     }
 
     /**
@@ -100,7 +100,7 @@ class CreateDB
      */
     public function createSchema(): void
     {
-        $rowsAffected = $this->dbh->exec("CREATE SCHEMA IF NOT EXISTS login_example DEFAULT CHARACTER SET utf8;");
+        $rowsAffected = $this->pdo->exec("CREATE SCHEMA IF NOT EXISTS login_example DEFAULT CHARACTER SET utf8;");
 
         if ($rowsAffected > 0) {
             $this->schemaCreated = true;
@@ -114,15 +114,15 @@ class CreateDB
      */
     public function createTable(): void
     {
-        $query = "CREATE TABLE login_example.user (iduser BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
+        $query = "CREATE TABLE login_example.user (user_id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
                                                    email VARCHAR(255) NOT NULL,
                                                    password VARCHAR(255) NOT NULL,
-                                                   PRIMARY KEY (iduser)) ENGINE = InnoDB";
+                                                   PRIMARY KEY (user_id)) ENGINE = InnoDB";
         try {
-            $this->dbh->exec($query);
+            $this->pdo->exec($query);
             $this->tableCreated = true;
         } catch (PDOException $exception) {
-            // If there's an exception the table was already created. Do nothing.
+            // If there's an exception, the table was already created. Do nothing.
         }
     }
 
@@ -137,15 +137,15 @@ class CreateDB
         $checkQuery = "SELECT email FROM login_example.user";
         $insertQuery = "INSERT INTO login_example.user SET email = :email, password = :password";
 
-        $checkStatement = $this->dbh->query($checkQuery);
+        $checkStatement = $this->pdo->query($checkQuery);
         $emailRows = $checkStatement->fetchAll(PDO::FETCH_COLUMN);
 
         foreach ($this->users as $user) {
             if (!in_array($user["email"], $emailRows)) {
-                $statement = $this->dbh->prepare($insertQuery);
+                $statement = $this->pdo->prepare($insertQuery);
                 $params = [
                     ":email" => $user["email"],
-                    ":password" => password_hash($user["password"], PASSWORD_DEFAULT)
+                    ":password" => password_hash($user["password"], PASSWORD_DEFAULT),
                 ];
                 $success = $statement->execute($params);
                 if ($success) {
@@ -167,7 +167,7 @@ class CreateDB
         $this->twig->display("createdb.html.twig", [
             "schemaCreated" => $this->schemaCreated ? "Yes" : "No",
             "tableCreated" => $this->tableCreated ? "Yes" : "No",
-            "nrOfUsersCreated" => $this->nrOfUsersCreated
+            "nrOfUsersCreated" => $this->nrOfUsersCreated,
         ]);
     }
 }
