@@ -1,6 +1,6 @@
 <?php
 
-$d = new DateTime("2024-04-29T10:30:00+02:00");
+$d = new DateTime("2025-04-24T14:40:00+02:00");
 
 $twoWeeks = new DateInterval("P2W");
 $oneDay5Hours3Mins10Secs = new DateInterval("P1DT5H3M10S");

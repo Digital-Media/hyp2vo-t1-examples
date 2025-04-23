@@ -22,8 +22,8 @@ $twig = new Environment(
     new FilesystemLoader("templates"),
     [
         "cache" => "cache",
-        "auto_reload" => true
-    ]
+        "auto_reload" => true,
+    ],
 );
 
 $twig->addExtension(new TranslationExtension($translator));

@@ -28,7 +28,7 @@ $patternSelect = "{gender,select,
     female {Sie}
     other {They}
     }";
-    
+
 $mfComplex = new MessageFormatter("de-AT", $patternPlural);
 echo $mfComplex->format(["nr" => 5]) . "<br>";
 

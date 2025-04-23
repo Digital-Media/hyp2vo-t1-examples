@@ -9,6 +9,6 @@ $messages = [
     "messages" => [
         "zero" => "You have no messages.",
         "one" => "You have one message.",
-        "other" => "You have %d messages."
-    ]
+        "other" => "You have %d messages.",
+    ],
 ];

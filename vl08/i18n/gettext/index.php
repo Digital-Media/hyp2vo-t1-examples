@@ -12,9 +12,7 @@ $domain = "messages";
 bindtextdomain($domain, __DIR__ . "/locale");
 textdomain($domain);
 bind_textdomain_codeset($domain, "UTF-8");
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

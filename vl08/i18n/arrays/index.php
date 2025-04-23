@@ -6,9 +6,7 @@ if (isset($_GET["locale"])) {
 }
 
 require __DIR__ . "/locale/$locale.php";
-
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -28,7 +26,7 @@ require __DIR__ . "/locale/$locale.php";
     <button type="submit"><?= $messages["sendButton"] ?></button>
 </form>
 <?php
-echo "<p>" . $messages["welcome"] . "</p>";
+echo "<p>{$messages["welcome"]}</p>";
 
 if (isset($_GET["nrOfMessages"])) {
     $nrOfMessages = $_GET["nrOfMessages"];

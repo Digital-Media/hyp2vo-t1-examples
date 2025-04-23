@@ -1,5 +1,8 @@
 <?php
 
+// Exclude deprecation notices (issues with symfony/translator and PHP 8.4)
+error_reporting(E_ALL & ~E_DEPRECATED);
+
 use Symfony\Component\Translation\Loader\JsonFileLoader;
 use Symfony\Component\Translation\Translator;
 
@@ -15,7 +18,6 @@ $translator->addLoader("json", new JsonFileLoader());
 $translator->addResource("json", "translations/messages.de.json", "de-AT");
 $translator->addResource("json", "translations/messages.en.json", "en-US");
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -36,7 +38,7 @@ $translator->addResource("json", "translations/messages.en.json", "en-US");
 </form>
 <?php
 
-echo "<p>" . $translator->trans("welcome") . "</p>";
+echo "<p>{$translator->trans("welcome")}</p>";
 
 if (isset($_GET["nrOfMessages"])) {
     $nrOfMessages = $_GET["nrOfMessages"];

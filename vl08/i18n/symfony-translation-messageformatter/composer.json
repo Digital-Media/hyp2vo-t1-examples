@@ -1,6 +1,6 @@
 {
     "require": {
-        "symfony/yaml": "^7.0",
-        "symfony/translation": "^7.0"
+        "symfony/yaml": "^7.2",
+        "symfony/translation": "^7.2"
     }
 }
