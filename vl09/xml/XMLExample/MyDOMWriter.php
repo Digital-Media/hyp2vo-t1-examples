@@ -1,23 +1,22 @@
 <?php
 
-namespace Hypermedia2\Vl09;
+namespace XMLExample;
 
-use DOMDocument;
-use DOMException;
+use Dom\XMLDocument;
 
 /**
  * Creates a new XML file based on the data passed to the constructor using DOM.
  * @package Hypermedia2\Vl09
  */
-class XMLDomWriter
+class MyDOMWriter
 {
-    // Writer related properties
+    // Writer-related properties
 
     /**
      * The DOM instance.
-     * @var DOMDocument
+     * @var XMLDocument
      */
-    private DOMDocument $dom;
+    private XMLDocument $dom;
 
     // Document data properties
 
@@ -33,7 +32,7 @@ class XMLDomWriter
      */
     public function __construct(array $shows)
     {
-        $this->dom = new DOMDocument("1.0", "UTF-8");
+        $this->dom = XMLDocument::createEmpty("1.0", "UTF-8");
         $this->dom->formatOutput = true;
         $this->shows = $shows;
     }
@@ -41,7 +40,6 @@ class XMLDomWriter
     /**
      * Creates a new XML file based on the $shows property and writes it to a file.
      * @param string $file The XML file name.
-     * @throws DOMException Throws a DOMException when an error occurs.
      */
     public function generateXML(string $file): void
     {
@@ -50,10 +48,12 @@ class XMLDomWriter
         foreach ($this->shows as $show) {
             $showElem = $shows->appendChild($this->dom->createElement("show"));
             foreach ($show as $tag => $data) {
-                $showElem->appendChild($this->dom->createElement($tag, htmlentities($data)));
+                $showData = $this->dom->createElement($tag);
+                $showData->textContent = $data;
+                $showElem->appendChild($showData);
             }
         }
 
-        $this->dom->save($file);
+        $this->dom->saveXmlFile($file);
     }
 }

@@ -41,7 +41,7 @@ imagearc(
     $maxLength - 2,
     0,
     360,
-    $blue
+    $blue,
 );
 
 // Hour markers
@@ -53,7 +53,7 @@ for ($i = 0; $i < 360; $i = $i + 30) {
         intval($originY + (($radius - $marker) * sin($degrees))),
         intval($originX + ($radius * cos($degrees))),
         intval($originY + ($radius * sin($degrees))),
-        $red
+        $red,
     );
 }
 
@@ -64,7 +64,7 @@ imageline(
     $originY,
     intval($originX + ($hourSegment * cos($hourAngle))),
     intval($originY + ($hourSegment * sin($hourAngle))),
-    $black
+    $black,
 );
 
 // Minute hand
@@ -74,12 +74,26 @@ imageline(
     $originY,
     intval($originX + ($minuteSegment * cos($minuteAngle))),
     intval($originY + ($minuteSegment * sin($minuteAngle))),
-    $black
+    $black,
 );
 
 // Center dot
-imagearc($image, $originX, $originY, 6, 6, 0, 360, $red);
-imagefill($image, $originX + 1, $originY + 1, $red);
+imagearc(
+    $image,
+    $originX,
+    $originY,
+    6,
+    6,
+    0,
+    360,
+    $red,
+);
+imagefill(
+    $image,
+    $originX + 1,
+    $originY + 1,
+    $red,
+);
 
 // Draw image
 header("Content-type: image/png");

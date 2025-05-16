@@ -1,8 +1,7 @@
 <?php
 
 // Create image
-$width = $height = 300;
-$image = imagecreatetruecolor($width, $height);
+$image = imagecreatetruecolor(300, 300);
 
 // Display image
 imagepng($image, "emptyimage.png");

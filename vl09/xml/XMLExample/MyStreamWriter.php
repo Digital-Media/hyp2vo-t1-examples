@@ -1,6 +1,6 @@
 <?php
 
-namespace Hypermedia2\Vl09;
+namespace XMLExample;
 
 use XMLWriter;
 
@@ -8,9 +8,9 @@ use XMLWriter;
  * Creates a new XML file based on the data passed to the constructor using XMLWriter.
  * @package Hypermedia2\Vl09
  */
-class XMLWriterWriter
+class MyStreamWriter
 {
-    // Writer related properties
+    // Writer-related properties
 
     /**
      * The XMLWriter instance.

@@ -1,16 +1,16 @@
 <?php
 
-namespace Hypermedia2\Vl09;
+namespace XMLExample;
 
 use XMLReader;
 
 /**
  * Creates a new pull parser based on XMLReader and parses the XML Tirolerknödel recipe.
- * @package Hypermedia2\Vl09
+ * @package XMLExample
  */
-class XMLPullParser
+class MyPullParser
 {
-    // Parser related properties
+    // Parser-related properties
 
     /**
      * The XML event parser instance.
@@ -18,31 +18,31 @@ class XMLPullParser
      */
     private XMLReader $parser;
 
-    // Document related properties
+    // Document-related properties
 
     /**
-     * The URL source of the recipe.
+     * The URL source of the recipe. This uses asymmetric access that is public for reading and private for writing.
      * @var string
      */
-    private string $source;
+    private(set) string $source = "";
 
     /**
-     * The name of the current dish.
+     * The name of the current dish. This uses asymmetric access that is public for reading and private for writing.
      * @var string
      */
-    private string $dish;
+    private(set) string $dish = "";
 
     /**
-     * The list of ingredients.
+     * The list of ingredients. This uses asymmetric access that is public for reading and private for writing.
      * @var array
      */
-    private array $ingredients;
+    private(set) array $ingredients = [];
 
     /**
-     * The list of preparation steps.
+     * The list of preparation steps. This uses asymmetric access that is public for reading and private for writing.
      * @var array
      */
-    private array $steps;
+    private(set) array $steps = [];
 
     /**
      * Creates a new parser instance and initializes properties.
@@ -50,8 +50,6 @@ class XMLPullParser
     public function __construct()
     {
         $this->parser = new XMLReader();
-        $this->ingredients = [];
-        $this->steps = [];
     }
 
     /**
@@ -85,8 +83,8 @@ class XMLPullParser
                     case "ingredienz":
                     case "menge":
                     case "einheit":
-                        $this->ingredients[count($this->ingredients) - 1][$this->parser->name] = trim(
-                            $this->parser->readString()
+                        $this->ingredients[array_key_last($this->ingredients)][$this->parser->name] = trim(
+                            $this->parser->readString(),
                         );
                         break;
                     case "schritt":
@@ -95,41 +93,5 @@ class XMLPullParser
                 }
             }
         }
-    }
-
-    /**
-     * Returns the source URL once it's been parsed.
-     * @return string The source URL.
-     */
-    public function getSource(): string
-    {
-        return $this->source;
-    }
-
-    /**
-     * Returns the dish once it's been parsed.
-     * @return string The name of the dish.
-     */
-    public function getDish(): string
-    {
-        return $this->dish;
-    }
-
-    /**
-     * Returns the list of ingredients once they've been parsed.
-     * @return array The list of ingredients.
-     */
-    public function getIngredients(): array
-    {
-        return $this->ingredients;
-    }
-
-    /**
-     * Returns the list of preparation steps once they've been parsed.
-     * @return array The list of preparation steps.
-     */
-    public function getSteps(): array
-    {
-        return $this->steps;
     }
 }

@@ -9,7 +9,7 @@ $pdf = new TCPDF(
     "A4",
     true,
     "UTF-8",
-    false
+    false,
 );
 
 # Dokumenteninformationen (Meta-Daten)
@@ -55,10 +55,10 @@ $pdf->Write(0, "Mein erstes PDF mit TCPDF!", "", 0, "L");
 $pdf->Ln(24.0);
 
 $html = <<<TEXT
-<h2>Ein kleines HTML-Fragment</h2>
-<p>Hier steht ein weiterer Satz.</p>
-<p>Auch <a href="https://www.fh-ooe.at/">Links</a> funktionieren.</p>
-TEXT;
+    <h2>Ein kleines HTML-Fragment</h2>
+    <p>Hier steht ein weiterer Satz.</p>
+    <p>Auch <a href="https://www.fh-ooe.at/">Links</a> funktionieren.</p>
+    TEXT;
 // HTML-Fragment ausgeben
 $pdf->writeHTML($html);
 
