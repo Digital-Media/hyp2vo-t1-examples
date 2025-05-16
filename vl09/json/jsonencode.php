@@ -1,8 +1,8 @@
 <?php
 
-require "Hypermedia2/Vl09/Person.php";
+require "JSONExample/Person.php";
 
-use Hypermedia2\Vl09\Person;
+use JSONExample\Person;
 
 $array = ["Good", "Bad", "Ugly"];
 

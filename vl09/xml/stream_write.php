@@ -1,8 +1,8 @@
 <?php
 
-require "Hypermedia2/Vl09/XMLWriterWriter.php";
+require "XMLExample/MyStreamWriter.php";
 
-use Hypermedia2\Vl09\XMLWriterWriter;
+use XMLExample\MyStreamWriter;
 
 $shows = [
     [
@@ -19,5 +19,5 @@ $shows = [
     ]
 ];
 
-$xmlWriter = new XMLWriterWriter($shows);
+$xmlWriter = new MyStreamWriter($shows);
 $xmlWriter->generateXML("xmlwriter_shows.xml");

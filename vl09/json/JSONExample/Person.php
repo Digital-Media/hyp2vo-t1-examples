@@ -1,6 +1,6 @@
 <?php
 
-namespace Hypermedia2\Vl09;
+namespace JSONExample;
 
 /**
  * A simple person class to demonstrate JSON functionalities.

@@ -1,6 +1,6 @@
 <?php
 
-namespace Hypermedia2\Vl09;
+namespace XMLExample;
 
 use DOMDocument;
 use DOMException;
@@ -9,7 +9,7 @@ use DOMException;
  * Creates a new XML file based on the data passed to the constructor using DOM.
  * @package Hypermedia2\Vl09
  */
-class XMLDomWriter
+class MyDOMWriter
 {
     // Writer related properties
 

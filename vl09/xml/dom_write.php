@@ -1,8 +1,8 @@
 <?php
 
-require "Hypermedia2/Vl09/XMLDomWriter.php";
+require "XMLExample/MyDOMWriter.php";
 
-use Hypermedia2\Vl09\XMLDomWriter;
+use XMLExample\MyDOMWriter;
 
 $shows = [
     [
@@ -19,7 +19,7 @@ $shows = [
     ]
 ];
 
-$xmlWriter = new XMLDomWriter($shows);
+$xmlWriter = new MyDOMWriter($shows);
 try {
     $xmlWriter->generateXML("dom_shows.xml");
 } catch (DOMException $e) {

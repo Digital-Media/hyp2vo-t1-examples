@@ -1,10 +1,10 @@
 <?php
 
-require "Hypermedia2/Vl09/XMLOOParser.php";
+require "XMLExample/MyDOMParser.php";
 
-use Hypermedia2\Vl09\XMLOOParser;
+use XMLExample\MyDOMParser;
 
-$xmlParser = new XMLOOParser();
+$xmlParser = new MyDOMParser();
 $xmlParser->parse("rezept.xml");
 ?>
 
@@ -15,16 +15,15 @@ $xmlParser->parse("rezept.xml");
     <meta charset="utf-8">
 </head>
 <body>
-<h1><?= $xmlParser->getDish() ?></h1>
+<h1><?= $xmlParser->dish ?></h1>
 
-<p>Quelle: <a href="<?= $xmlParser->getSource() ?>"><?= $xmlParser->getSource() ?></a></p>
+<p>Quelle: <a href="<?= $xmlParser->source ?>"><?= $xmlParser->source ?></a></p>
 
 <h2>Zutaten</h2>
 
 <ul>
     <?php
-    $ingredients = $xmlParser->getIngredients();
-    foreach ($ingredients as $ingredient) {
+    foreach ($xmlParser->ingredients as $ingredient) {
         echo "<li>" . $ingredient["menge"] . " " . $ingredient["einheit"] . " " . $ingredient["ingredienz"] . "</li>";
     }
     ?>
@@ -34,8 +33,7 @@ $xmlParser->parse("rezept.xml");
 
 <ol>
     <?php
-    $steps = $xmlParser->getSteps();
-    foreach ($steps as $step) {
+    foreach ($xmlParser->steps as $step) {
         echo "<li>$step</li>";
     }
     ?>
