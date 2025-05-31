@@ -13,7 +13,7 @@ function sendAJAXRequest(event) {
 }
 
 /**
- * Handle the response and include the content into the page.
+ * Handle the response and insert the content into the page.
  * @param event The event object.
  */
 function handleResponse(event) {

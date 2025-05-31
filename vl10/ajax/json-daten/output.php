@@ -1,13 +1,12 @@
 <?php
 
-use Hypermedia2\Vl10\SearchData;
+use JSONData\SearchData;
 
-require_once("Hypermedia 2/Vl10/SearchData.php");
+require_once("JSONData/SearchData.php");
 
 $data = new SearchData();
-$titles = $data->getTitles();
+$titles = $data->titles;
 ?>
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

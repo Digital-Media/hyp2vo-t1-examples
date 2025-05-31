@@ -13,14 +13,14 @@ use Twig\Error\SyntaxError;
  * Creates the database, table and user entries for this example to work.
  * @package RestApiExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @version 2024
+ * @version 2025
  */
 class CreateDB
 {
     /**
      * @var PDO The PDO object.
      */
-    private PDO $dbh;
+    private PDO $pdo;
 
     /**
      * @var Environment Provides a Twig object to display HTML templates.
@@ -57,16 +57,16 @@ class CreateDB
         $this->users = [
             [
                 "username" => "jdoe",
-                "realname" => "John Doe"
+                "realname" => "John Doe",
             ],
             [
                 "username" => "jane789",
-                "realname" => "Jane Doe"
+                "realname" => "Jane Doe",
             ],
             [
                 "username" => "jimmy",
-                "realname" => "Jim Doe"
-            ]
+                "realname" => "Jim Doe",
+            ],
         ];
 
         $this->twig = $twig;
@@ -84,18 +84,18 @@ class CreateDB
      */
     private function initDB(): void
     {
-        $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
-        $dsn = "mysql:host=db;port=3306";
-        $mysqlUser = "hypermedia";
-        $mysqlPwd = "geheim";
+        $host = "db";
+        $port = 3306;
+        $dsn = "mysql:host=$host;port=$port";
+        $username = "hypermedia";
+        $password = "geheim";
         $options = [
-            PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
-            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_OBJ,
-            PDO::MYSQL_ATTR_INIT_COMMAND => $charsetAttr,
-            PDO::MYSQL_ATTR_MULTI_STATEMENTS => false
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+            PDO::ATTR_PERSISTENT => true,
+            PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
         ];
-        $this->dbh = new PDO($dsn, $mysqlUser, $mysqlPwd, $options);
+        $this->pdo = new PDO($dsn, $username, $password, $options);
     }
 
     /**
@@ -104,7 +104,7 @@ class CreateDB
      */
     public function createSchema(): void
     {
-        $rowsAffected = $this->dbh->exec("CREATE SCHEMA IF NOT EXISTS rest_api_example DEFAULT CHARACTER SET utf8;");
+        $rowsAffected = $this->pdo->exec("CREATE SCHEMA IF NOT EXISTS rest_api_example DEFAULT CHARACTER SET utf8;");
 
         if ($rowsAffected > 0) {
             $this->schemaCreated = true;
@@ -118,16 +118,15 @@ class CreateDB
      */
     public function createTable(): void
     {
-
         $query = "CREATE TABLE rest_api_example.user (id BIGINT UNSIGNED NOT NULL AUTO_INCREMENT,
                                    username VARCHAR(100) NOT NULL,
                                    realname VARCHAR(255) NOT NULL,
                                    PRIMARY KEY (id)) ENGINE = InnoDB";
         try {
-            $this->dbh->exec($query);
+            $this->pdo->exec($query);
             $this->tableCreated = true;
         } catch (PDOException $exception) {
-            // If there's an exception the table was already created. Do nothing.
+            // If there's an exception, the table was already created. Do nothing.
         }
     }
 
@@ -142,12 +141,12 @@ class CreateDB
         $checkQuery = "SELECT username FROM rest_api_example.user";
         $insertQuery = "INSERT INTO rest_api_example.user SET username = :username, realname = :realname";
 
-        $checkStatement = $this->dbh->query($checkQuery);
+        $checkStatement = $this->pdo->query($checkQuery);
         $emailRows = $checkStatement->fetchAll(PDO::FETCH_COLUMN);
 
         foreach ($this->users as $user) {
             if (!in_array($user["username"], $emailRows)) {
-                $statement = $this->dbh->prepare($insertQuery);
+                $statement = $this->pdo->prepare($insertQuery);
                 $params = [":username" => $user["username"], ":realname" => $user["realname"]];
                 $success = $statement->execute($params);
                 if ($success) {
@@ -169,7 +168,7 @@ class CreateDB
         $this->twig->display("createdb.html.twig", [
             "schemaCreated" => $this->schemaCreated ? "Yes" : "No",
             "tableCreated" => $this->tableCreated ? "Yes" : "No",
-            "nrOfUsersCreated" => $this->nrOfUsersCreated
+            "nrOfUsersCreated" => $this->nrOfUsersCreated,
         ]);
     }
 }

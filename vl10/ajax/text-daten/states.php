@@ -10,7 +10,7 @@ $capitals = [
     "Innsbruck",
     "Linz",
     "Bregenz",
-    "Vienna"
+    "Vienna",
 ];
 
 header("Content-Type: text/plain");

@@ -3,12 +3,16 @@
 header("Content-Type: text/plain");
 
 if (!empty($_POST)) {
-    $lastKey = array_key_last($_POST);
-    $output = "";
-
-    foreach ($_POST as $key => $value) {
-        $output .= $key . ": " . $value . ($key !== $lastKey ? PHP_EOL : "");
-    }
+    $output = implode(
+        PHP_EOL,
+        array_map(
+            function ($key, $value) {
+                return "$key: $value";
+            },
+            array_keys($_POST),
+            $_POST,
+        ),
+    );
 
     http_response_code(200);
     echo $output;

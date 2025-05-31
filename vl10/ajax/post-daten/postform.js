@@ -1,7 +1,7 @@
 "use strict";
 
 const request = new XMLHttpRequest();
-const form = document.getElementById("registerform");
+const form = document.getElementById("registerForm");
 form.addEventListener("submit", sendAJAXRequest);
 
 /**
@@ -17,10 +17,10 @@ function sendAJAXRequest(event) {
 }
 
 /**
- * Handle the response and include the content into the page.
+ * Handle the response and insert the content into the page.
  */
 function handleResponse() {
-    const ul = document.getElementById("logindetails");
+    const ul = document.getElementById("loginDetails");
     if (request.status === 200) {
         const data = request.responseText.split("\n");
         for (let i = 0; i < data.length; i++) {

@@ -1,13 +1,13 @@
 <?php
 
-namespace Hypermedia2\Vl10;
+namespace JSONData;
 
 /**
- * Contains dummy data that is being searched using the search suggest feature.
+ * Contains placeholder data that is being searched using the search suggest feature.
  * This class serves as a simple data source that is being used for the search suggest feature. Since this example does
  * not work with actual data, you can define the strings that are being queried here.
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @version 2024
+ * @version 2025
  */
 class SearchData
 {
@@ -15,7 +15,7 @@ class SearchData
      * The titles that are queried by the search suggest feature.
      * @var array
      */
-    private array $titles;
+    private(set) array $titles;
 
     /**
      * Fills the data array with a series of strings that are being queried by the search suggest feature.
@@ -29,13 +29,13 @@ class SearchData
             "Hagenberg",
             "Datenbanken",
             "Medientechnik und -design",
-            "MTD23",
+            "MTD24",
             "MTD",
             "PHP",
             "JavaScript",
             "Österreich",
             "Bla",
-            "Gut/Böse"
+            "Gut/Böse",
         ];
     }
 
@@ -56,14 +56,5 @@ class SearchData
         $jsonResponse["count"] = count($jsonResponse["words"]);
 
         return json_encode($jsonResponse);
-    }
-
-    /**
-     * Return all the stored titles in the form of an array.
-     * @return array Alls stored titles.
-     */
-    public function getTitles(): array
-    {
-        return $this->titles;
     }
 }

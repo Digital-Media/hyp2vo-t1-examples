@@ -2,7 +2,7 @@ body {
     font-family: Helvetica, Arial, sans-serif;
 }
 
-.suggestlink {
+.suggestLink {
     color: rgb(0, 0, 0);
     background-color: rgb(255, 255, 255);
     padding: 2px 6px 2px 6px;
@@ -11,11 +11,11 @@ body {
     border-right: 1px solid black;
 }
 
-.suggestlink:first-child {
+.suggestLink:first-child {
     border-top: 1px solid black;
 }
 
-.suggestlinkover {
+.suggestLinkOver {
     color: rgb(255, 255, 255);
     background-color: rgb(51, 102, 204);
     cursor: pointer;

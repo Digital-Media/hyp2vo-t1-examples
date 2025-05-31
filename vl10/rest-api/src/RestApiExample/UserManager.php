@@ -8,19 +8,24 @@ use PDO;
  * A simple REST API example for listing and creating users.
  * @package RestApiExample
  * @author Wolfgang Hochleitner <wolfgang.hochleitner@fh-hagenberg.at>
- * @version 2024
+ * @version 2025
  */
 class UserManager
 {
     /**
      * @var PDO The PDO object.
      */
-    private PDO $dbh;
+    private PDO $pdo;
 
     /**
      * @var string Defines the content type that this class unterstands.
      */
     private string $contentType;
+
+    /**
+     * @var string The URL for user endpoints. This is used for generating links in the JSON output.
+     */
+    private string $link = "/users";
 
     /**
      * Creates a new user manager that lists and creates stored users.
@@ -37,18 +42,19 @@ class UserManager
      */
     private function initDB(): void
     {
-        $charsetAttr = "SET NAMES utf8 COLLATE utf8_general_ci";
-        $dsn = "mysql:host=db;port=3306;dbname=rest_api_example";
-        $mysqlUser = "hypermedia";
-        $mysqlPwd = "geheim";
+        $host = "db";
+        $port = 3306;
+        $database = "rest_api_example";
+        $dsn = "mysql:host=$host;port=$port;dbname=$database";
+        $username = "hypermedia";
+        $password = "geheim";
         $options = [
-            PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+            PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
+            PDO::ATTR_PERSISTENT => true,
             PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC,
-            PDO::MYSQL_ATTR_INIT_COMMAND => $charsetAttr,
-            PDO::MYSQL_ATTR_MULTI_STATEMENTS => false
         ];
-        $this->dbh = new PDO($dsn, $mysqlUser, $mysqlPwd, $options);
+        $this->pdo = new PDO($dsn, $username, $password, $options);
     }
 
     /**
@@ -58,19 +64,18 @@ class UserManager
     public function listUsers(): void
     {
         $query = "SELECT * FROM rest_api_example.user";
-        $link = "/users";
 
-        $statement = $this->dbh->query($query);
+        $statement = $this->pdo->query($query);
         $users = $statement->fetchAll();
 
         $jsonResponse = [
             "size" => count($users),
-            "link" => $link
+            "link" => $this->link,
         ];
 
         foreach ($users as $user) {
             $newUser = $user;
-            $newUser["link"] = $link . "?id=" . $user["id"];
+            $newUser["link"] = "$this->link/{$user["id"]}";
             $jsonResponse["users"][] = $newUser;
         }
 
@@ -80,16 +85,21 @@ class UserManager
 
     /**
      * Lists a single user with a given ID and returns a JSON representation.
-     * @param int $id The ID of the desired user.
+     * @param int|string $id The ID of the desired user. Can be an integer or a string that is numeric.
      * @return void Returns nothing because it generates JSON output.
      */
-    public function listUser(int $id): void
+    public function listUser(int|string $id): void
     {
+        if (is_string($id) && !is_numeric($id)) {
+            // If the ID is not a number, return a 400 Bad Request response.
+            $this->showResponse(400, ["error" => "The given ID has to be a number"]);
+            return;
+        }
+
         $query = "SELECT * FROM rest_api_example.user WHERE id = :id";
-        $link = "/users";
 
         // Select and retrieve this one user.
-        $statement = $this->dbh->prepare($query);
+        $statement = $this->pdo->prepare($query);
         $params = [":id" => $id];
         $statement->execute($params);
         $users = $statement->fetchAll();
@@ -97,10 +107,10 @@ class UserManager
         // If there's exactly one user that has been retrieved, generate output. Otherwise, generate a 404 response.
         if (count($users) === 1) {
             $jsonResponse = $users[0];
-            $jsonResponse["link"] = $link . "?id=" . $id;
+            $jsonResponse["link"] = "$this->link/$id";
             $this->showResponse(200, $jsonResponse);
         } else {
-            $this->showResponse(404);
+            $this->showResponse(404, ["error" => "No entry with ID $id found"]);
         }
     }
 
@@ -112,22 +122,25 @@ class UserManager
     {
         $query = "INSERT into rest_api_example.user SET username = :username, realname = :realname";
 
-        $statement = $this->dbh->prepare($query);
+        $statement = $this->pdo->prepare($query);
         $params = [":username" => $_POST["username"], ":realname" => $_POST["realname"]];
         $success = $statement->execute($params);
 
-        // If adding the user was successful, show 201 otherwise an error 500 because something internally went wrong.
+        // If adding the user was successful, show 201 otherwise error 500 because something internally went wrong.
         if ($success) {
             // This could also return the entry of the new user here if necessary
-            $this->showResponse(201);
+            $this->showResponse(201, [
+                "message" => "User successfully created",
+                "link" => "$this->link/{$this->pdo->lastInsertId()}",
+            ]);
         } else {
-            $this->showResponse(500);
+            $this->showResponse(500, ["error" => "An error occurred while creating the user"]);
         }
     }
 
     /**
      * Generates a response with a given status code and, if provided, with the necessary content. The content has to be
-     * provided as an associative array and is transformed into the data format here. This example stays with JSON but
+     * provided as an associative array and is transformed into the data format here. This example stays with JSON, but
      * there could be other formats as well.
      * @param int $statusCode The HTTP/REST status code to be returned.
      * @param array|null $content The content that is transformed into the desired output format.

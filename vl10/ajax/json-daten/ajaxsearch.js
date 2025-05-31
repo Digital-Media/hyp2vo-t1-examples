@@ -20,25 +20,25 @@ function handleResponse() {
         suggestDiv.innerHTML = "";
         const data = request.response;
 
-        // Only do something, if data sets actually came back
+        // Only do something if data sets actually came back
         if (data.count > 0) {
             for (let i = 0; i < data.count; i++) {
                 // Generate the element-DIVs.
                 const entry = document.createElement("div");
                 // Change class onmouseover
                 entry.addEventListener("mouseover", function () {
-                    this.classList.add("suggestlinkover");
+                    this.classList.add("suggestLinkOver");
                 });
                 // Change back class onmouseout
                 entry.addEventListener("mouseout", function () {
-                    this.classList.remove("suggestlinkover");
+                    this.classList.remove("suggestLinkOver");
                 });
                 // Set the search value on click
                 entry.addEventListener("click", function () {
                     search.value = this.textContent;
                     suggestDiv.innerHTML = "";
                 });
-                entry.classList.add("suggestlink");
+                entry.classList.add("suggestLink");
                 entry.textContent = data.words[i];
                 suggestDiv.appendChild(entry);
             }
@@ -46,6 +46,6 @@ function handleResponse() {
     }
 }
 
-// Set the AJAX function as callback in the keyup-handler
+// Set the AJAX function as a callback in the keyup-handler
 const search = document.getElementById("search");
 search.addEventListener("keyup", sendAJAXRequest);

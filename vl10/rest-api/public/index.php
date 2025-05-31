@@ -5,8 +5,10 @@ declare(strict_types=1);
 use Fhooe\Router\Router;
 use Fhooe\Twig\RouterExtension;
 use Fhooe\Twig\SessionExtension;
+use Monolog\Formatter\LineFormatter;
 use Monolog\Handler\StreamHandler;
 use Monolog\Logger;
+use Monolog\Processor\PsrLogMessageProcessor;
 use RestApiExample\CreateDB;
 use RestApiExample\UserManager;
 use Twig\Environment;
@@ -23,13 +25,21 @@ require "../vendor/autoload.php";
 /**
  * Instantiated Router invocation. Create an object, define the routes and run it.
  */
-// Create a new Router object.
-$router = new Router();
-
-// Create a monolog instance for logging in the skeleton. Pass it to the router to receive its log messages too.
+// Create a monolog instance for logging in the skeleton.
 $logger = new Logger("skeleton-logger");
-$logger->pushHandler(new StreamHandler(__DIR__ . "/../logs/router.log"));
-$router->setLogger($logger);
+$logger->pushProcessor(new PsrLogMessageProcessor());
+$formatter = new LineFormatter(
+    "[%datetime%] %channel%.%level_name%: %message%\n",
+    "d.m.Y H:i:s T",
+    true,
+    true,
+);
+$handler = new StreamHandler(__DIR__ . "/../logs/router.log");
+$handler->setFormatter($formatter);
+$logger->pushHandler($handler);
+
+// Create a new Router object with the logger.
+$router = new Router($logger);
 
 // Create a new Twig instance for advanced templates.
 $twig = new Environment(
@@ -37,8 +47,8 @@ $twig = new Environment(
     [
         "cache" => "../cache",
         "auto_reload" => true,
-        "debug" => true
-    ]
+        "debug" => true,
+    ],
 );
 
 // Add the router extension to Twig. This makes the url_for() and get_base_path() functions available in templates.
@@ -62,13 +72,12 @@ $router->get("/", function () use ($twig) {
 
 $router->get("/users", function () {
     $userManager = new UserManager();
+    $userManager->listUsers();
+});
 
-    $id = filter_input(INPUT_GET, "id", FILTER_VALIDATE_INT);
-    if ($id) {
-        $userManager->listUser($id);
-    } else {
-        $userManager->listUsers();
-    }
+$router->get("/users/{id}", function ($id) {
+    $userManager = new UserManager();
+    $userManager->listUser($id);
 });
 
 $router->post("/users", function () {
