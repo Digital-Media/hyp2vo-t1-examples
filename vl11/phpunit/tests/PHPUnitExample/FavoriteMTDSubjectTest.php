@@ -1,27 +1,25 @@
 <?php
 
-namespace Hypermedia2\Vl11;
-
-require dirname(__DIR__) . "../../../src/Hypermedia2/Vl11/FavoriteMTDSubject.php";
+namespace PHPUnitExample;
 
 use Exception;
+use InvalidArgumentException;
 use PHPUnit\Framework\TestCase;
 
 /**
  * Test class for FavoriteMTDSubject
- * @package Hypermedia2\Vl11
+ * @package PHPUnitExample
  */
 class FavoriteMTDSubjectTest extends TestCase
 {
     /**
-     * Tests if the constructor assigns the correct value to the property and
-     * getFavoriteSubject() returns it correctly.
+     * Tests if the constructor throws an InvalidArgumentException when the argument is an empty string
+     * @return void
      */
-    public function testGetFavoriteSubject()
+    public function testConstructorThrowsExceptionOnEmptyFavoriteSubject()
     {
-        $name = "Hypermedia 2";
-        $subject = new FavoriteMTDSubject($name);
-        $this->assertEquals($name, $subject->getFavoriteSubject());
+        $this->expectException(InvalidArgumentException::class);
+        new FavoriteMTDSubject("");
     }
 
     /**

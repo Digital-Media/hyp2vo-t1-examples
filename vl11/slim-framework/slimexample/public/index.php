@@ -28,13 +28,13 @@ $containerBuilder->addDefinitions(
             "logger" => [
                 "name" => "slimexample-logger",
                 "path" => "../logs/app.log",
-                "level" => Level::Debug
+                "level" => Level::Debug,
             ],
             "view" => [
                 "templates" => "../templates",
                 "cache" => "../cache",
-                "auto_reload" => true
-            ]
+                "auto_reload" => true,
+            ],
         ],
         LoggerInterface::class => function (ContainerInterface $container) {
             $settings = $container->get("settings");
@@ -54,11 +54,11 @@ $containerBuilder->addDefinitions(
                 $viewSettings["templates"],
                 [
                     "cache" => $viewSettings["cache"],
-                    "auto_reload" => $viewSettings["auto_reload"]
-                ]
+                    "auto_reload" => $viewSettings["auto_reload"],
+                ],
             );
-        }
-    ]
+        },
+    ],
 );
 
 $container = $containerBuilder->build();
@@ -90,7 +90,7 @@ $app->addErrorMiddleware(
     $settings["displayErrorDetails"],
     $settings["logErrors"],
     $settings["logErrorDetails"],
-    $logger
+    $logger,
 );
 $logger->info("Error middleware added.");
 
@@ -101,14 +101,14 @@ $app->get(
     "/",
     function (Request $request, Response $response, array $args) {
         return $this->get("view")->render($response, "form.html.twig");
-    }
+    },
 );
 
 $app->get(
     "/{placeholder}[/]",
     function (Request $request, Response $response, array $args) {
         return $this->get("view")->render($response, "form.html.twig", ["placeholder" => $args["placeholder"]]);
-    }
+    },
 );
 
 $app->post(
@@ -117,7 +117,7 @@ $app->post(
         $data = $request->getParsedBody();
         $name = $data["name"];
         return $this->get("view")->render($response, "result.html.twig", ["name" => $name]);
-    }
+    },
 )->setName("result");
 
 ###############

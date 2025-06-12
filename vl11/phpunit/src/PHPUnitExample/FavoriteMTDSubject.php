@@ -1,8 +1,9 @@
 <?php
 
-namespace Hypermedia2\Vl11;
+namespace PHPUnitExample;
 
 use Exception;
+use InvalidArgumentException;
 
 /**
  * Stores and prints a user's favorite subject of the Media Technology and Design program.
@@ -14,24 +15,19 @@ class FavoriteMTDSubject
      * The user's favorite MTD subject.
      * @var string
      */
-    private string $favoriteSubject;
+    private(set) string $favoriteSubject;
 
     /**
      * FavoriteMTDSubject constructor.
      * @param string $favoriteSubject The favorite subject to store.
+     * @throws InvalidArgumentException Thrown if the argument is an empty string.
      */
     public function __construct(string $favoriteSubject)
     {
+        if (trim($favoriteSubject) === "") {
+            throw new InvalidArgumentException("Favorite subject cannot be empty. You must choose!");
+        }
         $this->favoriteSubject = $favoriteSubject;
-    }
-
-    /**
-     * Returns the favorite subject without a message.
-     * @return string The best subject in MTD alone.
-     */
-    public function getFavoriteSubject(): string
-    {
-        return $this->favoriteSubject;
     }
 
     /**

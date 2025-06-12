@@ -1,15 +1,22 @@
 <?php
 
-require "../src/Hypermedia2/Vl11/FavoriteMTDSubject.php";
+require "../vendor/autoload.php";
 
-use Hypermedia2\Vl11\FavoriteMTDSubject;
+use PHPUnitExample\FavoriteMTDSubject;
 
 // Shout the favorite subject
 $favoriteSubject = new FavoriteMTDSubject("Hypermedia 2");
 echo $favoriteSubject->say();
 
-// Simply retrieve the favorit subject
-echo $favoriteSubject->getFavoriteSubject();
+// Simply retrieve the favorite subject
+echo $favoriteSubject->favoriteSubject;
+
+// Create an empty favorite subject
+try {
+    new FavoriteMTDSubject("");
+} catch (InvalidArgumentException $e) {
+    echo $e->getMessage();
+}
 
 // Disagree with another statement
 $otherSubject1 = new FavoriteMTDSubject("Media Technology 2");
