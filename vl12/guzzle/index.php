@@ -3,28 +3,41 @@
 declare(strict_types=1);
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 
 require "vendor/autoload.php";
 
 $client = new Client([
-    "base_uri" => "https://httpbin.org"
+    "base_uri" => "https://httpbin.org",
 ]);
 
-$getResponse = $client->get("/get", [
-    "query" => ["foo" => "bar"]
-]);
-$postResponse = $client->post("/post", [
-    "form_params" => ["foo" => "bar"]
-]);
+try {
+    $getResponse = $client->get("/get", [
+        "query" => ["foo" => "bar"],
+    ]);
+} catch (ClientException $e) {
+    $getResponse = $e->getResponse();
+}
+try {
+    $postResponse = $client->post("/post", [
+        "form_params" => ["foo" => "bar"],
+    ]);
+} catch (ClientException $e) {
+    $postResponse = $e->getResponse();
+}
 
-echo "<strong>The GET Response:</strong><br>";
-echo $getResponse->getStatusCode() . "<br>";
-echo $getResponse->getReasonPhrase() . "<br>";
-echo $getResponse->getHeader("Content-Type")[0] . "<br>";
-echo $getResponse->getBody()->getContents() . "</p>";
+echo <<<GETRESPONSE
+<p><strong>The GET Response:</strong><br>
+{$getResponse->getStatusCode()}<br>
+{$getResponse->getReasonPhrase()}<br>
+{$getResponse->getHeader("Content-Type")[0]}</p>
+<pre>{$getResponse->getBody()->getContents()}</pre>
+GETRESPONSE;
 
-echo "<p><strong>The POST Response:</strong><br>";
-echo $postResponse->getStatusCode() . "<br>";
-echo $postResponse->getReasonPhrase() . "<br>";
-echo $postResponse->getHeader("Content-Type")[0] . "<br>";
-echo $postResponse->getBody()->getContents() . "</p>";
+echo <<<POSTRESPONSE
+<p><strong>The POST Response:</strong><br>
+{$postResponse->getStatusCode()}<br>
+{$postResponse->getReasonPhrase()}<br>
+{$postResponse->getHeader("Content-Type")[0]}</p>
+<pre>{$postResponse->getBody()->getContents()}</pre>
+POSTRESPONSE;

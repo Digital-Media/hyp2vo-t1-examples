@@ -36,7 +36,7 @@ class WeatherGenerator
 
     /**
      * Geocodes coordinates from a given address by using Geocoder PHP with the Nominatim OpenStreetMap API.
-     * @param string $location The location string to be geocoded.
+     * @param string $location The location-string to be geocoded.
      * @return array|false Returns an array with latitude and longitude or false if the geocoding was unsuccessful.
      * @throws Exception Throws an exception if an error happened during geocoding.
      */
@@ -45,7 +45,7 @@ class WeatherGenerator
         $httpClient = new ClientAdapter();
         $provider = Nominatim::withOpenStreetMapServer(
             $httpClient,
-            "What's the Weather Demo Application"
+            "What's the Weather Demo Application",
         );
         $geocoder = new StatefulGeocoder($provider, "en");
 
@@ -55,7 +55,7 @@ class WeatherGenerator
             $coordinates = $result->get(0)->getCoordinates();
             return [
                 "latitude" => $coordinates->getLatitude(),
-                "longitude" => $coordinates->getLongitude()
+                "longitude" => $coordinates->getLongitude(),
             ];
         }
         return false;
@@ -83,8 +83,8 @@ class WeatherGenerator
     }
 
     /**
-     * Displays output. If a filename of the forecast is supplied, the weather is shown. Otherwise, an error message is
-     * returned.
+     * Displays the output. If a filename of the forecast is supplied, the weather is shown. Otherwise, an error message
+     * is returned.
      * @param string $location The location of the possible weather forecast.
      * @param string|null $imageName The name of the weather forecast image file.
      * @return void Returns nothing since output is created.
@@ -98,14 +98,14 @@ class WeatherGenerator
             $this->twig->display("weather.html.twig", [
                 "weather" => [
                     "location" => $location,
-                    "image" => $imageName
-                ]
+                    "image" => $imageName,
+                ],
             ]);
         } else {
             $this->twig->display("weather.html.twig", [
                 "noresult" => [
-                    "location" => $location
-                ]
+                    "location" => $location,
+                ],
             ]);
         }
     }
